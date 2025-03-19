@@ -1,7 +1,22 @@
 // assets/styles/global.scss
 
-// customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
-
 // the ~ allows you to reference things in node_modules
-@import "~bootstrap/scss/bootstrap";
+@use "~bootstrap/scss/bootstrap";
+
+body {
+  background-image: url("./images/background.png"); // Obrázek pozadí
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.navbar.bg-light {
+  --bs-bg-opacity: 0;}
+
+// customize some Bootstrap variables
+$body-bg: rgb(33, 7, 104);
+$navbar-bg: rgb(255, 255, 255);
+
+
+
+
