@@ -1,22 +1,17 @@
 // assets/styles/global.scss
 
-// the ~ allows you to reference things in node_modules
-@use "~bootstrap/scss/bootstrap";
-
-body {
-  background-image: url("./images/background.png"); // Obrázek pozadí
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-}
-.navbar.bg-light {
-  --bs-bg-opacity: 0;}
-
+.bula-drbola{
+    width: 100%;
+    height: 400px; /* adjust the height as needed */
+    background-image: url('./images/background.png');
+    background-size: cover; /* makes the image cover the entire area */
+    background-position: center; /* ensures the image is centered */
+    background-repeat: no-repeat; /* prevent repeating the image */
+  }
 // customize some Bootstrap variables
-$body-bg: rgb(33, 7, 104);
-$navbar-bg: rgb(255, 255, 255);
+$body-bg: rgba(33, 7, 104, 1);
+$navbar-bg: rgba(255, 255, 255);
 
-
-
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
 
