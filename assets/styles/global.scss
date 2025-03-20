@@ -12,6 +12,16 @@
     top: -67px;
   }
 
+.video-bula-drbola {
+    top: -200px;
+}
+.video-bula-drbola.container{
+    max-width: 50%;
+}
+.video-bula-drbola iframe{
+    border-radius: 7px;
+}
+
 /* Výchozí styl navigace */
 .navbar {
     transition: background-color 0.4s ease-in-out;
