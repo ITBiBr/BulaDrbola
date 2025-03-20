@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@symfony/stimulus-bridge": "^4.0.0",
-        "@symfony/ux-turbo": "^2.23.0"
+        "@symfony/ux-turbo": "^2.23.0",
+        "jquery": "^3.7.1"
     }
 }

@@ -8,4 +8,19 @@ import './bootstrap.js';
 //import './styles/app.css';
 import './styles/global.scss';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+const $ = require('jquery');
+// this "modifies" the jquery module: adding behavior to it
+// the bootstrap module doesn't export/return anything
+require('bootstrap');
+
+$(document).ready(function () {
+    let navbar = $("#navbar");
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 15) {
+            navbar.addClass("scrolled");
+        } else {
+            navbar.removeClass("scrolled");
+        }
+    });
+});
