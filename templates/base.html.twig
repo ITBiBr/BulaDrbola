@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>BD</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -57,6 +57,97 @@
 
         {% endblock %}
         {% block body %}{% endblock %}
+        {% block footer %}
+            <footer class="text-center text-lg-start bg-body-secondary text-muted">
+                <section class="d-flex p-4">
+
+                </section>
+
+                <section class="container text-center text-md-start mt-5">
+                    <div class="row">
+                        <div class="col-1 border-end">
+                            <span><img class="img-fluid" src="{{ asset('images/logo_bile.png') }}" width="70px"></span>
+                        </div>
+                        <div class="col-2 border-end">
+                            <img class="img-fluid" src="{{ asset('images/dieceze.png') }}" width="120px">
+                        </div>
+                        <div class="col-4">
+                           beatifikační proces mučedníků<br> komunistického režimu
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container text-center text-md-start mt-5">
+                        <div class="row mt-3">
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="fw-bold mb-4">
+                                    domů
+                                </h6>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="fw-bold mb-4">
+                                    příběh
+                                </h6>
+                                <p>
+                                    <a href="#" class="text-reset">buletin ke stažení</a>
+                                </p>
+
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-md-0 mb-4">
+                                <h6 class="fw-bold mb-4">blahořečení</h6>
+                                <p>
+                                    <a href="#" class="text-reset">jak probíhá blahořečení</a>
+                                <br>
+                                    <a href="#" class="text-reset">význam blahořečení</a>
+                                <br>
+                                    <a href="#!" class="text-reset">schválený zázrak</a>
+                                </p>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="fw-bold mb-4">
+                                    výstaviště
+                                </h6>
+
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="fw-bold mb-4">
+                                    materiály
+                                </h6>
+                                <p>
+                                    <a href="#" class="text-reset">modlitba</a>
+                                <br>
+                                    <a href="#" class="text-reset">katecheze</a>
+                                <br>
+                                    <a href="#!" class="text-reset">merch</a>
+                                </p>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="fw-bold mb-4">
+                                    zapojte se
+                                </h6>
+                                <p>
+                                    <a href="#" class="text-reset">modlitba za blahořečení</a>
+                                <br>
+                                    <a href="#" class="text-reset">darujte</a>
+                                <br>
+                                    <a href="#!" class="text-reset">sdílejte svědectví</a>
+                                <br>
+                                    <a href="#" class="text-reset">dobrovolnictví</a>
+                                <br>
+                                    <a href="#!" class="text-reset">pro media</a>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+            </footer>
+
+        {% endblock %}
 
     </body>
 </html>
