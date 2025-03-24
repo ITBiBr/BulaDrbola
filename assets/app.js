@@ -15,12 +15,26 @@ require('bootstrap');
 
 $(document).ready(function () {
     let navbar = $("#navbar");
+    let navbarCollapse = $(".navbar-collapse"); // ID collapsible menu
 
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 15) {
+    function toggleScrolledClass() {
+        if ($(window).scrollTop() > 15 || navbarCollapse.hasClass("show")) {
             navbar.addClass("scrolled");
         } else {
             navbar.removeClass("scrolled");
         }
+    }
+
+    // Při scrollování
+    $(window).scroll(toggleScrolledClass);
+
+    // Při rozbalení menu
+    navbarCollapse.on("show.bs.collapse", function () {
+        navbar.addClass("toggled");
+    });
+
+    // Při sbalení menu (zkontrolujeme i pozici stránky)
+    navbarCollapse.on("hide.bs.collapse", function () {
+        navbar.removeClass("toggled");
     });
 });

@@ -27,10 +27,6 @@
     border-radius: 7px;
 }
 
-/* Výchozí styl navigace */
-.navbar {
-    transition: background-color 0.4s ease-in-out;
-}
 .footer{
     background-color: rgba(33, 7, 104, 1);
     width: 100%;
@@ -38,9 +34,17 @@
 }
 
 /* Nová barva pozadí po posunutí */
-.navbar.scrolled {
+.navbar.scrolled, .navbar.toggled {
     background-color: rgba(255, 255, 255, 1) !important;
 }
+
+.navbar.toggled{
+    transition: background-color 0ms;
+}
+.navbar.scrolled {
+    transition: background-color 0.4s ease-in-out;
+}
+
 // customize some Bootstrap variables
 $body-secondary-bg: rgba(33, 7, 104, 1);
 $body-secondary-color: rgba(147, 144, 199, 1);
