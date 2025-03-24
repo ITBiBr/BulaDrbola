@@ -24,7 +24,8 @@ $(document).ready(function () {
             navbar.removeClass("scrolled");
         }
     }
-
+    //Při načtení stránky
+    toggleScrolledClass();
     // Při scrollování
     $(window).scroll(toggleScrolledClass);
 
