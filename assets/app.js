@@ -38,4 +38,22 @@ $(document).ready(function () {
     navbarCollapse.on("hide.bs.collapse", function () {
         navbar.removeClass("toggled");
     });
+
+    $(".collapse").on("show.bs.collapse", function () {
+        $(this).closest(".casova-osa-element").addClass("casova-osa-zvyrazeny-element");
+        $(this).closest(".casova-osa-element-levy").addClass("casova-osa-zvyrazeny-element-levy");
+        $(".collapse").not(this).collapse('hide');
+        // Změna textu tlačítka na "Zobrazit méně"
+        var button = $(this).next(".toggle-btn");
+        button.text("Zobrazit méně");
+    });
+
+    $(".collapse").on("hide.bs.collapse", function () {
+        $(this).closest(".casova-osa-element").removeClass("casova-osa-zvyrazeny-element");
+        $(this).closest(".casova-osa-element-levy").removeClass("casova-osa-zvyrazeny-element-levy");
+        // Změna textu tlačítka na "Zobrazit méně"
+        var button = $(this).next(".toggle-btn");
+        button.text("Zobrazit více");
+    });
+
 });
