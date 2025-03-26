@@ -59,7 +59,8 @@ $(document).ready(function () {
     var $carousel = $('#carouselCasovaOsa'); // Výběr carouselu
     var $indicators = $carousel.find('.carousel-indicators button'); // Všechny indikátory
     var totalItems = $indicators.length; // Počet snímků
-
+    var $prevButton = $carousel.find('.carousel-control-prev'); // Tlačítko "Předchozí"
+    var $nextButton = $carousel.find('.carousel-control-next'); // Tlačítko "Další"
     function updateIndicators() {
         var activeIndex = $carousel.find('.carousel-item.active').index(); // Získání aktuálního indexu
 
@@ -70,12 +71,31 @@ $(document).ready(function () {
         $indicators.eq(activeIndex).show().addClass('active');
     }
 
+    function updateButtons() {
+        var activeIndex = $carousel.find('.carousel-item.active').index(); // Aktuální index
+
+        // Skryj "Předchozí" na prvním snímku
+        if (activeIndex === 0) {
+            $prevButton.hide();
+        } else {
+            $prevButton.show();
+        }
+
+        // Skryj "Další" na posledním snímku
+        if (activeIndex === totalItems - 1) {
+            $nextButton.hide();
+        } else {
+            $nextButton.show();
+        }
+    }
+
     // Spustí se při změně snímku
     $carousel.on('slid.bs.carousel', function() {
         updateIndicators();
+        updateButtons();
     });
 
     // Inicializace při načtení stránky
-    updateIndicators();
+    updateButtons();
 
 });
