@@ -44,7 +44,7 @@
 .navbar.scrolled {
     transition: background-color 0.4s ease-in-out;
 }
-.text-reset{
+.text-reset, .text-secondary{
     text-decoration:none;
 }
 
@@ -53,13 +53,10 @@
     padding-right: 10px; /* Prostor pro pravý okraj */
 }
 
-
-
-
 .bod-casove-osy::after {
     content: "";
     position: absolute;
-    top: 13px;
+    top: 22px;
     right: -3px;
     width: 8px;
     height: 8px;
@@ -76,7 +73,7 @@
     width: 2px; /* Šířka pravého okraje */
     height: calc(100% + 1px);
     background-color: rgba(222,174,107,1); /* Barva okraje */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 27px, 100% 27px, 100% 9px, 0 9px)
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 36px, 100% 36px, 100% 18px, 0 18px);
 }
 .casova-osa-linie {
     border-right: solid 1.5px rgba(222,174,107,1);
@@ -99,7 +96,7 @@
 
 .casova-osa-linie-end {
     position: relative;
-    padding-right: 10px; /* Prostor pro border efekt */
+    padding-right: 10px;
 }
 
 .casova-osa-linie-end::after {
@@ -127,8 +124,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, white 20%, transparent 100%);
-    clip-path: polygon(100% 0%, 10px 0%, 10px 10px, 0% 17px, 10px 24px, 10px 100%, 100% 100%, 100% calc(100% - 1px), 11px calc(100% - 1px), 11px 23px, 1px 17px, 11px 11px, 11px 1px, 100% 1px)
+    background: linear-gradient(to right, rgb(147, 144, 199) 20%, transparent 100%);
+    clip-path: polygon(100% 0%, 12px 0%, 12px 16px, 0% 26px, 12px 38px, 12px 100%, 100% 100%, 100% calc(100% - 1px), 13px calc(100% - 1px), 13px 37px, 1px 26px, 13px 17px, 13px 1px, 100% 1px);
 }
 
 .casova-osa-zvyrazeny-element-levy::before {
@@ -138,17 +135,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to left, white 20%, transparent 100%);
-    clip-path: polygon(0% 0%, calc(100% - 10px) 0%, calc(100% - 10px) 10px, 100% 17px, calc(100% - 10px) 24px, calc(100% - 10px) 100%, 0% 100%, 0% calc(100% - 1px), calc(100% - 11px) calc(100% - 1px), calc(100% - 11px) 23px, calc(100% - 1px) 17px, calc(100% - 11px) 11px, calc(100% - 11px) 1px, 0% 1px)
+    background: linear-gradient(to left, rgb(147, 144, 199) 20%, transparent 100%);
+    clip-path: polygon(0% 0%, calc(100% - 12px) 0%, calc(100% - 12px) 16px, 100% 26px, calc(100% - 12px) 38px, calc(100% - 12px) 100%, 0% 100%, 0% calc(100% - 1px), calc(100% - 13px) calc(100% - 1px), calc(100% - 13px) 37px, calc(100% - 1px) 26px, calc(100% - 13px) 17px, calc(100% - 13px) 1px, 0% 1px);
 }
-
-
 
 
 // customize some Bootstrap variables
 $body-secondary-bg: rgba(33, 7, 104, 1);
 $body-secondary-color: rgba(147, 144, 199, 1);
 $primary: rgba(33, 7, 104, 1);
+$secondary: rgb(222, 174, 107);
 $navbar-bg: rgba(255, 255, 255);
 $navbar-light-color: rgba(33, 7, 104, 1);
 $font-family-sans-serif: 'Clash Display', sans-serif;
