@@ -44,9 +44,6 @@
 .navbar.scrolled {
     transition: background-color 0.4s ease-in-out;
 }
-.text-reset, .text-secondary{
-    text-decoration:none;
-}
 
 .bod-casove-osy,.casova-osa-linie {
     position: relative; /* Umožní umístit pseudo-element relativně k tomuto prvku */
@@ -146,7 +143,42 @@
 .casova-osa-rok{
     min-width: 72px;
 }
+.text-justify-center {
+    text-align: justify;
+    text-align-last: center;
+}
 
+.casova-osa-carousel .carousel-indicators button {
+    width: 8px;  /* Velikost kruhu */
+    height: 8px;
+    border-radius: 50%; /* Udělá z tlačítka kruh */
+    background-color: white; /* Barva kruhu */
+    border: none; /* Odebrání výchozích okrajů */
+    opacity: 1; /* Lehce průhledné */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.casova-osa-carousel .carousel-indicators button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, rgb(222, 174, 107) 45%, rgba(255, 255, 255, 0.4) 70%, rgba(255,255,255,0) 97%);
+    clip-path: polygon(0 50%, calc(50% - 8px) 0, calc(50% - 8px) 100%, 0% 50%);
+}
+
+.casova-osa-carousel .carousel-indicators button::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: rgb(222, 174, 107);
+    clip-path: polygon(calc(50% + 8px) 100%, 100% 0, 100% 100%, calc(50% + 8px) 100%);
+}
 
 // customize some Bootstrap variables
 $body-secondary-bg: rgba(33, 7, 104, 1);

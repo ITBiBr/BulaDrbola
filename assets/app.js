@@ -56,4 +56,26 @@ $(document).ready(function () {
         button.html("&#709; zobrazit více");
     });
 
+    var $carousel = $('#carouselCasovaOsa'); // Výběr carouselu
+    var $indicators = $carousel.find('.carousel-indicators button'); // Všechny indikátory
+    var totalItems = $indicators.length; // Počet snímků
+
+    function updateIndicators() {
+        var activeIndex = $carousel.find('.carousel-item.active').index(); // Získání aktuálního indexu
+
+        // Skryjeme všechny indikátory
+        $indicators.hide().removeClass('active');
+
+        // Zobrazíme jen ten aktuální
+        $indicators.eq(activeIndex).show().addClass('active');
+    }
+
+    // Spustí se při změně snímku
+    $carousel.on('slid.bs.carousel', function() {
+        updateIndicators();
+    });
+
+    // Inicializace při načtení stránky
+    updateIndicators();
+
 });
