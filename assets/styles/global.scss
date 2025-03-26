@@ -48,9 +48,8 @@
     text-decoration:none;
 }
 
-.bod-casove-osy {
+.bod-casove-osy,.casova-osa-linie {
     position: relative; /* Umožní umístit pseudo-element relativně k tomuto prvku */
-    padding-right: 10px; /* Prostor pro pravý okraj */
 }
 
 .bod-casove-osy::after {
@@ -68,15 +67,22 @@
 .bod-casove-osy::before {
     content: "";
     position: absolute;
-    top: -1px;
+    top: 0;
     right: 0;
     width: 2px; /* Šířka pravého okraje */
-    height: calc(100% + 1px);
+    height: 100%;
     background-color: rgba(222,174,107,1); /* Barva okraje */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 36px, 100% 36px, 100% 18px, 0 18px);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 35px, 100% 35px, 100% 17px, 0 17px);
 }
-.casova-osa-linie {
-    border-right: solid 1.5px rgba(222,174,107,1);
+.casova-osa-linie:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px; /* Šířka pravého okraje */
+    height: 100%;
+    background-color: rgba(222,174,107,1); /* Barva okraje */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 .casova-osa-linie-start {
     position: relative;
@@ -86,7 +92,7 @@
 .casova-osa-linie-start::after {
     content: "";
     position: absolute;
-    bottom: -1px;
+    bottom: 0;
     right: 0;
     width: 2px; /* Výchozí tloušťka okraje */
     height: 100%;
@@ -96,17 +102,16 @@
 
 .casova-osa-linie-end {
     position: relative;
-    padding-right: 10px;
+    min-height: 80px;
 }
 
 .casova-osa-linie-end::after {
     content: "";
     position: absolute;
-    top: -1px;
-    right: -0.2px;
-    width: 2.25px;
+    top: 0;
+    right: 0;
+    width: 2px;
     height: 100%;
-    min-height: 70px;
     background: linear-gradient(to bottom, rgb(222, 174, 107) 45%, rgba(255, 255, 255, 0.4) 70%, rgba(255,255,255,0) 97%);
     clip-path: polygon(100% 0, 0% 0, 50% 100%, 100% 100%); /* Zúžení směrem dolů */
 }
@@ -137,6 +142,9 @@
     height: 100%;
     background: linear-gradient(to left, rgb(147, 144, 199) 20%, transparent 100%);
     clip-path: polygon(0% 0%, calc(100% - 12px) 0%, calc(100% - 12px) 16px, 100% 26px, calc(100% - 12px) 38px, calc(100% - 12px) 100%, 0% 100%, 0% calc(100% - 1px), calc(100% - 13px) calc(100% - 1px), calc(100% - 13px) 37px, calc(100% - 1px) 26px, calc(100% - 13px) 17px, calc(100% - 13px) 1px, 0% 1px);
+}
+.casova-osa-rok{
+    min-width: 72px;
 }
 
 
