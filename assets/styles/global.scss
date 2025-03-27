@@ -204,10 +204,19 @@
 }
 .casova-osa-carousel-rok{
     position: relative;
-    top: 30px;
+    top: 70px;
 }
-.casova-osa-carousel-rok-wrapper{
-    min-height: 150px;
+.casova-osa-carousel .carousel-inner{
+    overflow: visible;
+}
+.casova-osa-carousel .carousel-indicators{
+    bottom: -25px !important;
+}
+.casova-osa-carousel .carousel-caption{
+    bottom: -10px !important;
+}
+.prostor-pod-carouselem {
+    min-height: 6rem;
 }
 
 
