@@ -1,15 +1,17 @@
 // assets/styles/global.scss
-.bula-drbola{
+.bula-drbola::after{
+    content: "";
     width: 100%;
-    height: 500px; /* adjust the height as needed */
-    background-image: url('./images/background.png');
+    height: 475px; /* adjust the height as needed */
+    background-image: url('./images/background.jpg');
     background-size: cover; /* makes the image cover the entire area */
     background-position: center; /* ensures the image is centered */
     background-repeat: no-repeat; /* prevent repeating the image */
     display: block;
-    position: relative;
-    top: -88px;
-  }
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+}
 
 .podbarveni{
     width: 100%;
@@ -20,11 +22,7 @@
 
 .posun {
     position: relative;
-    top: -140px;
-}
-
-.video-bula-drbola iframe{
-    border-radius: 7px;
+    top: -80px;
 }
 
 .footer{
