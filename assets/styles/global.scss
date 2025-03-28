@@ -206,6 +206,7 @@
 }
 .casova-osa-carousel .carousel-inner{
     overflow: visible;
+    clip-path: inset(0 0 -70px 0);
 }
 .casova-osa-carousel .carousel-indicators{
     bottom: -25px !important;
