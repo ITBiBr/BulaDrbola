@@ -21,13 +21,13 @@
         </header>
         {% endblock %}
         {% block nav %}
-        <nav class="navbar navbar-expand-lg sticky-top navbar-light" id="navbar">
-            <div class="container">
+        <nav class="navbar navbar-expand-lg sticky-top-lg navbar-light" id="navbar">
+            <div class="container justify-content-lg-center">
                 <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}" height="60px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item mt-2 fw-bold">
                             <a class="nav-link active" aria-current="page" href="{{ path ('app_main') }}">&#8962</a>
