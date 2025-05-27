@@ -237,6 +237,15 @@ $font-family-base: 'Clash Display', sans-serif;
 $headings-font-family: 'Clash Display', sans-serif;
 h1, h2 {
     font-family: "palast-variable",sans-serif !important;
+    font-weight: 900 !important; //Poster black
+    font-style: normal;
+}
+
+body {
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    font-weight: 400 !important; //Regular
+    font-style: normal;
 }
 
 // the ~ allows you to reference things in node_modules
