@@ -226,7 +226,6 @@
     min-height: 6rem;
 }
 
-
 // customize some Bootstrap variables
 $body-secondary-bg: rgba(33, 7, 104, 1);
 $body-secondary-color: rgba(147, 144, 199, 1);
@@ -235,7 +234,11 @@ $secondary: rgb(222, 174, 107);
 $navbar-bg: rgba(255, 255, 255);
 $navbar-light-color: rgba(33, 7, 104, 1);
 $font-family-base: 'Clash Display', sans-serif;
-$headings-font-family: "palast-variable",sans-serif;
+$headings-font-family: 'Clash Display', sans-serif;
+h1, h2 {
+    font-family: "palast-variable",sans-serif !important;
+}
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
