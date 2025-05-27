@@ -23,9 +23,9 @@
     background-repeat: no-repeat;
 }
 
-.posun-200 {
+.posun-180 {
     position: relative;
-    top: -200px;
+    top: -180px;
 }
 
 .posun-140 {
@@ -235,8 +235,9 @@ $navbar-bg: rgba(255, 255, 255);
 $navbar-light-color: rgba(33, 7, 104, 1);
 $font-family-base: 'Clash Display', sans-serif;
 $headings-font-family: 'Clash Display', sans-serif;
-h1, h2 {
+h1, h2, h3 {
     font-family: "palast-variable",sans-serif !important;
+    line-height: 1.2;
     font-weight: 900 !important; //Poster black
     font-style: normal;
 }
