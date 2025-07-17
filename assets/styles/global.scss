@@ -24,6 +24,14 @@
     background-repeat: no-repeat;
 }
 
+.podbarveni_2{
+    width: 100%;
+    height: 749px;
+    background-image: linear-gradient(to bottom, white 10%, transparent 52%, rgba(33, 7, 104, 1) 95%), url('./images/body_bottom_2.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
 .posun-180 {
     position: relative;
     top: -180px;
