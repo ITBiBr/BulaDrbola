@@ -11,7 +11,7 @@
     display: block;
     position: relative;
     z-index: -1;
-    top: -86px;
+    top: -101px;
 }
 .navbar-minus{
     height: 86px;
@@ -22,6 +22,7 @@
     #background-image: url('./images/body_bottom.jpg');
     background-position: bottom;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .podbarveni_2{
@@ -30,6 +31,7 @@
     background-image: linear-gradient(to bottom, white 10%, transparent 52%, rgba(33, 7, 104, 1) 95%), url('./images/body_bottom_2.jpg');
     background-position: bottom;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .posun-180 {
