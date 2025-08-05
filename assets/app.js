@@ -6,7 +6,6 @@
  */
 //import './styles/app.css';
 import './styles/global.scss';
-import './styles/clash-display.css';
 
 const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
