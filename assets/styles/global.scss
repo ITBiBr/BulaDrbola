@@ -304,6 +304,21 @@ body {
 .card-img-top-filter{
     filter:sepia(1) opacity(0.62) contrast(1.3)
 }
+
+.materialy .nav-link.active, .materialy .nav-link.active:hover {
+    border-bottom: 2px solid rgb(222, 174, 107) !important;
+}
+.materialy .nav-link:hover {
+    border-bottom: 2px solid rgba(222, 174, 107, 0.57) !important;
+}
+
+.materialy.nav-tabs, .materialy .nav-link{
+    border: 0px !important;
+}
+.materialy .nav-link{
+    border-bottom: 2px solid white !important;
+    font-size: large !important;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 

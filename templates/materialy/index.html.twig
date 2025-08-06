@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Materiály{% endblock %}
+
+{% block body %}
+<div class = "container pt-5 mt-3">
+    <div class="row text-center">
+        <div class="col-12 p-3">
+            <h1 class="text-primary fw-bold text-uppercase">Materiály</h1>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class = "col-8">
+                <p class="text-justify-center">Zde bude text, který upřesní, jakým způsobem a jaké materiály je zde možné vyhledat.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <nav>
+        <div class="nav nav-tabs materialy justify-content-center" id="nav-tab" role="tablist">
+            <button class="nav-link active fw-bold" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+            <button class="nav-link fw-bold" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+            <button class="nav-link fw-bold" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">1</div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+    </div>
+
+</div>
+    {% include 'paticka.html.twig' %}
+{% endblock %}
