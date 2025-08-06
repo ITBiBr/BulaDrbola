@@ -283,7 +283,17 @@ body {
     font-weight: 400 !important; //Regular
     font-style: normal;
 }
+.image-overlay {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(222, 174, 107);
+}
 
+.card-img-top-filter{
+    filter:sepia(1) opacity(0.62) contrast(1.3)
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
