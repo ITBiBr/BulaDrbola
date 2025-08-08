@@ -13,6 +13,7 @@ final class PribehController extends AbstractController
     {
         return $this->render('pribeh/index.html.twig', [
             'controller_name' => 'PribehController',
+            'paticka' => false,
         ]);
     }
 }

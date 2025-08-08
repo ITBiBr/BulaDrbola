@@ -13,6 +13,7 @@ final class MaterialyController extends AbstractController
     {
         return $this->render('materialy/index.html.twig', [
             'controller_name' => 'MaterialyController',
+            'paticka' => true,
         ]);
     }
 }

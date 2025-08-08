@@ -13,6 +13,7 @@ final class AktualityController extends AbstractController
     {
         return $this->render('aktuality/index.html.twig', [
             'controller_name' => 'AktualityController',
+            'paticka' => true,
         ]);
     }
 }

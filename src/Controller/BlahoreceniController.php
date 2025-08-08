@@ -13,6 +13,7 @@ final class BlahoreceniController extends AbstractController
     {
         return $this->render('blahoreceni/index.html.twig', [
             'controller_name' => 'BlahoreceniController',
+            'paticka' => true,
         ]);
     }
 }

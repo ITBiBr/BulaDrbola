@@ -13,6 +13,7 @@ final class ZapojteSeController extends AbstractController
     {
         return $this->render('zapojte_se/index.html.twig', [
             'controller_name' => 'ZapojteSeController',
+            'paticka' => true,
         ]);
     }
 }

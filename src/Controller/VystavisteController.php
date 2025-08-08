@@ -13,6 +13,7 @@ final class VystavisteController extends AbstractController
     {
         return $this->render('vystaviste/index.html.twig', [
             'controller_name' => 'VystavisteController',
+            'paticka' => true,
         ]);
     }
 }
