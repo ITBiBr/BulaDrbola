@@ -52,6 +52,11 @@
     background-size: cover;
 }
 
+.posun-140 {
+    position: relative;
+    top: -8.75em;
+}
+
 .posun-240 {
     position: relative;
     top: -15em;
@@ -59,7 +64,14 @@
 @media screen and (max-width: 1024px){
     .posun-240 {
         position: relative;
-        top: -10em;
+        top: -7em;
+    }
+    .posun-140 {
+        position: relative;
+        top: -4.75em;
+    }
+    .bula-drbola{
+        min-height: 22em;
     }
 }
 .posun_190 {
@@ -69,11 +81,6 @@
 .posun-180 {
     position: relative;
     top: -180px;
-}
-
-.posun-140 {
-    position: relative;
-    top: -140px;
 }
 
 .footer{
