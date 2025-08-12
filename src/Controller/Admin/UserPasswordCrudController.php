@@ -43,7 +43,7 @@ class UserPasswordCrudController extends UserCrudController
         $entity = $context->getEntity()->getInstance();
 
         // Zkontroluj ID entity
-        if ($entity->getId() !== $user->getId()) {
+        if ($entity->getUsername() !== $user->getUserIdentifier()) {
             throw $this->createAccessDeniedException();
         }
 
