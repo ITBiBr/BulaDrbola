@@ -27,6 +27,11 @@ class UserCrudController extends AbstractCrudController
 {
     protected Security $security;
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('new', 'New user')->setPageTitle('edit', 'Edit user')->setPageTitle('index', 'Users');
+    }
     public function __construct(public UserPasswordHasherInterface $userPasswordHasher, Security $security)
     {
         $this->security = $security;
@@ -44,7 +49,7 @@ class UserCrudController extends AbstractCrudController
             throw $this->createAccessDeniedException();
         }
         $actions->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
-            return $action->setLabel('Nová agenda');
+            return $action->setLabel('New user');
         });
         return $actions;
     }

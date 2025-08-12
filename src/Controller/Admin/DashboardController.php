@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
@@ -47,7 +48,20 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Home', 'fa fa-home');
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class)->setController(UserCrudController::class)->setPermission('ROLE_ADMIN');
+        // odkaz na změnu hesla aktuálního uživatele
+        $currentUserId = $this->getUser()?->getId();
+
+        if ($currentUserId) {
+            $url = $this->container->get(AdminUrlGenerator::class)
+                ->setController(UserPasswordCrudController::class)
+                ->setAction('edit')
+                ->setEntityId($currentUserId)
+                ->generateUrl();
+
+            yield MenuItem::linkToUrl('Password change', 'fa fa-key', $url);
+        }
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
