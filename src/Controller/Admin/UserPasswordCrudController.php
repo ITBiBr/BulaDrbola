@@ -25,7 +25,8 @@ class UserPasswordCrudController extends UserCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('edit', 'New password');
+            ->setPageTitle('edit', 'New password')
+            ->setSearchFields(null);
     }
 
     public function configureActions(Actions $actions): Actions
