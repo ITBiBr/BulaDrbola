@@ -4,12 +4,11 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory:
-            memory:
-                users:
-                    test:
-                        password: '$2y$13$VYcXD1FHuRa8lq.JLhAlcebNwZ9NUghI.jnIO0U.It73LB8KF7SZK'
-                        roles: [ ROLE_USER ]
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -19,7 +18,7 @@ security:
             lazy: true
             http_basic:
                 realm: "Secured Area"
-            provider: users_in_memory
+            provider: app_user_provider
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
