@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Constraints\Length;
 
 #[IsGranted('ROLE_ADMIN')]
 class UserCrudController extends AbstractCrudController
@@ -65,6 +66,12 @@ class UserCrudController extends AbstractCrudController
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat password'],
                 'mapped' => false,
+                'constraints' => [
+                new Length([
+                    'min' => 8,
+                    'minMessage' => 'Password must be at least 8 characters long.',
+                ]),
+            ],
             ])
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->onlyOnForms()

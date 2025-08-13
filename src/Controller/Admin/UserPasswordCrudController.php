@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserPasswordCrudController extends UserCrudController
 {
@@ -61,6 +62,11 @@ class UserPasswordCrudController extends UserCrudController
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat password'],
                 'mapped' => false,
+                'constraints' => [
+                    new Length([
+                        'min' => 8,
+                        'minMessage' => 'Password must be at least 8 characters long.',
+                    ]),],
             ])
             ->setRequired($pageName === Crud::PAGE_NEW)
             ->onlyOnForms()
