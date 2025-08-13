@@ -7,8 +7,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -37,10 +39,20 @@ class AktualityCrudController extends AbstractCrudController
     {
 
             yield IdField::new('id')->hideOnForm();
+            yield TextField::new('Titulek', 'Title');
             yield TextEditorField::new('perex');
             yield TextEditorField::new('obsah');
+            yield DateField::new('Datum', 'Date');
             yield DateTimeField::new('DatumZobrazeniOd', 'Show content from')
                 ->setFormTypeOption('data', new \DateTime());
+            yield ImageField::new('Obrazek', 'Image')
+                ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
+                ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
+                ->setFormTypeOption('multiple', false)
+                ->setUploadedFileNamePattern('[year]-[month]-[day]-[slug]-[contenthash].[extension]')
+                ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
+                ->setFormTypeOption('allow_delete', false);;
+
 
     }
 

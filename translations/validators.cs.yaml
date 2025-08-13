@@ -1,3 +1,4 @@
 'This username already exist.' : "Uživatelské jméno již existuje."
 'Password must be at least 8 characters long.' : "Heslo musí obsahovat minimálně 8 znaků."
 'Content must not be blank.' : "Obsah nesmí být prázdný."
+'Perex must not be blank.' : "Perex nesmí být prázdný."

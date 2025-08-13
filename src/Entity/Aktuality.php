@@ -15,21 +15,25 @@ class Aktuality
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[NotBlank(message: 'Perex must not be blank.')]
+    #[ORM\Column(length: 255)]
     private ?string $Perex = null;
 
     #[NotBlank(message: 'Content must not be blank.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $Obsah = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $Datum = null;
 
     #[ORM\Column]
     private ?\DateTime $DatumZobrazeniOd = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $Obrazek = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Titulek = null;
 
     public function getId(): ?int
     {
@@ -92,6 +96,18 @@ class Aktuality
     public function setObrazek(?string $Obrazek): static
     {
         $this->Obrazek = $Obrazek;
+
+        return $this;
+    }
+
+    public function getTitulek(): ?string
+    {
+        return $this->Titulek;
+    }
+
+    public function setTitulek(string $Titulek): static
+    {
+        $this->Titulek = $Titulek;
 
         return $this;
     }
