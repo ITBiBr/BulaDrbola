@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 px-lg-5 py-lg-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 px-lg-5 py-lg-3" id="aktuality-container">
 
         <!-- Aktualita 7
         <div class="col">
@@ -32,31 +32,49 @@
             </div>
         </div>-->
         {% for aktualita in aktuality %}
-            <div class="col">
-                <div class="card h-100 border-0 rounded-0">
-                    <div class="card-header bg-white border-0 pb-0">
-                        <small class="text-muted">{{ aktualita.Datum|cesky_datum }}</small>
-                    </div>
-                    <div class="px-3">
-                        <img src="images/aktuality/{{ aktualita.Obrazek }}" class="card-img-top rounded-0" alt="Náhledový obrázek">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title mt-2 text-primary fw-bold">{{ aktualita.Titulek}}</h5>
-                        <p class="card-text mb-0">{{ aktualita.Perex|raw }}</p>
-                        <a href="#" class="fw-bold">Číst více</a>
-                    </div>
-                </div>
-            </div>
+            {% include 'aktuality/_aktualita.html.twig' with {'aktualita': aktualita} %}
         {% endfor %}
     </div>
     <div class="container-fluid text-center">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <button class="btn btn-outline-primary rounded-pill m-5"><div class="mx-3">Načíst další</div></button>
+                <button id="load-more-btn" data-offset="{{ aktuality|length }}" class="btn btn-outline-primary rounded-pill m-5"><div class="mx-3">Načíst další</div></button>
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('load-more-btn').addEventListener('click', function () {
+            const btn = this;
+            const offset = btn.dataset.offset;
 
+            fetch('/aktuality/load-more?offset=' + offset)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('aktuality-container');
+                    data.items.forEach(itemHtml => {
+                        const div = document.createElement('div');
+                        div.innerHTML = itemHtml.trim();
+                        const newItem = div.firstElementChild;
+
+                        if (newItem) {
+                            // přidej třídu fade-in
+                            newItem.classList.add('fade-in');
+                            container.appendChild(newItem);
+
+                            // malý timeout, aby se spustil transition efekt
+                            setTimeout(() => {
+                                newItem.classList.add('show');
+                            }, 10);
+                        }
+                    });
+                    if (data.hasMore) {
+                        btn.dataset.offset = data.nextOffset;
+                    } else {
+                        btn.remove(); // skryje tlačítko, pokud už není co načíst
+                    }
+                });
+        });
+    </script>
 
 
 </div>

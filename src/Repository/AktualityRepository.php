@@ -50,4 +50,16 @@ class AktualityRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAktualityKZobrazeniPaginated(int $limit, int $offset): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.DatumZobrazeniOd < :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('a.DatumZobrazeniOd', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
 }
