@@ -23,6 +23,12 @@ class Aktuality
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $Datum = null;
 
+    #[ORM\Column]
+    private ?\DateTime $DatumZobrazeniOd = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Obrazek = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +66,30 @@ class Aktuality
     public function setDatum(?\DateTime $Datum): static
     {
         $this->Datum = $Datum;
+
+        return $this;
+    }
+
+    public function getDatumZobrazeniOd(): ?\DateTime
+    {
+        return $this->DatumZobrazeniOd;
+    }
+
+    public function setDatumZobrazeniOd(\DateTime $DatumZobrazeniOd): static
+    {
+        $this->DatumZobrazeniOd = $DatumZobrazeniOd;
+
+        return $this;
+    }
+
+    public function getObrazek(): ?string
+    {
+        return $this->Obrazek;
+    }
+
+    public function setObrazek(?string $Obrazek): static
+    {
+        $this->Obrazek = $Obrazek;
 
         return $this;
     }
