@@ -40,4 +40,14 @@ class AktualityRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findAktualityKZobrazeni(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.DatumZobrazeniOd < :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('a.DatumZobrazeniOd', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
