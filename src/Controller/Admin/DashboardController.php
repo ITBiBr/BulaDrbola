@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Aktuality;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -62,6 +63,6 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToUrl('Password change', 'fa fa-key', $url);
         }
 
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('News', 'fa fa-newspaper', Aktuality::class);
     }
 }

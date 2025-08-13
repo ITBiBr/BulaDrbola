@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AktualityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: AktualityRepository::class)]
 class Aktuality
@@ -17,6 +18,7 @@ class Aktuality
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Perex = null;
 
+    #[NotBlank(message: 'Content must not be blank.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $Obsah = null;
 

@@ -31,7 +31,9 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('new', 'New user')->setPageTitle('edit', 'Edit user')->setPageTitle('index', 'Users');
+            ->setPageTitle('new', 'New user')
+            ->setPageTitle('edit', 'Edit user')
+            ->setPageTitle('index', 'Users');
     }
     public function __construct(public UserPasswordHasherInterface $userPasswordHasher, Security $security)
     {
