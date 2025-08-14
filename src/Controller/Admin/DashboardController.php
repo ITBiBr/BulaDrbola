@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Aktuality;
+use App\Entity\Materialy;
+use App\Entity\MaterialyKategorie;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -64,5 +66,7 @@ class DashboardController extends AbstractDashboardController
         }
 
         yield MenuItem::linkToCrud('News', 'fa fa-newspaper', Aktuality::class);
+        yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class);
+        yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class);
     }
 }
