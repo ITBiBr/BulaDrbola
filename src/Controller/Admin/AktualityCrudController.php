@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Aktuality;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -13,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Filesystem\Filesystem;
 
 class AktualityCrudController extends AbstractCrudController
 {
@@ -57,4 +59,24 @@ class AktualityCrudController extends AbstractCrudController
 
     }
 
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+
+        $soubor = $entityInstance->getObrazek();
+
+        if ($soubor) {
+            $filesystem = new Filesystem();
+            $souborPath = $this->getParameter('kernel.project_dir') . '/public/images/aktuality/' . $soubor;
+
+            if ($filesystem->exists($souborPath)) {
+                try {
+                    $filesystem->remove($souborPath);
+                } catch (\Exception $e) {
+
+                }
+            }
+        }
+
+        parent::deleteEntity($entityManager, $entityInstance);
+    }
 }
