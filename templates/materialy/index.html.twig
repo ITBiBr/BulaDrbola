@@ -21,10 +21,9 @@
     <nav>
         <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
             <button class="nav-link active fw-bold" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
-            <button class="nav-link fw-bold" id="nav-category-1-tab" data-bs-toggle="tab" data-bs-target="#nav-category-1" type="button" role="tab" aria-controls="nav-category-1" aria-selected="false">K modlitbě</button>
-            <button class="nav-link fw-bold" id="nav-category-2-tab" data-bs-toggle="tab" data-bs-target="#nav-category-2" type="button" role="tab" aria-controls="nav-category-2" aria-selected="false">Pro katechezi</button>
-            <button class="nav-link fw-bold" id="nav-category-3-tab" data-bs-toggle="tab" data-bs-target="#nav-category-3" type="button" role="tab" aria-controls="nav-category-3" aria-selected="false">Pro média</button>
-            <button class="nav-link fw-bold" id="nav-category-4-tab" data-bs-toggle="tab" data-bs-target="#nav-category-4" type="button" role="tab" aria-controls="nav-category-4" aria-selected="false">Merch</button>
+            {% for kat in kategorie %}
+                <button class="nav-link fw-bold" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
+            {% endfor %}
 
         </div>
     </nav>
@@ -32,123 +31,22 @@
         <div class = "col-lg-8 col-11 mt-4">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
-                    <div class="text-primary small mx-4">K modlitbě</div>
-                    <div class="card shadow-sm mb-4 rounded-0 border-primary border-2">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- Levý sloupec -->
-                                <div class="col-md-2">
-                                    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <!-- Obrys souboru -->
-                                        <polyline
-                                                points="47,7 47,22 62,22 47,7 17,7 17,72 62,72 62,22"
-                                                style="fill:white;stroke:rgba(33, 7, 104, 1);stroke-width:2"
-                                                stroke-linejoin="round"
-                                        />
-
-                                        <!-- Rámeček vlevo nahoře -->
-                                        <polygon
-                                                points="39,24 6,24 6,41 39,41"
-                                                style="fill:white;stroke:rgba(33, 7, 104, 1);stroke-width:2"
-                                                stroke-linejoin="round"
-                                        />
-
-                                        <!-- Tučný text typu souboru -->
-                                        <text
-                                                x="22"
-                                                y="33"
-                                                text-anchor="middle"
-                                                font-size="10"
-                                                font-family="Arial, sans-serif"
-                                                font-weight="bold"
-                                                fill="rgba(33, 7, 104, 1)"
-                                                dominant-baseline="middle"
-                                        >
-                                            DOCX
-                                        </text>
-                                    </svg>
-
-                                </div>
-                                <!-- Střední sloupec -->
-                                <div class="col-lg-7 col-md-6">
-                                    <h5 class="card-title">Název souboru DOCX</h5>
-                                    <p class="card-text">Zde bude nějaký dlouhosáhlý popis toho, co se v souboru nachází.</p>
-
-                                </div>
-                                <!-- Pravý sloupec -->
-                                <div class="col-md-3">
-
-                                    <button class="btn btn-outline-primary rounded-pill d-flex align-items-center ">
-                                        <img src="{{ asset('images/download.png') }}" alt="Stáhnout" class="me-2">
-                                        Stáhnout
-                                    </button>
-                                </div>
-                            </div>
+                    {% for soubor in soubory %}
+                        <div class="text-primary small mx-4">
+                            {% for kat in soubor.kategorie %}
+                                {{ kat.Kategorie }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
                         </div>
-                    </div>
-
-                    <div class="text-primary small mx-4">Merch</div>
-                    <div class="card shadow-sm mb-4 rounded-0 border-primary border-2">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- Levý sloupec -->
-                                <div class="col-md-2">
-                                    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <!-- Obrys souboru -->
-                                        <polyline
-                                                points="47,7 47,22 62,22 47,7 17,7 17,72 62,72 62,22"
-                                                style="fill:white;stroke:rgba(33, 7, 104, 1);stroke-width:2"
-                                                stroke-linejoin="round"
-                                        />
-
-                                        <!-- Rámeček vlevo nahoře -->
-                                        <polygon
-                                                points="39,24 6,24 6,41 39,41"
-                                                style="fill:white;stroke:rgba(33, 7, 104, 1);stroke-width:2"
-                                                stroke-linejoin="round"
-                                        />
-
-                                        <!-- Tučný text typu souboru -->
-                                        <text
-                                                x="22"
-                                                y="33"
-                                                text-anchor="middle"
-                                                font-size="10"
-                                                font-family="Arial, sans-serif"
-                                                font-weight="bold"
-                                                fill="rgba(33, 7, 104, 1)"
-                                                dominant-baseline="middle"
-                                        >
-                                            PDF
-                                        </text>
-                                    </svg>
-
-                                </div>
-                                <!-- Střední sloupec -->
-                                <div class="col-lg-7 col-md-6">
-                                    <h5 class="card-title">Název souboru PDF</h5>
-                                    <p class="card-text">Zde bude nějaký dlouhosáhlý popis toho, co se v souboru nachází.</p>
-
-                                </div>
-                                <!-- Pravý sloupec -->
-                                <div class="col-md-2">
-
-                                    <button class="btn btn-outline-primary rounded-pill d-flex align-items-center ">
-                                        <img src="{{ asset('images/download.png') }}" alt="Stáhnout" class="me-2">
-                                        Stáhnout
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
+                        {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
+                    {% endfor %}
                 </div>
-                <div class="tab-pane fade" id="nav-category-1" role="tabpanel" aria-labelledby="nav-category-1-tab">K modlitbě</div>
-                <div class="tab-pane fade" id="nav-category-2" role="tabpanel" aria-labelledby="nav-category-2-tab">Pro katechezi</div>
-                <div class="tab-pane fade" id="nav-category-3" role="tabpanel" aria-labelledby="nav-category-3-tab">Pro média</div>
-                <div class="tab-pane fade" id="nav-category-4" role="tabpanel" aria-labelledby="nav-category-4-tab">Merch</div>
-
+                {% for kat in kategorie %}
+                    <div class="tab-pane fade" id="nav-category-{{ kat.id }}" role="tabpanel" aria-labelledby="nav-category-{{ kat.id }}-tab">
+                        {% for soubor in kat.materialies %}
+                                {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
 
             </div>
         </div>

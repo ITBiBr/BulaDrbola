@@ -79,6 +79,13 @@ class MaterialyCrudController extends AbstractCrudController
                 ]))
                 ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
                 ->setFormTypeOption('allow_delete', false);
+            yield TextField::new('NazevSouboru', 'File Name')
+                ->onlyOnForms()
+                ->setFormTypeOption('disabled', true);
+            yield TextField::new('TypSouboru', 'File Type')
+                ->onlyOnForms()
+                ->setFormTypeOption('disabled', true);
+
             yield DateTimeField::new('DatumVlozeni', 'Insertion Date')
                 ->setFormTypeOption('data', new \DateTime());
             yield AssociationField::new('Kategorie', 'Material Categories')->setFormTypeOption('by_reference', false)->formatValue(fn($value) => implode(', ', $value->toArray()));//->autocomplete();
