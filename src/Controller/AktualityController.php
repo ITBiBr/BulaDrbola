@@ -17,7 +17,7 @@ final class AktualityController extends AbstractController
     #[Route('/aktuality', name: 'app_aktuality')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated(3,0);
+        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated(9,0);
 
         return $this->render('aktuality/index.html.twig', [
             'controller_name' => 'AktualityController',
@@ -30,7 +30,7 @@ final class AktualityController extends AbstractController
     public function loadMore(Request $request, AktualityRepository $aktualityRepository): JsonResponse
     {
         $offset = (int) $request->query->get('offset', 0);
-        $limit = 3;
+        $limit = 9;
 
         $aktuality = $aktualityRepository->findAktualityKZobrazeniPaginated($limit, $offset);
         $dalsi_aktuality = $aktualityRepository->findAktualityKZobrazeniPaginated($limit, $offset+1);
