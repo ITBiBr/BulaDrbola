@@ -11,7 +11,7 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 col-11 text-justify-center">
-                <img class="w-75" src="../images/aktuality/{{ aktualita.Obrazek }}" alt="{{ aktualita.Titulek }}">
+                <img class="w-75" src="{{ asset('/images/aktuality/' ~ aktualita.Obrazek) | imagine_filter('aktualita_full_thumb') }}" alt="{{ aktualita.Titulek }}">
             </div>
         </div>
 
