@@ -20,9 +20,9 @@
 
     <nav>
         <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
-            <button class="nav-link active fw-bold" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
+            <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
             {% for kat in kategorie %}
-                <button class="nav-link fw-bold" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
+                <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
             {% endfor %}
 
         </div>
