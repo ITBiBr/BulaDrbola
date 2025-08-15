@@ -54,7 +54,7 @@ final class AktualityController extends AbstractController
     public function showAktualita(string $url, EntityManagerInterface $entityManager): Response
     {
         $aktualita = $entityManager->getRepository(Aktuality::class)->findOneBy(['url'=>$url]);
-        dump($aktualita);
+
         if (!$aktualita)
             throw new NotFoundHttpException();
         return $this->render('aktuality/aktualita.html.twig', [
