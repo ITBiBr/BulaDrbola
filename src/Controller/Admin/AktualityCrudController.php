@@ -42,6 +42,7 @@ class AktualityCrudController extends AbstractCrudController
 
             yield IdField::new('id')->hideOnForm();
             yield TextField::new('Titulek', 'Title');
+            yield TextField::new('url', 'URL')->hideOnForm();
             yield TextEditorField::new('perex');
             yield TextEditorField::new('obsah');
             yield DateField::new('Datum', 'Date');
@@ -57,6 +58,15 @@ class AktualityCrudController extends AbstractCrudController
                 ->setSortable(false);
 
 
+    }
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Aktuality)
+        {
+            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager));
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -78,5 +88,36 @@ class AktualityCrudController extends AbstractCrudController
         }
 
         parent::deleteEntity($entityManager, $entityInstance);
+    }
+
+    private function makeURL(string $url): string
+    {
+        // 1. Odstranění diakritiky
+        $url = transliterator_transliterate('Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove', $url);
+
+        // 2. Nahrazení mezer pomlckami
+        $url = preg_replace('/\s+/', '-', $url);
+
+        // 3. Odstranění nepovolených znaků (ponechá jen písmena, čísla, pomlčku, podtržítko)
+        $url = preg_replace('/[^A-Za-z0-9\-_]/', '', $url);
+
+        // 4. Volitelně: převede na lowercase
+        $url = strtolower($url);
+
+        return $url;
+    }
+
+    private function makeUniqueUrl(string $original, EntityManagerInterface $em): string
+    {
+        $url = $originalUrl = $this->makeURL($original);
+
+        $i = 2;
+
+        while ($em->getRepository(Aktuality::class)->findOneBy(['url' => $url])) {
+            $url = $originalUrl . '-' . $i;
+            $i++;
+        }
+
+        return $url;
     }
 }
