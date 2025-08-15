@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class AktualityController extends AbstractController
@@ -47,6 +48,19 @@ final class AktualityController extends AbstractController
             'items' => $htmlItems,
             'nextOffset' => $offset + $limit,
             'hasMore' => count($dalsi_aktuality) >= $limit,
+        ]);
+    }
+    #[Route('/aktuality/{url}', name: 'aktuality_url')]
+    public function showAktualita(string $url, EntityManagerInterface $entityManager): Response
+    {
+        $aktualita = $entityManager->getRepository(Aktuality::class)->findOneBy(['url'=>$url]);
+        dump($aktualita);
+        if (!$aktualita)
+            throw new NotFoundHttpException();
+        return $this->render('aktuality/aktualita.html.twig', [
+            'controller_name' => 'AktualityController',
+            'aktualita' => $aktualita,
+            'paticka'=> true,
         ]);
     }
 }

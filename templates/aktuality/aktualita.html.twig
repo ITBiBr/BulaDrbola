@@ -4,15 +4,21 @@
 
 {% block body %}
     <div class = "container-fluid pt-5 mt-3">
-        <div class="row text-center">
-            <div class="col-12 p-3">
-                <h1 class="text-primary fw-bold text-uppercase">Aktuality</h1>
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8 col-11 p-3">
+                <h1 class="text-primary fw-bold text-uppercase">{{ aktualita.Titulek }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8 col-11 text-justify-center">
+                <img class="w-75" src="../images/aktuality/{{ aktualita.Obrazek }}" alt="{{ aktualita.Titulek }}">
             </div>
         </div>
 
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 px-lg-5 py-lg-3">
-
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8 col-11 text-justify-left">
+                {{ aktualita.Obsah|raw }}
+            </div>
         </div>
 
 
