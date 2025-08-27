@@ -50,7 +50,7 @@ class Clanky
         return $this->Obrazek;
     }
 
-    public function setObrazek(string $Obrazek): static
+    public function setObrazek(?string $Obrazek): static
     {
         $this->Obrazek = $Obrazek;
 
