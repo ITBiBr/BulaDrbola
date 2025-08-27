@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClankyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ClankyRepository::class)]
 class Clanky
@@ -14,10 +15,11 @@ class Clanky
     #[ORM\Column]
     private ?int $id = null;
 
+    #[NotBlank(message: 'Content must not be blank.')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $Obsah = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $Obrazek = null;
 
     #[ORM\Column(length: 255)]
