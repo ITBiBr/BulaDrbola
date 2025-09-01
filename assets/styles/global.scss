@@ -4,8 +4,9 @@
 .bula-drbola{
     width: 100%;
     #height: 475px; /* adjust the height as needed */
-    background-image: url('./images/background.jpg');
-    background-size: cover; /* makes the image cover the entire area */
+    background-image: url('./images/BD_layout_03.jpg');
+    background-size: 100% 100%;
+    //background-size: cover; /* makes the image cover the entire area */
     background-position: top center; /* ensures the image is centered */
     background-repeat: no-repeat; /* prevent repeating the image */
     display: block;
@@ -61,7 +62,7 @@
     position: relative;
     top: -15em;
 }
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 840px){
     .posun-240 {
         position: relative;
         top: -7em;
