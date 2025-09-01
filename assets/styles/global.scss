@@ -25,7 +25,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 .podbarveni_2{
     width: 100%;
     height: 749px;
@@ -57,28 +56,32 @@
     position: relative;
     top: -8.75em;
 }
-
+.posun_190 {
+    position: relative;
+    top: 12em;
+}
 .posun-240 {
     position: relative;
     top: -15em;
 }
 @media screen and (max-width: 840px){
     .posun-240 {
-        position: relative;
         top: -7em;
     }
     .posun-140 {
-        position: relative;
         top: -4.75em;
+    }
+    .posun_190 {
+        top: 1em;
     }
     .bula-drbola{
         min-height: 22em;
     }
+    .podbarveni_2{
+        height: auto;
+    }
 }
-.posun_190 {
-    position: relative;
-    top: 12em;
-}
+
 .posun-180 {
     position: relative;
     top: -180px;
