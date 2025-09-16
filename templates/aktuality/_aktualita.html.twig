@@ -1,6 +1,6 @@
     <div class="card h-100 border-0 rounded-0">
         <div class="card-header bg-white border-0 pb-0 px-1">
-            <small class="text-muted">{{ aktualita.Datum|cesky_datum }}</small>
+            <small class="text-date">{{ aktualita.Datum|cesky_datum }}</small>
         </div>
         <div class="px-1">
             <img src="{{ asset('/images/aktuality/' ~ aktualita.Obrazek) | imagine_filter('aktualita_thumb') }}" class="card-img-top rounded-0" alt="Náhledový obrázek">
