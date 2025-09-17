@@ -66,9 +66,12 @@
     position: relative;
     margin-top: -19em;
 }
-.border-end-desktop-only {
-    border-right: none;
+
+.svg-file {
+    width: 100px;
+    height: 100px;
 }
+
 @media screen and (max-width: 840px){
     .posun-240 {
         top: -7em;
@@ -88,6 +91,20 @@
         height: auto;
     }
 
+    .svg-file {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+}
+
+.border-end-desktop-only {
+    border-right: none;
+}
+@media screen and (min-width: 992px) {
+    .border-end-desktop-only {
+        border-right: 1px solid #dee2e6 !important;
+    }
 }
 .navbar-toggler{
     border: none !important;
@@ -103,11 +120,6 @@
     box-shadow: none !important;
 }
 
-@media screen and (min-width: 992px) {
-    .border-end-desktop-only {
-        border-right: 1px solid #dee2e6 !important;
-    }
-}
 .posun-180 {
     position: relative;
     top: -180px;
