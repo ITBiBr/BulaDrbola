@@ -66,7 +66,9 @@
     position: relative;
     margin-top: -19em;
 }
-
+.border-end-desktop-only {
+    border-right: none;
+}
 @media screen and (max-width: 840px){
     .posun-240 {
         top: -7em;
@@ -85,8 +87,13 @@
     .podbarveni_2{
         height: auto;
     }
-}
 
+}
+@media screen and (min-width: 992px) {
+    .border-end-desktop-only {
+        border-right: 1px solid #dee2e6 !important;
+    }
+}
 .posun-180 {
     position: relative;
     top: -180px;
