@@ -44,7 +44,7 @@ $(document).ready(function () {
         $(".collapse").not(this).collapse('hide');
         // Změna textu tlačítka na "Zobrazit méně"
         var button = $(this).next(".toggle-btn");
-        button.html("&#708; zobrazit méně");
+        button.html("&#9650; zobrazit méně");
     });
 
     $(".collapse").on("hide.bs.collapse", function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         $(this).closest(".casova-osa-element-levy").removeClass("casova-osa-zvyrazeny-element-levy");
         // Změna textu tlačítka na "Zobrazit méně"
         var button = $(this).next(".toggle-btn");
-        button.html("&#709; zobrazit více");
+        button.html("&#9660; zobrazit více");
     });
 
     var $carousel = $('#carouselCasovaOsa'); // Výběr carouselu
