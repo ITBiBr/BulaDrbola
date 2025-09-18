@@ -68,8 +68,13 @@
 }
 
 .svg-file {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
+}
+.bula-drbola-prechod{
+    position: relative;
+    top: 0;
+    max-width: 100%;
 }
 
 @media screen and (max-width: 840px){
@@ -91,11 +96,6 @@
         height: auto;
     }
 
-    .svg-file {
-        width: 70px !important;
-        height: 70px !important;
-    }
-
 }
 
 .border-end-desktop-only {
@@ -105,6 +105,12 @@
     .border-end-desktop-only {
         border-right: 1px solid #dee2e6 !important;
     }
+    .bula-drbola-prechod{
+        top: -5% !important;
+        width: 180% !important;
+        transform: scale(180%);
+    }
+
 }
 .navbar-toggler{
     border: none !important;
