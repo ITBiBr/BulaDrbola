@@ -4,138 +4,142 @@
 
 {% block body %}
 <div class = "container-fluid pt-5 mt-3">
-    <div class="row text-center">
-        <div class="col-12 p-3">
-            <h1 class="text-primary fw-bold text-uppercase">Příběh</h1>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-4">
-        <div class = "col-xl-6 col-lg-9 col-10">
-            <p class="text-justify-center">Jan Bula a Václav Drbola představují dvě významné osobnosti katolické církve první poloviny 20. století.
-            Jejich životy a&nbsp;odkaz jsou spjaty s obdobím náboženské perzekuce v&nbsp;Československu - oba kněží působí
-            v&nbsp;období těsně před a po komunistickém převratu. Symbolem neochvějné víry a&nbsp;odhodlání se stali poté, co se
-            vymezili vůči totalitnímu režimu, který se snažil církev podřídit státní moci. Jejich smrt zůstává
-            silným svědectvím víry v&nbsp;prostředí násilí a útlaku a i dnes nás nutí zamyslet se nad tím, co znamená zůstat
-            věrný svým ideálům a&nbsp;víře i za cenu osobních obětí.</p>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-12 mt-5 p-3">
-            <h5 class="text-primary fw-bolder">V čem je jejich příběh vyjímečný?</h5>
-        </div>
-    </div>
-    <div class="row justify-content-center d-flex flex-row mt-1">
-        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
-            <p class="p-3">
-                <img src="{{ asset('images/kolarek.svg') }}" height="35px">
-            </p>
-            <p class="p-0">
-                jde o první blahoslavené oběti komunistického režimu v&nbsp;česku
-            </p>
-        </div>
-
-        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
-            <p class="p-3">
-                <img src="{{ asset('images/kolarek.svg') }}" height="35px">
-            </p>
-            <p class="p-0">
-                oba kněží jsou prvními blahoslavenými mučedníky moderní české historie (žili a&nbsp;zemřeli ve 20.století)
-            </p>
-        </div>
-
-        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
-            <p class="p-3">
-                <img src="{{ asset('images/kolarek.svg') }}" height="35px">
-            </p>
-            <p class="p-0">
-                od roku 1989 jde teprve o druhý úspěšně zakončený proces blahořečení v ČR
-            </p>
-        </div>
-    </div>
-{#</div>
-<div class="container-fluid bg-primary">
-    <div class="row justify-content-center pt-5">
-        <div class="col-6 text-center">
-            <h3 class="text-white text-uppercase">Časová osa</h3>
-        </div>
-    </div>
     <div class="row justify-content-center">
-        <div class="col-xl-6 col-lg-9 col-10">
-            <div id="carouselCasovaOsa" class="carousel slide casova-osa-carousel" data-bs-interval="false">
+        <div class="col-lg-11 col-12">
+            <div class="row text-center">
+                <div class="col-12 p-3">
+                    <h1 class="text-primary fw-bold text-uppercase">Příběh</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class = "col-xl-6 col-lg-9 col-10">
+                    <p class="text-justify-center">Jan Bula a Václav Drbola představují dvě významné osobnosti katolické církve první poloviny 20. století.
+                    Jejich životy a&nbsp;odkaz jsou spjaty s obdobím náboženské perzekuce v&nbsp;Československu - oba kněží působí
+                    v&nbsp;období těsně před a po komunistickém převratu. Symbolem neochvějné víry a&nbsp;odhodlání se stali poté, co se
+                    vymezili vůči totalitnímu režimu, který se snažil církev podřídit státní moci. Jejich smrt zůstává
+                    silným svědectvím víry v&nbsp;prostředí násilí a útlaku a i dnes nás nutí zamyslet se nad tím, co znamená zůstat
+                    věrný svým ideálům a&nbsp;víře i za cenu osobních obětí.</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12 mt-5 p-3">
+                    <h5 class="text-primary fw-bolder">V čem je jejich příběh vyjímečný?</h5>
+                </div>
+            </div>
+            <div class="row justify-content-center d-flex flex-row mt-1">
+                <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                    <p class="p-3">
+                        <img src="{{ asset('images/kolarek.svg') }}" height="35px">
+                    </p>
+                    <p class="p-0">
+                        jde o první blahoslavené oběti komunistického režimu v&nbsp;česku
+                    </p>
+                </div>
 
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
+                <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                    <p class="p-3">
+                        <img src="{{ asset('images/kolarek.svg') }}" height="35px">
+                    </p>
+                    <p class="p-0">
+                        oba kněží jsou prvními blahoslavenými mučedníky moderní české historie (žili a&nbsp;zemřeli ve 20.století)
+                    </p>
+                </div>
 
-                        <img src="{{ asset('images/casova-osa/1.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5>Václav Drbola narozen v jihomoravských Starovičkách</h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="0" class="active casova-osa-carousel-prvni" aria-current="true" aria-label="Slide 1"><div class="button"></div></button>
+                <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                    <p class="p-3">
+                        <img src="{{ asset('images/kolarek.svg') }}" height="35px">
+                    </p>
+                    <p class="p-0">
+                        od roku 1989 jde teprve o druhý úspěšně zakončený proces blahořečení v ČR
+                    </p>
+                </div>
+            </div>
+        {#</div>
+        <div class="container-fluid bg-primary">
+            <div class="row justify-content-center pt-5">
+                <div class="col-6 text-center">
+                    <h3 class="text-white text-uppercase">Časová osa</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-9 col-10">
+                    <div id="carouselCasovaOsa" class="carousel slide casova-osa-carousel" data-bs-interval="false">
 
-                        <h1 class="casova-osa-carousel-rok text-white text-center">1912</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/2.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5>příběh pokračuje</h5>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+
+                                <img src="{{ asset('images/casova-osa/1.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5>Václav Drbola narozen v jihomoravských Starovičkách</h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="0" class="active casova-osa-carousel-prvni" aria-current="true" aria-label="Slide 1"><div class="button"></div></button>
+
+                                <h1 class="casova-osa-carousel-rok text-white text-center">1912</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/2.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5>příběh pokračuje</h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="1" class="casova-osa-carousel-prostredek"aria-label="Slide 2"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2002</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/3.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5></h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="2" class="casova-osa-carousel-prostredek" aria-label="Slide 3"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2003</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/4.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5></h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="3" class="casova-osa-carousel-prostredek" aria-label="Slide 4"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2004</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/5.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5></h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="4" class="casova-osa-carousel-prostredek" aria-label="Slide 5"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2005</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/6.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5></h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="5" class="casova-osa-carousel-prostredek" aria-label="Slide 6"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2007</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/casova-osa/7.png') }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption text-white mt-5">
+                                    <h5>ch</h5>
+                                </div>
+                                <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="6" class="casova-osa-carousel-posledni" aria-label="Slide 7"><div class="button"></div></button>
+                                <h1 class="casova-osa-carousel-rok text-white text-center">2008</h1>
+                            </div>
                         </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="1" class="casova-osa-carousel-prostredek"aria-label="Slide 2"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2002</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/3.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5></h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="2" class="casova-osa-carousel-prostredek" aria-label="Slide 3"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2003</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/4.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5></h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="3" class="casova-osa-carousel-prostredek" aria-label="Slide 4"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2004</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/5.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5></h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="4" class="casova-osa-carousel-prostredek" aria-label="Slide 5"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2005</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/6.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5></h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="5" class="casova-osa-carousel-prostredek" aria-label="Slide 6"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2007</h1>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('images/casova-osa/7.png') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-white mt-5">
-                            <h5>ch</h5>
-                        </div>
-                        <button type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide-to="6" class="casova-osa-carousel-posledni" aria-label="Slide 7"><div class="button"></div></button>
-                        <h1 class="casova-osa-carousel-rok text-white text-center">2008</h1>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide="next" style="display: none;">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselCasovaOsa" data-bs-slide="next" style="display: none;">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-
             </div>
+            <div class="prostor-pod-carouselem"></div>#}
         </div>
     </div>
-    <div class="prostor-pod-carouselem"></div>#}
 </div>
 <div class = "container-fluid bg-primary text-white">
     <div class="row">

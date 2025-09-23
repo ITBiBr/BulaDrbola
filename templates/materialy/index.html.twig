@@ -4,54 +4,57 @@
 
 {% block body %}
 <div class = "container-fluid pt-5 mt-3">
-    <div class="row text-center">
-        <div class="col-12 p-3">
-            <h1 class="text-primary fw-bold text-uppercase">Materiály</h1>
-
-        </div>
-    </div>
-    <div class="row justify-content-center mt-4">
-        <div class = "col-xl-6 col-lg-9 col-10">
-            <p class="text-justify-center">Zde bude text, který upřesní, jakým způsobem a jaké materiály je zde možné vyhledat.</p>
-        </div>
-    </div>
-
-
-
-    <nav>
-        <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
-            <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
-            {% for kat in kategorie %}
-                <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
-            {% endfor %}
-
-        </div>
-    </nav>
     <div class="row justify-content-center">
-        <div class = "col-xxl-5 col-xl-7 col-lg-8 col-9 mt-4">
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
-                    {% for soubor in soubory %}
-                        <div class="text-primary small mx-4">
-                            {% for kat in soubor.kategorie %}
-                                {{ kat.Kategorie }}{% if not loop.last %}, {% endif %}
+        <div class="col-lg-11 col-12">
+            <div class="row text-center">
+                <div class="col-12 p-3">
+                    <h1 class="text-primary fw-bold text-uppercase">Materiály</h1>
+
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class = "col-xl-6 col-lg-9 col-10">
+                    <p class="text-justify-center">Zde bude text, který upřesní, jakým způsobem a jaké materiály je zde možné vyhledat.</p>
+                </div>
+            </div>
+
+
+
+            <nav>
+                <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
+                    <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
+                    {% for kat in kategorie %}
+                        <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
+                    {% endfor %}
+
+                </div>
+            </nav>
+            <div class="row justify-content-center">
+                <div class = "col-xxl-5 col-xl-7 col-lg-8 col-9 mt-4">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+                            {% for soubor in soubory %}
+                                <div class="text-primary small mx-4">
+                                    {% for kat in soubor.kategorie %}
+                                        {{ kat.Kategorie }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
                             {% endfor %}
                         </div>
-                        {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
-                    {% endfor %}
-                </div>
-                {% for kat in kategorie %}
-                    <div class="tab-pane fade" id="nav-category-{{ kat.id }}" role="tabpanel" aria-labelledby="nav-category-{{ kat.id }}-tab">
-                        {% for soubor in kat.materialies %}
-                                {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
+                        {% for kat in kategorie %}
+                            <div class="tab-pane fade" id="nav-category-{{ kat.id }}" role="tabpanel" aria-labelledby="nav-category-{{ kat.id }}-tab">
+                                {% for soubor in kat.materialies %}
+                                        {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
+                                {% endfor %}
+                            </div>
                         {% endfor %}
-                    </div>
-                {% endfor %}
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 {% endblock %}

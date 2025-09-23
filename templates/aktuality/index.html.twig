@@ -4,62 +4,64 @@
 
 {% block body %}
 <div class = "container-fluid pt-5 mt-3">
-    <div class="row justify-content-center text-center">
-        <div class="col-xl-6 col-lg-9 col-10 p-3">
-            <h1 class="text-primary fw-bolder text-uppercase">Aktuality</h1>
-        </div>
-    </div>
-
-    <div class="row justify-content-center mt-4">
-        <div class="col-xxl-6 col-xl-9 col-md-10">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 px-lg-5 py-lg-3" id="aktuality-container">
-                {% for aktualita in aktuality %}
-                    {% include 'aktuality/_aktualita.html.twig' with {'aktualita': aktualita} %}
-                {% endfor %}
+    <div class="row justify-content-center">
+        <div class="col-lg-11 col-12">
+            <div class="row justify-content-center text-center">
+                <div class="col-xl-6 col-lg-9 col-10 p-3">
+                    <h1 class="text-primary fw-bolder text-uppercase">Aktuality</h1>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="container-fluid text-center">
-        <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-9 col-10">
-                <button id="load-more-btn" data-offset="{{ aktuality|length }}" class="btn btn-outline-primary rounded-pill m-5"><div class="mx-3">Načíst další</div></button>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-xxl-6 col-xl-9 col-md-10">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 px-lg-5 py-lg-3" id="aktuality-container">
+                        {% for aktualita in aktuality %}
+                            {% include 'aktuality/_aktualita.html.twig' with {'aktualita': aktualita} %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <script>
-        document.getElementById('load-more-btn').addEventListener('click', function () {
-            const btn = this;
-            const offset = btn.dataset.offset;
+            <div class="container-fluid text-center">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-9 col-10">
+                        <button id="load-more-btn" data-offset="{{ aktuality|length }}" class="btn btn-outline-primary rounded-pill m-5"><div class="mx-3">Načíst další</div></button>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.getElementById('load-more-btn').addEventListener('click', function () {
+                    const btn = this;
+                    const offset = btn.dataset.offset;
 
-            fetch('/aktuality/load-more?offset=' + offset)
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('aktuality-container');
-                    data.items.forEach(itemHtml => {
-                        const div = document.createElement('div');
-                        div.innerHTML = itemHtml.trim();
-                        const newItem = div.firstElementChild;
+                    fetch('/aktuality/load-more?offset=' + offset)
+                        .then(response => response.json())
+                        .then(data => {
+                            const container = document.getElementById('aktuality-container');
+                            data.items.forEach(itemHtml => {
+                                const div = document.createElement('div');
+                                div.innerHTML = itemHtml.trim();
+                                const newItem = div.firstElementChild;
 
-                        if (newItem) {
-                            // přidej třídu fade-in
-                            newItem.classList.add('fade-in');
-                            container.appendChild(newItem);
+                                if (newItem) {
+                                    // přidej třídu fade-in
+                                    newItem.classList.add('fade-in');
+                                    container.appendChild(newItem);
 
-                            // malý timeout, aby se spustil transition efekt
-                            setTimeout(() => {
-                                newItem.classList.add('show');
-                            }, 10);
-                        }
-                    });
-                    if (data.hasMore) {
-                        btn.dataset.offset = data.nextOffset;
-                    } else {
-                        btn.remove(); // skryje tlačítko, pokud už není co načíst
-                    }
+                                    // malý timeout, aby se spustil transition efekt
+                                    setTimeout(() => {
+                                        newItem.classList.add('show');
+                                    }, 10);
+                                }
+                            });
+                            if (data.hasMore) {
+                                btn.dataset.offset = data.nextOffset;
+                            } else {
+                                btn.remove(); // skryje tlačítko, pokud už není co načíst
+                            }
+                        });
                 });
-        });
-    </script>
-
-
+            </script>
+        </div>
+    </div>
 </div>
 {% endblock %}
