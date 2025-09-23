@@ -44,7 +44,7 @@ $(document).ready(function () {
         $(".collapse").not(this).collapse('hide');
         // Změna textu tlačítka na "Zobrazit méně"
         var button = $(this).next(".toggle-btn");
-        button.html("&#9650; zobrazit méně");
+        button.html("<svg width=\"12\" height=\"12\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"50,0 100,90 0,90\" fill=\"rgb(222, 174, 107)\"></polygon></svg>&nbsp;zobrazit méně");
     });
 
     $(".collapse").on("hide.bs.collapse", function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         $(this).closest(".casova-osa-element-levy").removeClass("casova-osa-zvyrazneny-element-levy");
         // Změna textu tlačítka na "Zobrazit méně"
         var button = $(this).next(".toggle-btn");
-        button.html("&#9660; zobrazit více");
+        button.html("<svg width=\"12\" height=\"12\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"0,3.4 100,3.4 50,90\" fill=\"rgb(222, 174, 107)\"></polygon></svg>&nbsp;zobrazit více");
     });
 
     var $carousel = $('#carouselCasovaOsa'); // Výběr carouselu
