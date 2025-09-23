@@ -21,6 +21,9 @@
 .nav-link:hover .icon-home{
     stroke: var(--bs-nav-link-hover-color);
 }
+.nav-link:hover{
+    font-weight: 1000;
+}
 .podbarveni{
     width: 100%;
     background-image: linear-gradient(to bottom, white 0%, white 50%, transparent 100%), url('./images/body_bottom.jpg');
