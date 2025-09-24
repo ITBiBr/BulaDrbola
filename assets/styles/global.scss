@@ -81,7 +81,8 @@
 .bula-drbola-prechod{
     position: relative;
     top: 0;
-    max-width: 100%;
+    max-width: 150%;
+    left: -20%;
 }
 
 @media screen and (max-width: 840px){
@@ -109,6 +110,9 @@
         top: -7em;
     }
 }
+.overflow-wrapper {
+    overflow: hidden;
+}
 
 .border-end-desktop-only {
     border-right: none;
@@ -118,9 +122,11 @@
         border-right: 1px solid #dee2e6 !important;
     }
     .bula-drbola-prechod{
-        top: -5% !important;
-        width: 180% !important;
-        transform: scale(180%);
+        top: 3% !important;
+        left: 5% !important;
+        width: 280% !important;
+        transform: scale(280%);
+        max-width: 100% !important;
     }
 
 }

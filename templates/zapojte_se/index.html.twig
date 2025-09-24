@@ -3,11 +3,11 @@
 {% block title %}Zapojte se{% endblock %}
 
 {% block body %}
-    <div class = "container-fluid pt-5 mt-3">
+    <div class = "container-fluid pt-5 mt-3 overflow-x-hidden">
         <div class="row justify-content-center">
             <div class="col-lg-11 col-12">
-                <div class="row text-center">
-                    <div class="col-12 p-3">
+                <div class="row text-center mb-lg-5 mb-0">
+                    <div class="col-12 pb-lg-5 mb-lg-3 mb-0 pb-0 p-3">
                         <h1 class="text-primary fw-bolder text-uppercase">Zapojte se</h1>
                     </div>
                 </div>
@@ -27,12 +27,14 @@
                         <p class="text-justify-left">Amen.</p>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-12 text-center my-5 position-relative overflow-visible ps-lg-5 ps-0">
-                        <img src="{{ asset ('images/bula_drbola_prechod.jpg') }}" class="bula-drbola-prechod z-n1">
 
-                        <a class="btn btn-sm btn-outline-primary rounded-pill bula-drbola-karticka mt-lg-3 mt-0 px-4">
-                            <img src="{{ asset('images/download.svg') }}" height="20px" alt="Stáhnout" class="me-2">
-                            Stáhnout modlitební kartičku
-                        </a>
+                        <img src="{{ asset ('images/bula_drbola_prechod.jpg') }}" class="bula-drbola-prechod z-n1">
+                        <div class="mt-lg-5 mt-0">
+                            <a class="btn btn-sm btn-outline-primary rounded-pill mt-lg-5 mt-0 px-4">
+                                <img src="{{ asset('images/download.svg') }}" height="20px" alt="Stáhnout" class="me-2">
+                                Stáhnout modlitební kartičku
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
