@@ -103,7 +103,18 @@
     .podbarveni_2{
         height: auto;
     }
-
+    .bula-drbola-oriznuti-mobil
+    {
+        width: 115% !important;
+        transform: scale(115%);
+        max-width: 100% !important;
+    }
+    .bula-drbola-oriznuti-main-mobil
+    {
+        width: 110% !important;
+        transform: scale(110%);
+        max-width: 100% !important;
+    }
 }
 @media screen and (max-width: 600px) {
     .posun-240 {
@@ -128,8 +139,8 @@
         transform: scale(280%);
         max-width: 100% !important;
     }
-
 }
+
 .navbar-toggler{
     border: none !important;
 }
