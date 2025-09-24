@@ -86,7 +86,7 @@
 
 @media screen and (max-width: 840px){
     .posun-240 {
-        top: -7em;
+        top: -10em;
     }
     .posun-140 {
         top: -4.75em;
@@ -103,6 +103,11 @@
         height: auto;
     }
 
+}
+@media screen and (max-width: 600px) {
+    .posun-240 {
+        top: -7em;
+    }
 }
 
 .border-end-desktop-only {
@@ -362,6 +367,11 @@ $headings-font-family: 'Clash Display', sans-serif;
 $h1-font-size: 3.125rem;
 $h2-font-size: 2.19rem;
 $font-weight-bolder: 1000;
+
+.pt-6
+{
+    padding-top: 5rem;
+}
 
 .text-date{
     color: rgb(154, 151, 151);;
