@@ -432,7 +432,9 @@ body {
     font-weight: bold;
 }
 
-
+.perex{
+    font-size: 0.95rem;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
