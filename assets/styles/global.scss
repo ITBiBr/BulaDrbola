@@ -21,6 +21,10 @@
 .nav-link:hover .icon-home{
     stroke: var(--bs-nav-link-hover-color);
 }
+.download:hover .download-svg .stroke {
+    stroke: white;
+}
+
 .nav-link:hover{
     font-weight: 1000;
 }
