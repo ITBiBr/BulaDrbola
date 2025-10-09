@@ -97,4 +97,31 @@ $(document).ready(function () {
     // Inicializace při načtení stránky
     updateButtons();
 
+    let scrollTarget = null;
+    let offset = 91; // výška fixed headeru
+
+    // Při kliknutí si uložíme, kam chceme scrollovat
+    $('.scroll-top-on-click').on('click', function () {
+        scrollTarget = $(this).closest('.scroll-top');
+    });
+
+    // Po dokončení otevření collapse sekce provedeme scroll
+    $('.collapse').on('shown.bs.collapse', function () {
+        if (scrollTarget) {
+            $('html, body').animate({
+                scrollTop: scrollTarget.offset().top - offset
+            }, 300);
+            scrollTarget = null; // reset
+        }
+    });
+
+    // Po zavření collapse (např. druhým klikem)
+    $('.collapse').on('hidden.bs.collapse', function () {
+        if (scrollTarget) {
+            $('html, body').animate({
+                scrollTop: scrollTarget.offset().top - offset
+            }, 400);
+            scrollTarget = null;
+        }
+    });
 });
