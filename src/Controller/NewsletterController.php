@@ -22,7 +22,6 @@ final class NewsletterController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $subscription->setCreatedAt(new \DateTimeImmutable());
             $em->persist($subscription);
             $em->flush();
 
