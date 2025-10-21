@@ -4,7 +4,11 @@ namespace App\Entity;
 
 use App\Repository\EmailSubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
+#[UniqueEntity('email', message: 'Tento e-mail je již zaregistrovaný.')]
 #[ORM\Entity(repositoryClass: EmailSubscriptionRepository::class)]
 class EmailSubscription
 {
@@ -13,8 +17,11 @@ class EmailSubscription
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Email = null;
+
+    #[NotBlank(message: 'E-mail je povinný.')]
+    #[Email(message: 'Zadejte platný e-mail.')]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    private ?string $email = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $CreatedAt = null;
@@ -26,12 +33,12 @@ class EmailSubscription
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): static
+    public function setEmail(string $email): static
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }

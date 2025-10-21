@@ -78,7 +78,7 @@
                 </div>
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                        <h5 id="sdilejte-svedectvi" class="scroll-offset text-primary text-start pt-4 fw-bold">Newsletter</h5>
+                        <h5 class="text-primary text-start pt-4 fw-bold">Newsletter</h5>
                         <p class="pt-4 ">
                             Chcete dostávat pravidelně důležité informace a novinky o doprovodných akcích a o samotné slavnosti blahořečení?
                             Přihlaste se k odběru našeho newsletteru a nenechte si ujít nové výzvy a updaty.</p>
@@ -90,7 +90,35 @@
 
 
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0">
+                    <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset" id="newsletter">
+                        {{ form_start(newsletterForm, {
+                            'action': path('app_newsletter'),
+                            'attr': {
+                                'class': 'd-flex gap-2 mt-4'
+                            }
+                        }) }}
+                                <div class="row">
+                                    <div class="col-12 mt-lg-5 pt-1 mt-0">
+                                    {{ form_widget(newsletterForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Zadejte svůj e-mail'}}) }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill mt-3 px-4 border-2">Přihlásit se k odběru</button>
+
+                                    </div>
+                                </div>
+                        {{ form_end(newsletterForm) }}
+                        <div class="row">
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="mt-3 mb-0 alert alert-{{ label }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                        </div>
+
                     </div>
 
                 </div>
