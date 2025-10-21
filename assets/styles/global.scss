@@ -19,6 +19,10 @@
     height: 86px;
 }
 
+.scroll-offset {
+    scroll-margin-top: 106px; /* nastav dle výšky navbaru */
+}
+
 .nav-link:hover .icon-home{
     stroke: var(--bs-nav-link-hover-color);
     stroke-width: 2.8;
