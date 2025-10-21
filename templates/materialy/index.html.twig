@@ -28,9 +28,9 @@
 
             <nav>
                 <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
-                    <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
+                    <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="vse-tab" data-bs-toggle="tab" data-bs-target="#vse" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
                     {% for kat in kategorie %}
-                        <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-category-{{ kat.id }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
+                        <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#{{ kat.slug }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
                     {% endfor %}
 
                 </div>
@@ -38,7 +38,7 @@
             <div class="row justify-content-center">
                 <div class = "col-xxl-5 col-xl-7 col-lg-8 col-9 mt-4">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+                        <div class="tab-pane fade show active" id="vse" role="tabpanel" aria-labelledby="vse-tab">
                             {% for soubor in soubory %}
                                 <div class="text-primary small mx-4">
                                     {% for kat in soubor.kategorie %}
@@ -49,7 +49,7 @@
                             {% endfor %}
                         </div>
                         {% for kat in kategorie %}
-                            <div class="tab-pane fade" id="nav-category-{{ kat.id }}" role="tabpanel" aria-labelledby="nav-category-{{ kat.id }}-tab">
+                            <div class="tab-pane fade scroll-offset-navbar" id="{{ kat.slug }}" role="tabpanel" aria-labelledby="{{ kat.slug }}-tab">
                                 {% for soubor in kat.materialies %}
                                         {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
                                 {% endfor %}
@@ -62,5 +62,28 @@
         </div>
     </div>
 </div>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const hash = window.location.hash;
+
+            if (hash) {
+                const triggerEl = document.querySelector(`button[data-bs-target="${hash}"]`);
+                console.log(triggerEl);
+                if (triggerEl) {
+                    const tab = new bootstrap.Tab(triggerEl);
+                    tab.show();
+                }
+            }
+            const navTabs = document.querySelectorAll('button[data-bs-toggle="tab"]');
+
+            navTabs.forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function (event) {
+                    const target = tab.getAttribute('data-bs-target');
+                    history.replaceState(null, null, target);
+                });
+            });
+        });
+    </script>
 
 {% endblock %}

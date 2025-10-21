@@ -22,6 +22,9 @@
 .scroll-offset {
     scroll-margin-top: 106px; /* nastav dle výšky navbaru */
 }
+.scroll-offset-navbar {
+    scroll-margin-top: 200px;
+}
 
 .nav-link:hover .icon-home{
     stroke: var(--bs-nav-link-hover-color);

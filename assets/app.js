@@ -11,6 +11,8 @@ const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 $(document).ready(function () {
     let navbar = $("#navbar");
