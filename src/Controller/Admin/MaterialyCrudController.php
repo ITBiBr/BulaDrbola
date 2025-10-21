@@ -69,13 +69,14 @@ class MaterialyCrudController extends AbstractCrudController
                 ->setUploadDir('public/files')
                 ->setFormTypeOption('multiple', false)
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
-                ->setFormTypeOption('attr', ['accept' => '.docx,.pdf'])
+                ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.pdf'])
                 ->setFileConstraints(new File([
                     'mimeTypes' => [
                         'application/pdf',
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'application/msword',
                     ],
-                    'mimeTypesMessage' => 'This file type is not supported.'
+                    'mimeTypesMessage' => 'Typ souboru není podporován.'
                 ]))
                 ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
                 ->setFormTypeOption('allow_delete', false);
