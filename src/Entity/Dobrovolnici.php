@@ -5,12 +5,18 @@ namespace App\Entity;
 use App\Repository\DobrovolniciRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
 #[ORM\Entity(repositoryClass: DobrovolniciRepository::class)]
 class Dobrovolnici
 {
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,8 +40,12 @@ class Dobrovolnici
     #[ORM\Column(length: 255)]
     private ?string $telefon = null;
 
+    #[IsTrue(message: 'Souhlas s GDPR musí být udělen.')]
     #[ORM\Column]
     private ?bool $isSouhlasGdpr = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $CreatedAt = null;
 
     public function getId(): ?int
     {
@@ -98,6 +108,18 @@ class Dobrovolnici
     public function setIsSouhlasGdpr(bool $isSouhlasGdpr): static
     {
         $this->isSouhlasGdpr = $isSouhlasGdpr;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    {
+        $this->CreatedAt = $CreatedAt;
 
         return $this;
     }

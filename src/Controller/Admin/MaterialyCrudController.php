@@ -54,7 +54,7 @@ class MaterialyCrudController extends AbstractCrudController
             yield IdField::new('id')->hideOnForm();
             yield TextField::new('NazevSouboru','File Name')->hideOnForm();
             yield TextField::new('TypSouboru','File Type')->hideOnForm();
-            yield TextField::new('Nazev', 'Name');
+            yield TextField::new('Nazev', 'Display Name');
             yield TextField::new('Popis', 'File Description')->formatValue(function ($value, $entity) {
                 if (!$value) {
                     return '';
