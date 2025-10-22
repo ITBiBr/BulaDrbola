@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\DobrovolniciRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 #[ORM\Entity(repositoryClass: DobrovolniciRepository::class)]
 class Dobrovolnici
@@ -19,9 +22,15 @@ class Dobrovolnici
     #[ORM\Column(length: 255)]
     private ?string $prijmeni = null;
 
+    #[NotBlank(message: 'E-mail je povinný.')]
+    #[Email(message: 'Zadejte platný e-mail.')]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[Regex(
+        pattern: '/^[+]?[\(\)0-9. -]{9,}$/',
+        message: 'Zadejte platné telefonní číslo.'
+    )]
     #[ORM\Column(length: 255)]
     private ?string $telefon = null;
 

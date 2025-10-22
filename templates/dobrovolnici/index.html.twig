@@ -8,13 +8,25 @@
             <div class="col-lg-11 col-12">
                 <div class="row justify-content-center text-center">
                     <div class="col-xl-6 col-lg-9 col-10 p-3">
-                        <h1 class="text-primary fw-bolder text-uppercase">Dobrovolníci</h1>
+                        <h1 class="text-primary fw-bolder text-uppercase">Registrace dobrovolníka</h1>
                     </div>
                 </div>
-
+                <div class="row justify-content-center mt-0">
+                    <div class="col-xl-4 col-lg-6 col-10">
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }} alert-dismissible fade show mt-5" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
                 <div class="row justify-content-center mt-5">
-                    <div class="col-xl-6 col-lg-9 col-10 text-justify-left">
-
+                    <div class="col-xl-4 col-lg-6 col-10 text-left">
+                        {{ form_start(dobrovolniciForm)}}
+                        {{ form_end(dobrovolniciForm) }}
                     </div>
                 </div>
             </div>
