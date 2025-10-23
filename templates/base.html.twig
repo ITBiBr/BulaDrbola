@@ -111,10 +111,10 @@
                             <div class="col-xxl-8 col-xl-10 col-12 justify-content-center">
                                 <div class="row justify-content-lg-start justify-content-center">
                                     <div class="col-lg-2 col-5 text-start m-auto border-end">
-                                        <img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60px">
+                                        <a href="{{ path ('app_main') }}"><img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60px"></a>
                                     </div>
                                     <div class="col-lg-2 col-5 text-lg-center text-start border-end-desktop-only m-auto">
-                                        <img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60px">
+                                        <a href="https://www.biskupstvi.cz"><img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60px"></a>
                                     </div>
                                     <div class="col-lg-8 col-10 mt-lg-0 mt-4 text-start ps-lg-5">
                                         beatifikační proces mučedníků<br>komunistického režimu
@@ -134,12 +134,12 @@
                                 <div class="row mt-3">
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            domů
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_main') }}">domů</a>
                                         </h6>
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            příběh
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_pribeh') }}">příběh</a>
                                         </h6>
                                         <p>
                                             <a href="{{ path('app_materialy') }}/#pro-katechezi" class="text-reset text-decoration-none hover-bold">bulletin ke stažení</a>
@@ -147,7 +147,7 @@
 
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-md-0 mb-4">
-                                        <h6 class="fw-bold mb-4">blahořečení</h6>
+                                        <h6 class="fw-bold mb-4"><a class="text-reset text-decoration-none" href="{{ path('app_blahoreceni') }}">blahořečení</a></h6>
                                         <p>
                                             <a href="{{ path('app_blahoreceni') }}/#jak-probiha-blahoreceni" class="text-reset text-decoration-none hover-bold">jak probíhá blahořečení?</a>
                                             <br>
@@ -158,13 +158,13 @@
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            výstaviště
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_vystaviste') }}">výstaviště</a>
                                         </h6>
 
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            materiály
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_materialy') }}">materiály</a>
                                         </h6>
                                         <p>
                                             <a href="{{ path('app_materialy') }}/#k-modlitbe" class="text-reset text-decoration-none hover-bold">modlitba</a>
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            zapojte se
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_zapojte_se') }}">zapojte se</a>
                                         </h6>
                                         <p>
                                             <a href="{{ path('app_zapojte_se') }}/#modlitba-za-blahoreceni" class="text-reset text-decoration-none hover-bold">modlitba za blahořečení</a>
