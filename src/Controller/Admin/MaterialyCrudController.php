@@ -69,12 +69,13 @@ class MaterialyCrudController extends AbstractCrudController
                 ->setUploadDir('public/files')
                 ->setFormTypeOption('multiple', false)
                 ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
-                ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.pdf'])
+                ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.pdf'])
                 ->setFileConstraints(new File([
                     'mimeTypes' => [
                         'application/pdf',
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                         'application/msword',
+                        'image/jpeg',
                     ],
                     'mimeTypesMessage' => 'Typ souboru není podporován.'
                 ]))
