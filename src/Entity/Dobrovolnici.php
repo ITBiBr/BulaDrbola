@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\DobrovolniciRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -15,6 +18,7 @@ class Dobrovolnici
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable());
+        $this->Akce = new ArrayCollection();
     }
 
     #[ORM\Id]
@@ -46,6 +50,21 @@ class Dobrovolnici
 
     #[ORM\Column]
     private ?\DateTimeImmutable $CreatedAt = null;
+
+    /**
+     * @var Collection<int, DobrovolniciAkceCiselnik>
+     */
+    #[ORM\ManyToMany(targetEntity: DobrovolniciAkceCiselnik::class, inversedBy: 'dobrovolnicis')]
+    private Collection $Akce;
+
+    #[ORM\Column]
+    private ?int $vek = null;
+
+    #[ORM\Column]
+    private ?bool $isZkusenosti = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $vzkaz = null;
 
     public function getId(): ?int
     {
@@ -120,6 +139,66 @@ class Dobrovolnici
     public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
     {
         $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DobrovolniciAkceCiselnik>
+     */
+    public function getAkce(): Collection
+    {
+        return $this->Akce;
+    }
+
+    public function addAkce(DobrovolniciAkceCiselnik $akce): static
+    {
+        if (!$this->Akce->contains($akce)) {
+            $this->Akce->add($akce);
+        }
+
+        return $this;
+    }
+
+    public function removeAkce(DobrovolniciAkceCiselnik $akce): static
+    {
+        $this->Akce->removeElement($akce);
+
+        return $this;
+    }
+
+    public function getVek(): ?int
+    {
+        return $this->vek;
+    }
+
+    public function setVek(int $vek): static
+    {
+        $this->vek = $vek;
+
+        return $this;
+    }
+
+    public function isZkusenosti(): ?bool
+    {
+        return $this->isZkusenosti;
+    }
+
+    public function setIsZkusenosti(bool $isZkusenosti): static
+    {
+        $this->isZkusenosti = $isZkusenosti;
+
+        return $this;
+    }
+
+    public function getVzkaz(): ?string
+    {
+        return $this->vzkaz;
+    }
+
+    public function setVzkaz(?string $vzkaz): static
+    {
+        $this->vzkaz = $vzkaz;
 
         return $this;
     }
