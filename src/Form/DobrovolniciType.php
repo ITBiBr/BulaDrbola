@@ -51,14 +51,11 @@ class DobrovolniciType extends AbstractType
             ->add('akce', EntityType::class, [
                 'class' => DobrovolniciAkceCiselnik::class,
                 'choice_label' => 'polozkaCiselniku',
-                'row_attr' => ['class' => ''],
                 'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'row'],
+                'expanded' => true, // musí být true
                 'label' => 'Na jakých aktivitách se můžete/chcete podílet?',
-                'choice_attr' => function($choice, $key, $value) {
-                    return ['class' => 'form-check-input'];
-                },
+                'choice_attr' => fn($choice, $key, $value) => ['class' => 'form-check-input'],
+                'label_attr' => ['class' => 'form-check-label'],
             ])
             ->add('isZkusenosti', ChoiceType::class, [
                 'label' => 'Máte předchozí zkušenosti s dobrovolnickou službou?',
@@ -68,18 +65,15 @@ class DobrovolniciType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
-                'choice_attr' => function($choice, $key, $value) {
-                    return ['class' => 'form-check-input mb-2']; // třída jen na <input>
-                },
-                'attr' => ['class' => 'row'],
-                'row_attr' => ['class' => 'row'], // přidá margin-bottom na každý řádek
-                'label_attr' => ['class' => 'form-label'], // hlavní label
+                'choice_attr' => fn($choice, $key, $value) => ['class' => 'form-check-input'],
+                'label_attr' => ['class' => 'form-check-label'],
             ])
 
             ->add('isSouhlasGdpr', CheckboxType::class, [
                 'label' => 'Souhlasím se zpracováním osobních údajů (GDPR)',
-                'attr' => ['class' => 'form-check-input mb-3'],
-                'label_attr' => ['class' => 'form-check-label me-3'],
+
+                'attr' => ['class' => 'form-check-input mb-3 mt-3'],
+                'label_attr' => ['class' => 'form-check-label me-3 mt-3 fw-bold'],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Odeslat',
