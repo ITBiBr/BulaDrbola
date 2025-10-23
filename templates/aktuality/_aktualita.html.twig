@@ -7,7 +7,7 @@
         </div>
         <div class="card-body px-2">
             <a href="aktuality/{{ aktualita.url}}" class="card-title mt-2 text-primary fw-bold text-decoration-none">{{ aktualita.Titulek}}</a>
-            <div class="card-text mb-0 perex">{{ aktualita.Perex|raw }}</div>
+            <div class="card-text mb-0 perex">{{ aktualita.Perex|raw|nbsp_prepositions }}</div>
             <a href="aktuality/{{ aktualita.url}}" class="fw-bold">Číst více</a>
         </div>
     </div>
