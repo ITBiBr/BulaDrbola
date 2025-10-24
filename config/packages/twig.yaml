@@ -1,6 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
 
+    globals:
+        video_id: '%video.id%'
+
 when@test:
     twig:
         strict_variables: true

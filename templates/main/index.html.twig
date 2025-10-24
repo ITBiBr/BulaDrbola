@@ -9,7 +9,7 @@
         <div class="container-fluid position-relative">
             <div class="navbar-minus"></div>
             <div class="text-center">
-                <img class="img-fluid mt-lg-0 mt-1 bula-drbola-oriznuti-main-mobil" src = "{{ asset('images/bula_drbola.png') }}">
+                <img class="img-fluid mt-lg-0 mt-1 bula-drbola-oriznuti-main-mobil" src = "{{ asset('images/bula_drbola.png') }}" alt="Jan Bula a Václav Drbola">
                 <div class="d-flex justify-content-between position-absolute top-50 start-50 translate-middle-x mt-lg-0 mt-sm-1 mt-4 pb-3">
                     <h2 class="text-white text-uppercase text-start m-2 pt-3">Jan<br>Bula</h2>
                     <h1 class="text-secondary text-uppercase m-3 pt-3 fw-normal">&amp;</h1>
@@ -29,7 +29,7 @@
         <div class ="row justify-content-center video-bula-drbola">
             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-10 pt-sm-0 pt-2">
                 <div class="ratio ratio-16x9">
-                    <iframe class = "rounded" src="https://www.youtube.com/embed/kc_wN0QYpfU" title="🎥 Ažnavěky | IV. Videolist brněnské diecéze | Hospodaření církve" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe class = "rounded" src="https://www.youtube.com/embed/{{ video_id }}" title="🎥 Ažnavěky | IV. Videolist brněnské diecéze | Hospodaření církve" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <div class="row justify-content-center">
 
                         <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                            <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}">
+                            <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}?v=2" alt="Odvaha">
                         </div>
                         <div class="col-xl-2 col-lg-3 col-10 ps-lg-5 ps-0">
                             <p></p>
@@ -50,7 +50,7 @@
                                 ... ctnosti, které charakterizují dva
                                 mučedníky komunistických procesů
                                 50.&nbsp;let, kněze Jana Bulu a&nbsp;Václava
-                                Drbolu
+                                Drbolu.
                             </p>
                             <p>
                                 Zpráva o jejich popravě měla původně

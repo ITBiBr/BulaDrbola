@@ -46,7 +46,7 @@ class AktualityRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.DatumZobrazeniOd < :now')
             ->setParameter('now', new \DateTime())
-            ->orderBy('a.DatumZobrazeniOd', 'ASC')
+            ->orderBy('a.Datum', 'DESC')
             ->getQuery()
             ->getResult();
     }
@@ -56,7 +56,7 @@ class AktualityRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.DatumZobrazeniOd < :now')
             ->setParameter('now', new \DateTime())
-            ->orderBy('a.DatumZobrazeniOd', 'ASC')
+            ->orderBy('a.Datum', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()

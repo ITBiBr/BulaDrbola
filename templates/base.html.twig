@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="Jan Bula a Václav Drbola. Dva obyčejní kněží, umučení v 50. letech minulého století komunistickým režimem. Oba se stali symbolem odporu vůči útlaku, neochvějné pevnosti hodnot, vnitřní integrity a hluboké víry. Papež Lev XIV. schválil v říjnu 2025 jejich beatifikaci, která se uskuteční na jaře 2026 v Brně.">
+        <meta name="keywords" content="blahořečení, Jan Bula, Václav Drbola, mučedníci komunismu, kněží brněnské diecéze, beatifikace, tzv. babické vraždy, pronásledování církve">
+        <meta name="robots" content="all,follow" >
+        <meta name='googlebot' content="index,follow,snippet,archive" >
+        <meta name="author" content="Biskupství brněnské" >
+        <meta property="og:type" content="website" >
+        <meta property="og:url" content="{{ app.request.uri }}" >
+        <meta property="og:title" content="Jan Bula a Václav Drbola" >
+        <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}/images/bula_drbola.jpg" >
+        <meta property="og:description" content="Jan Bula a Václav Drbola. Dva obyčejní kněží, umučení v 50. letech minulého století komunistickým režimem. Oba se stali symbolem odporu vůči útlaku, neochvějné pevnosti hodnot, vnitřní integrity a hluboké víry. Papež Lev XIV. schválil v říjnu 2025 jejich beatifikaci, která se uskuteční na jaře 2026 v Brně." >
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,
-            <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 8578.18 2985.99%22>
-                <path fill=%22%23E2B368%22 stroke=%22%23E2B368%22 d=%22M5795.98 1278.22c-57.68,17.56 -116.04,34.99 -175.95,52.03 -12.29,6.15 -24.59,12.28 -37.9,18.02 -549.51,238.38 -535.11,821 -535.91,1637.71 2511.87,-712.68 3488.38,-1412.64 3488.38,-2388.67l43.57 -597.32c-502.72,466.53 -1502.26,926.83 -2782.2,1278.22z%22/>
-                <path fill=%22%23E2B368%22 stroke=%22%23E2B368%22 d=%22M2782.19 1278.22c57.68,17.56 116.07,34.99 175.95,52.03 12.32,6.15 24.62,12.28 37.93,18.02 549.51,238.38 535.11,821 535.91,1637.71 -2511.87,-712.68 -3488.41,-1412.64 -3488.41,-2388.67l-43.56 -597.32c502.74,466.53 1502.28,926.83 2782.19,1278.22z%22/>
-            </svg>">
+        <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" >
+        <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" >
+        <link rel="shortcut icon" href="/images/favicon/favicon.ico" >
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" >
+        <meta name="apple-mobile-web-app-title" content="Jan Bula a Václav Drbola" >
+        <link rel="manifest" href="/images/favicon/site.webmanifest" >
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -16,6 +27,23 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        <!-- Matomo -->
+        <script>
+            var _paq = window._paq = window._paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="https://matomo.dieceze.cz/";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '8']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+
     </head>
     <body>
 
@@ -27,7 +55,7 @@
         {% block nav %}
         <nav class="navbar navbar-expand-lg sticky-top-lg navbar-light sticky-top mt-lg-3 mt-md-2" id="navbar">
             <div class="container-fluid justify-content-lg-center">
-                <a class="navbar-brand" href="{{ path ('app_main') }}"><img src="{{ asset('images/logo.svg') }}" height="60px"></a>
+                <a class="navbar-brand" href="{{ path ('app_main') }}"><img src="{{ asset('images/logo.svg') }}" height="60" alt="Logo"></a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -85,7 +113,7 @@
                     <div class="container-fluid">
                         <div class="row justify-content-center">
                             <div class="col-12 text-center mt-5 mb-5">
-                                <img class="img-fluid bula-drbola-oriznuti-mobil" src = "{{ asset('images/bula_drbola.png') }}">
+                                <img class="img-fluid bula-drbola-oriznuti-mobil" src = "{{ asset('images/bula_drbola.png') }}" alt="Jan Bula a Václav Drbola">
                             </div>
                         </div>
 
@@ -111,10 +139,10 @@
                             <div class="col-xxl-8 col-xl-10 col-12 justify-content-center">
                                 <div class="row justify-content-lg-start justify-content-center">
                                     <div class="col-lg-2 col-5 text-start m-auto border-end">
-                                        <a href="{{ path ('app_main') }}"><img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60px"></a>
+                                        <a href="{{ path ('app_main') }}"><img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60"></a>
                                     </div>
                                     <div class="col-lg-2 col-5 text-lg-center text-start border-end-desktop-only m-auto">
-                                        <a href="https://www.biskupstvi.cz"><img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60px"></a>
+                                        <a href="https://www.biskupstvi.cz"><img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60"></a>
                                     </div>
                                     <div class="col-lg-8 col-10 mt-lg-0 mt-4 text-start ps-lg-5">
                                         beatifikační proces mučedníků<br>komunistického režimu
@@ -181,13 +209,15 @@
                                             <a class="text-reset text-decoration-none" href="{{ path('app_zapojte_se') }}">zapojte se</a>
                                         </h6>
                                         <p>
-                                            <a href="{{ path('app_zapojte_se') }}/#modlitba-za-blahoreceni" class="text-reset text-decoration-none hover-bold">modlitba za blahořečení</a>
+                                            <a href="{{ path('app_zapojte_se') }}/#modlitba-za-blahoreceni" class="text-reset text-decoration-none hover-bold">modlitba</a>
+                                            <br>
+                                            <a href="{{ path('app_zapojte_se') }}/#dobrovolnictvi" class="text-reset text-decoration-none hover-bold">dobrovolnictví</a>
+                                            <br>
+                                            <a href="{{ path('app_zapojte_se') }}/#newsletter" class="text-reset text-decoration-none hover-bold">newsletter</a>
                                             <br>
                                             <a href="{{ path('app_zapojte_se') }}/#darujte" class="text-reset text-decoration-none hover-bold">darujte</a>
                                             <br>
                                             <a href="{{ path('app_zapojte_se') }}/#sdilejte-svedectvi" class="text-reset text-decoration-none hover-bold">sdílejte svědectví</a>
-                                            <br>
-                                            <a href="{{ path('app_zapojte_se') }}/#dobrovolnictvi" class="text-reset text-decoration-none hover-bold">dobrovolnictví</a>
                                             <br>
                                             <a href="{{ path('clanky_url', {'url': 'gdpr'}) }}" class="text-reset text-decoration-none hover-bold">GDPR</a>
                                         </p>
@@ -215,6 +245,9 @@
 
             </footer>
 
+        {% endblock %}
+
+        {% block scripts %}
         {% endblock %}
 
     </body>

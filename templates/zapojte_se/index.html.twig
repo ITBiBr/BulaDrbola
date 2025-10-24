@@ -6,14 +6,23 @@
     <div class = "container-fluid pt-5 mt-3 overflow-x-hidden">
         <div class="row justify-content-center">
             <div class="col-lg-11 col-12">
-                <div class="row text-center mb-lg-5 mb-0">
-                    <div class="col-12 pb-lg-5 mb-lg-3 mb-0 pb-0 p-3">
+                <div class="row text-center mb-lg-0 mb-0">
+                    <div class="col-12 pb-lg-5 mb-lg-0 mb-0 pb-0 p-3">
                         <h1 class="text-primary fw-bolder text-uppercase">Zapojte se</h1>
+                    </div>
+                </div>
+                <div class="row text-center mb-0">
+                    <div class="col-12 pb-lg-5 mb-lg-3 mb-0 pb-0 p-3">
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#modlitba-za-blahoreceni">Modlitba</a>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#dobrovolnictvi">Dobrovolnictví</a>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#newsletter">Newsletter</a>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#sdilejte-svedectvi">Sdílejte svědectví</a>
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#darujte">Darujte</a>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-4 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
-                        <h5 id="modlitba-za-blahoreceni" class="scroll-offset text-primary text-start fw-bold">Modlitba za blahořečení</h5>
+                        <h5 id="modlitba-za-blahoreceni" class="scroll-offset text-primary text-start fw-bold">MODLITBA</h5>
                         <p class="pt-4">Pane Ježíši, nás Pastýři a&nbsp;Příteli,</p>
 
 
@@ -94,7 +103,7 @@
                 </div>
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                        <h5 class="text-primary text-start pt-4 fw-bold">Newsletter</h5>
+                        <h5 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">Newsletter</h5>
                         <p class="pt-4 ">
                             Chcete dostávat pravidelně důležité informace a novinky o doprovodných akcích a o samotné slavnosti blahořečení?
                             Přihlaste se k odběru našeho newsletteru a nenechte si ujít nové výzvy a updaty.</p>
@@ -106,7 +115,7 @@
 
 
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset" id="newsletter">
+                    <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset">
                         {{ form_start(newsletterForm, {
                             'action': path('app_newsletter'),
                             'attr': {
@@ -151,15 +160,15 @@
                         <h6 class="text-primary text-start pt-4">Sdílet video</h6>
                         <div class="row">
                             <div class="col-xl-3 col-lg-4">
-                                <img src="{{ (asset('images/zs02.jpg')) }}" class="img-fluid">
+                                <img src="{{ (asset('images/zs02.jpg')) }}?v=1" class="img-fluid">
                             </div>
                             <div class="col-lg-7 col-md-8 col-9">
-                                <a class="btn btn-sm btn-outline-primary rounded-pill w-100 my-1 text-start p-0 border-2" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url(path('app_main')) }}" target="_blank">
+                                <div class="btn btn-sm btn-outline-primary rounded-pill w-100 my-1 text-start p-0 border-2" id="shareButton2" >
                                     <div class="d-flex align-items-start w-100">
                                         <img src="{{ asset('images/fb.svg') }}" height="30px" alt="Facebook" class="me-1">
                                         <span class="text-wrap m-auto pe-1">Sdílet na Facebooku</span>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                         <h6 class="text-primary text-start pt-4">Sdílet příběh</h6>
@@ -168,12 +177,12 @@
                                 <img src="{{ (asset('images/zs03.jpg')) }}" class="img-fluid">
                             </div>
                             <div class="col-lg-7 col-md-8 col-9">
-                                <a class="btn btn-sm btn-outline-primary rounded-pill w-100 my-1 text-start p-0 border-2" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url(path('app_pribeh')) }}" target="_blank">
+                                <div class="btn btn-sm btn-outline-primary rounded-pill w-100 my-1 text-start p-0 border-2" id="shareButton1" >
                                     <div class="d-flex align-items-start w-100">
                                         <img src="{{ asset('images/fb.svg') }}" height="30px" alt="Facebook" class="me-1">
                                         <span class="text-wrap m-auto pe-1">Sdílet na Facebooku</span>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,8 +190,9 @@
                         <h5 id="darujte" class="scroll-offset text-primary text-start pt-4 fw-bold">Darujte</h5>
                         <p class="pt-4 ">
                             Pokud chcete podpořit pastorační a&nbsp;komunikační aktivity spojené s&nbsp;blahořečením Jana Buly
-                        a&nbsp;Václava Drboly, budeme rádi, když přispějete libovolnou částkou na účet Biskupství brněnského.</p>
-                        <h6 class="text-black fw-bold text-start pt-4">1341625329/0800</h6>
+                        a&nbsp;Václava Drboly, budeme rádi, když přispějete libovolnou částkou. Přes portál Donátor.cz můžete k darům obdržet potvrzení.</p>
+{#                        <h6 class="text-black fw-bold text-start pt-4">1341625329/0800</h6>#}
+                        <h6 class="text-black fw-bold text-start pt-0"><a class="btn btn-sm btn-outline-primary rounded-pill mt-lg-5 mt-0 px-4 border-2" href="https://donator.cz/projekt/kanonizacebd" target="_blank">Přispět na portálu Donátor.cz</a></h6>
                         <p class="pt-4">
                             Váš dar pomůže pokrýt náklady na tiskoviny, doprovodné edukační materiály a&nbsp;samotný program
                             události blahořečení.
@@ -192,7 +202,7 @@
                                 <img src="{{ (asset('images/qr.png')) }}" class="img-fluid d-block mx-lg-0 mx-auto">
                             </div>
                             <div class="col-lg-8 col-12 mt-lg-0 mt-3">
-                                <p class="text-lg-start text-center small">Naskenujte v&nbsp;aplikaci své banky.</p>
+                                <p class="text-lg-start text-center small">Přímá platba bez možnosti potvrzení o daru – naskenujte QR kód v&nbsp;aplikaci své banky.</p>
                             </div>
                         </div>
                     </div>
@@ -200,4 +210,62 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        document.getElementById("shareButton1").addEventListener("click", async () => {
+            const pageUrl = 'https://www.buladrbola.cz';
+            const pageTitle = 'Jan Bula a Václav Drbola';
+
+            // 🧩 Funkce pro zjištění, zda je zařízení mobil
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            if (isMobile && navigator.share) {
+                // 📱 Mobil: otevře nativní nabídku sdílení
+                try {
+                    await navigator.share({
+                        title: pageTitle,
+                        text: "Sdílím stránku",
+                        url: pageUrl
+                    });
+                    console.log("Sdílení proběhlo úspěšně!");
+                } catch (err) {
+                    console.log("Sdílení zrušeno:", err);
+                }
+            } else {
+                // 💻 Desktop: otevře Facebook dialog
+                const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+                window.open(fbShareUrl, "_blank", "width=600,height=400");
+            }
+        });
+
+        document.getElementById("shareButton2").addEventListener("click", async () => {
+            const pageUrl = 'https://www.youtube.com/watch?v={{ video_id }}';
+            const pageTitle = 'Jan Bula a Václav Drbola';
+
+            // 🧩 Funkce pro zjištění, zda je zařízení mobil
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            if (isMobile && navigator.share) {
+                // 📱 Mobil: otevře nativní nabídku sdílení
+                try {
+                    await navigator.share({
+                        title: pageTitle,
+                        text: "Sdílím video",
+                        url: pageUrl
+                    });
+                    console.log("Sdílení proběhlo úspěšně!");
+                } catch (err) {
+                    console.log("Sdílení zrušeno:", err);
+                }
+            } else {
+                // 💻 Desktop: otevře Facebook dialog
+                const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+                window.open(fbShareUrl, "_blank", "width=600,height=400");
+            }
+        });
+    </script>
+
 {% endblock %}
