@@ -490,6 +490,24 @@ input.form-check-input[type=radio] + label {
     }
 
 
+input.form-check-input[type=checkbox] + label {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 1.6rem;
+    position: relative;
+    top: -1.1rem;
+}
+
+.form-dobrovolnici ul {
+    list-style: none;       /* odstraní defaultní odrážky */
+    padding-left: 1rem;        /* odsazení odstavce */
+}
+
+.form-dobrovolnici li {
+    color: #ff1c07;         /* text-warning barva */
+    margin-bottom: 0.25rem; /* mezera mezi chybami */
+}
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
