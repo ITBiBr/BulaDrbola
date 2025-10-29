@@ -24,6 +24,9 @@ class DobrovolniciAkceCiselnik
     #[ORM\ManyToMany(targetEntity: Dobrovolnici::class, mappedBy: 'Akce')]
     private Collection $dobrovolnicis;
 
+    #[ORM\Column]
+    private ?bool $isActive = null;
+
     public function __construct()
     {
         $this->dobrovolnicis = new ArrayCollection();
@@ -69,6 +72,18 @@ class DobrovolniciAkceCiselnik
         if ($this->dobrovolnicis->removeElement($dobrovolnici)) {
             $dobrovolnici->removeAkce($this);
         }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): static
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

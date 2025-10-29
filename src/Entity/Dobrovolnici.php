@@ -66,6 +66,9 @@ class Dobrovolnici
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $vzkaz = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $zkusenosti = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -199,6 +202,18 @@ class Dobrovolnici
     public function setVzkaz(?string $vzkaz): static
     {
         $this->vzkaz = $vzkaz;
+
+        return $this;
+    }
+
+    public function getZkusenosti(): ?string
+    {
+        return $this->zkusenosti;
+    }
+
+    public function setZkusenosti(?string $zkusenosti): static
+    {
+        $this->zkusenosti = $zkusenosti;
 
         return $this;
     }
