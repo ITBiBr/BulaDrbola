@@ -32,6 +32,6 @@ final class NewsletterController extends AbstractController
             }
         }
 
-        return $this->redirect($request->headers->get('referer'). '/#newsletter');
+        return $this->redirect($request->headers->get('referer'). '/#newsletter-zapsano');
     }
 }
