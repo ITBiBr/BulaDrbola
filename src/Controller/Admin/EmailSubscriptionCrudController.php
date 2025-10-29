@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,12 +28,18 @@ class EmailSubscriptionCrudController extends AbstractCrudController
     }
 
 
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_EDITOR'))
+            throw new AccessDeniedException('Access Denied');
 
-           yield IdField::new('id')->hideOnForm();
-           yield EmailField::new('email' ,'E-mail');
-           yield DateTimeField::new('createdAt' , 'Created At')->hideOnForm();
+        yield IdField::new('id')->hideOnForm();
+        yield EmailField::new('email' ,'E-mail');
+        yield DateTimeField::new('createdAt' , 'Created At')->hideOnForm();
     }
 
     public function configureCrud(Crud $crud): Crud

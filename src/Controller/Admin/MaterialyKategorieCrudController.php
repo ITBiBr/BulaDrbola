@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class MaterialyKategorieCrudController extends AbstractCrudController
 {
@@ -25,11 +27,17 @@ class MaterialyKategorieCrudController extends AbstractCrudController
             ->setPageTitle('index', 'Material Categories');;
     }
 
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_EDITOR'))
+            throw new AccessDeniedException('Access Denied');
 
-            yield IdField::new('id')->hideOnForm();
-            yield TextField::new('Kategorie');
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('Kategorie');
 
     }
 

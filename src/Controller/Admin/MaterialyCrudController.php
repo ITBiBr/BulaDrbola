@@ -15,18 +15,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\File;
 
 class MaterialyCrudController extends AbstractCrudController
 {
 
-    private RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack, private readonly Security $security)
     {
-        $this->requestStack = $requestStack;
     }
     public static function getEntityFqcn(): string
     {
@@ -49,48 +48,51 @@ class MaterialyCrudController extends AbstractCrudController
         return $actions;
     }
 
+
     public function configureFields(string $pageName): iterable
     {
-            yield IdField::new('id')->hideOnForm();
-            yield TextField::new('NazevSouboru','File Name')->hideOnForm();
-            yield TextField::new('TypSouboru','File Type')->hideOnForm();
-            yield TextField::new('Nazev', 'Display Name');
-            yield TextField::new('Popis', 'File Description')->formatValue(function ($value, $entity) {
-                if (!$value) {
-                    return '';
-                }
+        if (!$this->security->isGranted('ROLE_EDITOR'))
+            throw new AccessDeniedException('Access Denied');
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('NazevSouboru','File Name')->hideOnForm();
+        yield TextField::new('TypSouboru','File Type')->hideOnForm();
+        yield TextField::new('Nazev', 'Display Name');
+        yield TextField::new('Popis', 'File Description')->formatValue(function ($value, $entity) {
+            if (!$value) {
+                return '';
+            }
 
-                return mb_strlen($value) > 35
-                    ? mb_substr($value, 0, 35) . '...'
-                    : $value;
-            });
-            yield ImageField::new('Soubor', 'Inserted File')->onlyOnForms()
-                ->setBasePath('files/')
-                ->setUploadDir('public/files')
-                ->setFormTypeOption('multiple', false)
-                ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
-                ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.pdf'])
-                ->setFileConstraints(new File([
-                    'mimeTypes' => [
-                        'application/pdf',
-                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                        'application/msword',
-                        'image/jpeg',
-                    ],
-                    'mimeTypesMessage' => 'Typ souboru není podporován.'
-                ]))
-                ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
-                ->setFormTypeOption('allow_delete', false);
-            yield TextField::new('NazevSouboru', 'File Name')
-                ->onlyOnForms()
-                ->setFormTypeOption('disabled', true);
-            yield TextField::new('TypSouboru', 'File Type')
-                ->onlyOnForms()
-                ->setFormTypeOption('disabled', true);
+            return mb_strlen($value) > 35
+                ? mb_substr($value, 0, 35) . '...'
+                : $value;
+        });
+        yield ImageField::new('Soubor', 'Inserted File')->onlyOnForms()
+            ->setBasePath('files/')
+            ->setUploadDir('public/files')
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
+            ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.pdf'])
+            ->setFileConstraints(new File([
+                'mimeTypes' => [
+                    'application/pdf',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'application/msword',
+                    'image/jpeg',
+                ],
+                'mimeTypesMessage' => 'Typ souboru není podporován.'
+            ]))
+            ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
+            ->setFormTypeOption('allow_delete', false);
+        yield TextField::new('NazevSouboru', 'File Name')
+            ->onlyOnForms()
+            ->setFormTypeOption('disabled', true);
+        yield TextField::new('TypSouboru', 'File Type')
+            ->onlyOnForms()
+            ->setFormTypeOption('disabled', true);
 
-            yield DateTimeField::new('DatumVlozeni', 'Insertion Date')
-                ->setFormTypeOption('data', new \DateTime());
-            yield AssociationField::new('Kategorie', 'Material Categories')->setFormTypeOption('by_reference', false)->formatValue(fn($value) => implode(', ', $value->toArray()));//->autocomplete();
+        yield DateTimeField::new('DatumVlozeni', 'Insertion Date')
+            ->setFormTypeOption('data', new \DateTime());
+        yield AssociationField::new('Kategorie', 'Material Categories')->setFormTypeOption('by_reference', false)->formatValue(fn($value) => implode(', ', $value->toArray()));//->autocomplete();
 
     }
 

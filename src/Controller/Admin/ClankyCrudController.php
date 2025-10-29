@@ -15,7 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ClankyCrudController extends AbstractCrudController
 {
@@ -40,8 +42,14 @@ class ClankyCrudController extends AbstractCrudController
         return $actions;
     }
 
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_EDITOR'))
+            throw new AccessDeniedException('Access Denied');
 
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('Titulek', 'Title');

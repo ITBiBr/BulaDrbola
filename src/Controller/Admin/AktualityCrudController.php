@@ -14,7 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class AktualityCrudController extends AbstractCrudController
 {
@@ -37,25 +39,31 @@ class AktualityCrudController extends AbstractCrudController
         });
         return $actions;
     }
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_EDITOR'))
+            throw new AccessDeniedException('Access Denied');
 
-            yield IdField::new('id')->hideOnForm();
-            yield TextField::new('Titulek', 'Title');
-            yield TextField::new('url', 'URL')->hideOnForm();
-            yield TextEditorField::new('perex');
-            yield TextEditorField::new('obsah');
-            yield DateField::new('Datum', 'Date');
-            yield DateTimeField::new('DatumZobrazeniOd', 'Show content from')
-                ->setFormTypeOption('data', new \DateTime());
-            yield ImageField::new('Obrazek', 'Image')
-                ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
-                ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
-                ->setFormTypeOption('multiple', false)
-                ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
-                ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
-                ->setFormTypeOption('allow_delete', false)
-                ->setSortable(false);
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('Titulek', 'Title');
+        yield TextField::new('url', 'URL')->hideOnForm();
+        yield TextEditorField::new('perex');
+        yield TextEditorField::new('obsah');
+        yield DateField::new('Datum', 'Date');
+        yield DateTimeField::new('DatumZobrazeniOd', 'Show content from')
+            ->setFormTypeOption('data', new \DateTime());
+        yield ImageField::new('Obrazek', 'Image')
+            ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
+            ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
+            ->setFormTypeOption('allow_delete', false)
+            ->setSortable(false);
 
 
     }

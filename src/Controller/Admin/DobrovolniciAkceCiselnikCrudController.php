@@ -10,6 +10,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use function PHPUnit\Framework\throwException;
 
 class DobrovolniciAkceCiselnikCrudController extends AbstractCrudController
 {
@@ -17,10 +20,14 @@ class DobrovolniciAkceCiselnikCrudController extends AbstractCrudController
     {
         return DobrovolniciAkceCiselnik::class;
     }
-
+    public function __construct(private readonly Security $security)
+    {
+    }
 
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_DOBROVOLNICI'))
+            throw new AccessDeniedException('Access Denied');
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('polozkaCiselniku', 'Activity');
         yield BooleanField::new('isActive', 'Active');

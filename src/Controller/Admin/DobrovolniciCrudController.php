@@ -19,6 +19,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,8 +64,14 @@ class DobrovolniciCrudController extends AbstractCrudController
         return $entity;
     }
 
+    public function __construct(private readonly Security $security)
+    {
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        if (!$this->security->isGranted('ROLE_DOBROVOLNICI'))
+            throw new AccessDeniedException('Access Denied');
         yield IdField::new('Id')->hideOnForm();
         yield TextField::new('jmeno', 'Name');
         yield TextField::new('prijmeni', 'Surname');
