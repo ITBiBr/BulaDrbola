@@ -106,7 +106,7 @@ class DobrovolniciType extends AbstractType
                 'label' => 'Pokud ano, jaké zkušenosti s organizací akcí/dobrovolnictvím máte?',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Popište své zkušenosti',
+                    'placeholder' => 'Popište své zkušenosti…',
                 ],
                 'required' => false,
                 'label_attr' => [
