@@ -8,11 +8,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -63,10 +67,18 @@ class DobrovolniciCrudController extends AbstractCrudController
         yield IdField::new('Id')->hideOnForm();
         yield TextField::new('jmeno', 'Name');
         yield TextField::new('prijmeni', 'Surname');
+        yield IntegerField::new('vek', 'Age');
         yield EmailField::new('email', 'E-mail');
         yield TextField::new('telefon', "Phone number");
         yield BooleanField::new('isSouhlasGdpr', 'GDPR consent')->hideOnIndex();
         yield DateTimeField::new('CreatedAt', 'Created At')->setDisabled();
+        yield AssociationField::new('Akce', 'Activities')
+            ->setFormTypeOption('multiple', true)
+            ->setFormTypeOption('by_reference', false)
+            ->formatValue(fn($value) => implode('<br>', $value->toArray()));
+        yield BooleanField::new('isZkusenosti', 'Experiences')->hideOnIndex();
+        yield TextareaField::new('zkusenosti', 'Experiences');
+        yield TextareaField::new('vzkaz', 'Message');
     }
 
     #[Route('/admin/export/volunteers', name: 'admin_volunteers_export')]
@@ -85,6 +97,10 @@ class DobrovolniciCrudController extends AbstractCrudController
         $sheet->setCellValue('E1', 'Telefon');
         $sheet->setCellValue('F1', 'Souhlas s GDPR');
         $sheet->setCellValue('G1', 'Datum registrace');
+        $sheet->setCellValue('H1', 'Aktivity');
+        $sheet->setCellValue('I1', 'Zkušenosti');
+        $sheet->setCellValue('J1', 'Zkušenosti');
+        $sheet->setCellValue('K1', 'Vzkaz');
 
         $row = 2;
         foreach ($subscriptions as $subscription) {
@@ -95,6 +111,26 @@ class DobrovolniciCrudController extends AbstractCrudController
             $sheet->setCellValue('E' . $row, $subscription->getTelefon());
             $sheet->setCellValue('F' . $row, $subscription->isSouhlasGdpr()?'Ano':'Ne');
             $sheet->setCellValue('G' . $row, $subscription->getCreatedAt()->format('Y-m-d H:i:s'));
+            $aktivityEntita = $subscription->getAkce();
+            $aktivity = '';
+            $lastIndex = count($aktivityEntita) - 1;
+            foreach ($aktivityEntita as $index => $aktivita) {
+                $aktivity .= $aktivita->getPolozkaCiselniku();
+                if ($index !== $lastIndex) {
+                    $aktivity .= "\n"; // přidat zalomení jen pokud to není poslední položka
+                }
+            }
+            $sheet->setCellValue('H' . $row, $aktivity);
+            $sheet->setCellValue('I' . $row, $subscription->isZkusenosti()?'Ano':'Ne');
+            $sheet->setCellValue('J' . $row, $subscription->getZkusenosti());
+            $sheet->setCellValue('K' . $row, $subscription->getVzkaz());
+            // nastavit wrap text pro celý řádek
+            $sheet->getStyle($row)->getAlignment()->setWrapText(true);
+            // nastavit vertikální zarovnání nahoru pro celý řádek
+            $sheet->getStyle($row)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
+            // nastavit automatickou výšku řádku
+            $sheet->getRowDimension($row)->setRowHeight(-1);
+
             $row++;
         }
         $sheet->getColumnDimension('A')->setAutoSize(true);
@@ -104,6 +140,10 @@ class DobrovolniciCrudController extends AbstractCrudController
         $sheet->getColumnDimension('E')->setAutoSize(true);
         $sheet->getColumnDimension('F')->setAutoSize(true);
         $sheet->getColumnDimension('G')->setAutoSize(true);
+        $sheet->getColumnDimension('H')->setAutoSize(true);
+        $sheet->getColumnDimension('I')->setAutoSize(true);
+        $sheet->getColumnDimension('J')->setAutoSize(true);
+        $sheet->getColumnDimension('K')->setAutoSize(true);
 
         $writer = new Xlsx($spreadsheet);
 

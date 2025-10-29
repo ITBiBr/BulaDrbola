@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Aktuality;
 use App\Entity\Clanky;
 use App\Entity\Dobrovolnici;
+use App\Entity\DobrovolniciAkceCiselnik;
 use App\Entity\EmailSubscription;
 use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
@@ -79,7 +80,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class);
         yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class);
         yield MenuItem::linkToCrud('Email Subscription', 'fa fa-envelope', EmailSubscription::class);
-        yield MenuItem::linkToCrud('Volunteers', 'fa fa-handshake-angle', Dobrovolnici::class);
+        yield MenuItem::subMenu('Volunteers', 'fas fa-handshake-angle')->setSubItems([
+            MenuItem::linkToCrud('Volunteers', 'fa fa-handshake-angle', Dobrovolnici::class),
+            MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)
+            ]);
+
     }
 
 }
