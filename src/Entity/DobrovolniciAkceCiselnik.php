@@ -35,6 +35,7 @@ class DobrovolniciAkceCiselnik
     public function __construct()
     {
         $this->dobrovolnicis = new ArrayCollection();
+        $this->isActive = true;
     }
 
     public function getId(): ?int

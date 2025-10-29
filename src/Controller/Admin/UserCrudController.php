@@ -82,6 +82,7 @@ class UserCrudController extends AbstractCrudController
             ->setChoices([
                 'Editor' => 'ROLE_EDITOR',
                 'Administrator' => 'ROLE_ADMIN',
+                'Správce dobrovolníků' => 'ROLE_DOBROVOLNICI'
             ])
             ->allowMultipleChoices()
             ->renderExpanded(); // zobrazí jako checkboxy

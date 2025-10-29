@@ -72,17 +72,17 @@ class DashboardController extends AbstractDashboardController
                 ->setEntityId($currentUserId)
                 ->generateUrl();
 
-            yield MenuItem::linkToUrl('Password change', 'fa fa-key', $url);
+            yield MenuItem::linkToUrl('Password change', 'fa fa-key', $url)->setPermission('ROLE_EDITOR');
         }
 
-        yield MenuItem::linkToCrud('News', 'fa fa-newspaper', Aktuality::class);
-        yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Clanky::class);
-        yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class);
-        yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class);
-        yield MenuItem::linkToCrud('Email Subscription', 'fa fa-envelope', EmailSubscription::class);
+        yield MenuItem::linkToCrud('News', 'fa fa-newspaper', Aktuality::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Clanky::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Email Subscription', 'fa fa-envelope', EmailSubscription::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::subMenu('Volunteers', 'fas fa-handshake-angle')->setSubItems([
-            MenuItem::linkToCrud('Volunteers', 'fa fa-handshake-angle', Dobrovolnici::class),
-            MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)
+            MenuItem::linkToCrud('Volunteers', 'fa fa-handshake-angle', Dobrovolnici::class)->setPermission('ROLE_DOBROVOLNICI'),
+            MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)->setPermission('ROLE_DOBROVOLNICI')
             ]);
 
     }

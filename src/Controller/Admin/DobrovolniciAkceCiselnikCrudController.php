@@ -21,10 +21,9 @@ class DobrovolniciAkceCiselnikCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id');
+        yield IdField::new('id')->hideOnForm();
         yield TextField::new('polozkaCiselniku', 'Activity');
         yield BooleanField::new('isActive', 'Active');
-
     }
 
 
