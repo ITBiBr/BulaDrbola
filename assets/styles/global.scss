@@ -482,11 +482,14 @@ body {
     font-size: 0.95rem;
 }
 
-input.form-check-input + label {
-    display: block;
-    margin-bottom: 0.5rem; /* odsazení mezi řádky */
-    margin-top: 0.3rem; /* odsazení mezi řádky */
-}
+input.form-check-input[type=radio] + label {
+    display: inline-block;
+    margin-top: 0.2rem;
+    margin-left: 0.3rem;
+    margin-right: 0.8rem;
+    }
+
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
