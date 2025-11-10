@@ -195,13 +195,11 @@
                                             <a class="text-reset text-decoration-none" href="{{ path('app_materialy') }}">materiály</a>
                                         </h6>
                                         <p>
-                                            <a href="{{ path('app_materialy') }}/#k-modlitbe" class="text-reset text-decoration-none hover-bold">modlitba</a>
+                                            {% for kat in globalVars.kategorieData %}
+                                                <a href="{{ path('app_materialy') }}/#{{ kat.slug }}" class="text-reset text-decoration-none hover-bold">{{ kat.Kategorie|lower }}</a>
+                                                {% if not loop.last %}<br>{% endif %}
+                                            {% endfor %}
                                             <br>
-                                            <a href="{{ path('app_materialy') }}/#pro-katechezi" class="text-reset text-decoration-none hover-bold">katecheze</a>
-                                            <br>
-                                            <a href="{{ path('app_materialy') }}/#pro-media" class="text-reset text-decoration-none hover-bold">pro média</a>
-                                            <br>
-                                            <a href="{{ path('app_materialy') }}/#merch" class="text-reset text-decoration-none hover-bold">merch</a>
                                         </p>
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">

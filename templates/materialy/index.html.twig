@@ -29,7 +29,7 @@
             <nav>
                 <div class="nav nav-tabs materialy justify-content-center mt-5" id="nav-tab" role="tablist">
                     <button class="nav-link active fw-bold mx-lg-4 mx-sm-2 mx-0" id="vse-tab" data-bs-toggle="tab" data-bs-target="#vse" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Vše</button>
-                    {% for kat in kategorie %}
+                    {% for kat in globalVars.kategorieData %}
                         <button class="nav-link fw-bold mx-lg-4 mx-sm-2 mx-0" id="nav-category-{{ kat.id }}-tab" data-bs-toggle="tab" data-bs-target="#{{ kat.slug }}" type="button" role="tab" aria-controls="nav-category-{{ kat.id }}" aria-selected="false">{{ kat.Kategorie }}</button>
                     {% endfor %}
 
@@ -48,7 +48,7 @@
                                 {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}
                             {% endfor %}
                         </div>
-                        {% for kat in kategorie %}
+                        {% for kat in globalVars.kategorieData %}
                             <div class="tab-pane fade scroll-offset-navbar" id="{{ kat.slug }}" role="tabpanel" aria-labelledby="{{ kat.slug }}-tab">
                                 {% for soubor in kat.materialies %}
                                         {% include 'materialy/_file.html.twig' with {'NazevSouboru': soubor.NazevSouboru ~ '.' ~ soubor.TypSouboru , 'Typ' : soubor.TypSouboru, 'Nazev': soubor.Nazev, 'Popis': soubor.Popis, 'Soubor' : soubor.Soubor} %}

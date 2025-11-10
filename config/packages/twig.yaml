@@ -3,6 +3,7 @@ twig:
 
     globals:
         video_id: '%video.id%'
+        globalVars: '@App\Controller\Twig\GlobalVariables'
 
 when@test:
     twig:
