@@ -77,8 +77,15 @@
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_vystaviste') }}">výstaviště</a>
                         </li>
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
-                            <a class="nav-link text-center text-lg-start" href="{{ path('app_aktuality') }}">aktuality</a>
+                        <li class="nav-item dropdown mt-1 m-3 mx-xl-4 mb-0 fw-bold">
+                            <a class="nav-link dropdown-toggle text-center text-lg-start" href="{{ path('app_aktuality') }}" id="pribehDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                aktuality
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="pribehDropdown">
+                                <li><a class="dropdown-item" href="">Kapitola 1</a></li>
+                                <li><a class="dropdown-item" href="">Kapitola 2</a></li>
+                                <li><a class="dropdown-item" href="">Kapitola 3</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_materialy') }}">materiály</a>
