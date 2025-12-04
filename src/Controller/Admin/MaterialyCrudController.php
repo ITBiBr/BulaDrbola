@@ -79,6 +79,7 @@ class MaterialyCrudController extends AbstractCrudController
                     'application/msword',
                     'image/jpeg',
                     'audio/mpeg',
+                    'application/zip',
                     'application/x-zip-compressed',
                 ],
                 'mimeTypesMessage' => 'Typ souboru není podporován.'
