@@ -71,7 +71,7 @@ class MaterialyCrudController extends AbstractCrudController
             ->setUploadDir('public/files')
             ->setFormTypeOption('multiple', false)
             ->setUploadedFileNamePattern('[year]-[month]-[day]-[contenthash].[extension]')
-            ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.mp3,.pdf,.zip'])
+            ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.mp3,.ppt,.pptx,.pdf,.zip'])
             ->setFileConstraints(new File([
                 'mimeTypes' => [
                     'application/pdf',
@@ -81,6 +81,8 @@ class MaterialyCrudController extends AbstractCrudController
                     'audio/mpeg',
                     'application/zip',
                     'application/x-zip-compressed',
+                    'application/vnd.ms-powerpoint',
+                    'application/vnd.openxmlformats-officedocument.presentationml.presentation'
                 ],
                 'mimeTypesMessage' => 'Typ souboru není podporován.'
             ]))

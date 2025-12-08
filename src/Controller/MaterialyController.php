@@ -16,7 +16,7 @@ final class MaterialyController extends AbstractController
     public function index(EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
 
-        $soubory = $entityManager->getRepository(Materialy::class)->findAll();
+        $soubory = $entityManager->getRepository(Materialy::class)->findBy([], ['Nazev' => 'ASC']);
 
 
         return $this->render('materialy/index.html.twig', [
