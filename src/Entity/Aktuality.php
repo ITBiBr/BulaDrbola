@@ -39,6 +39,15 @@ class Aktuality
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $IlustraceObsahu = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Video = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $ObsahPokracovani = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,6 +133,42 @@ class Aktuality
     public function setUrl(string $url): static
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getIlustraceObsahu(): ?string
+    {
+        return $this->IlustraceObsahu;
+    }
+
+    public function setIlustraceObsahu(?string $IlustraceObsahu): static
+    {
+        $this->IlustraceObsahu = $IlustraceObsahu;
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->Video;
+    }
+
+    public function setVideo(?string $Video): static
+    {
+        $this->Video = $Video;
+
+        return $this;
+    }
+
+    public function getObsahPokracovani(): ?string
+    {
+        return $this->ObsahPokracovani;
+    }
+
+    public function setObsahPokracovani(?string $ObsahPokracovani): static
+    {
+        $this->ObsahPokracovani = $ObsahPokracovani;
 
         return $this;
     }
