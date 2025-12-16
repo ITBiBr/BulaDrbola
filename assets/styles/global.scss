@@ -507,6 +507,12 @@ input.form-check-input[type=checkbox] + label {
     color: #ff1c07;         /* text-warning barva */
     margin-bottom: 0.25rem; /* mezera mezi chybami */
 }
+.map-pin {
+    cursor: pointer;
+}
+.map-pin:hover path {
+    fill: #bb2d3b;
+}
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
