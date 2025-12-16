@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Aktuality;
+use App\Entity\BodyMapyPribeh;
 use App\Entity\Clanky;
 use App\Entity\Dobrovolnici;
 use App\Entity\DobrovolniciAkceCiselnik;
@@ -84,7 +85,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Volunteers', 'fa fa-handshake-angle', Dobrovolnici::class)->setPermission('ROLE_DOBROVOLNICI'),
             MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)->setPermission('ROLE_DOBROVOLNICI')
             ]);
-
+        yield MenuItem::linkToCrud('Story Map Points', 'fa fa-map-location', BodyMapyPribeh::class)->setPermission('ROLE_EDITOR');
     }
 
 }

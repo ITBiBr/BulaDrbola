@@ -1088,8 +1088,8 @@
                         </g>
                         {# Body mapy #}
                         {% for point in points %}
-                            <g transform="translate({{ point.x }}, {{ point.y }})">
-                                <a
+                            <g transform="translate({{ point.x }}, {{ point.y - 25 }}) scale(0.9)">
+                                <g
                                         role="button"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modal-{{ point.id }}"
@@ -1104,7 +1104,7 @@
                                             fill="#dc3545"
                                     />
                                     <circle cx="0" cy="-5" r="4" fill="white"/>
-                                </a>
+                                </g>
                             </g>
                         {% endfor %}
                     </svg>
@@ -1137,8 +1137,8 @@
                         <p>{{ point.description }}</p>
                         <hr>
                         <small class="text-muted">
-                            {{ point.lat|number_format(4) }},
-                            {{ point.lon|number_format(4) }}
+                            {{ point.lat }},
+                            {{ point.lon }}
                         </small>
                     </div>
                 </div>
