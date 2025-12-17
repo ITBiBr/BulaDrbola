@@ -1088,12 +1088,11 @@
                         </g>
                         {# Body mapy #}
                         {% for point in points %}
-                            <g transform="translate({{ point.x }}, {{ point.y - 25 }}) scale(0.9)">
+                            <g class="map-pin" transform="translate({{ point.x }}, {{ point.y - 25 }}) scale(0.9)">
                                 <g
                                         role="button"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modal-{{ point.id }}"
-                                        class="map-pin"
                                 >
                                     <path
                                             d="M0,-20
@@ -1101,7 +1100,9 @@
                    C-15,10 0,25 0,25
                    C0,25 15,10 15,0
                    C15,-10 10,-20 0,-20Z"
-                                            fill="#dc3545"
+                                            fill="rgb(222, 174, 107)"
+                                            stroke="#FFFFFF"
+                                            stroke-width="0.4"
                                     />
                                     <circle cx="0" cy="-5" r="4" fill="white"/>
                                 </g>
@@ -1114,7 +1115,27 @@
     </div>
 
 </div>
+<script>
+    const pins = document.querySelectorAll('.map-pin');
 
+    pins.forEach(pin => {
+        pin.addEventListener('mouseenter', () => {
+            // ztlum ostatní
+            pins.forEach(p => p.classList.add('is-dimmed'));
+
+            // aktivní pin
+            pin.classList.remove('is-dimmed');
+
+            // přesun do popředí
+            pin.parentNode.appendChild(pin);
+        });
+
+        pin.addEventListener('mouseleave', () => {
+            // reset průhlednosti
+            pins.forEach(p => p.classList.remove('is-dimmed'));
+        });
+    });
+</script>
     {# MODALY – MIMO MAPU #}
     {% for point in points %}
         <div
