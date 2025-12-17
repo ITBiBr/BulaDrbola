@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BodyMapyPribehRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BodyMapyPribehRepository::class)]
@@ -16,14 +17,21 @@ class BodyMapyPribeh
     #[ORM\Column]
     private ?float $lat = null;
 
+    private ?int $x = null;
+
     #[ORM\Column]
     private ?float $lng = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $popis = null;
+    private ?int $y = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nazev = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $pribehMista = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $zajimavosti = null;
 
     public function getId(): ?int
     {
@@ -54,18 +62,6 @@ class BodyMapyPribeh
         return $this;
     }
 
-    public function getPopis(): ?string
-    {
-        return $this->popis;
-    }
-
-    public function setPopis(?string $popis): static
-    {
-        $this->popis = $popis;
-
-        return $this;
-    }
-
     public function getNazev(): ?string
     {
         return $this->nazev;
@@ -77,4 +73,57 @@ class BodyMapyPribeh
 
         return $this;
     }
+
+    public function getPribehMista(): ?string
+    {
+        return $this->pribehMista;
+    }
+
+    public function setPribehMista(?string $pribehMista): static
+    {
+        $this->pribehMista = $pribehMista;
+
+        return $this;
+    }
+
+    public function getZajimavosti(): ?string
+    {
+        return $this->zajimavosti;
+    }
+
+    public function setZajimavosti(?string $zajimavosti): static
+    {
+        $this->zajimavosti = $zajimavosti;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getX(): ?int
+    {
+        return $this->x;
+    }
+
+    /**
+     * @param int|null $x
+     */
+    public function setX(?int $x): static
+    {
+        $this->x = $x;
+        return $this;
+    }
+
+    public function getY(): ?int
+    {
+        return $this->y;
+    }
+
+    public function setY(?int $y): static
+    {
+        $this->y = $y;
+        return $this;
+    }
+
 }

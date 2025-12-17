@@ -41,6 +41,7 @@ class BodyMapyPribehCrudController extends AbstractCrudController
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
         yield TextField::new('nazev' ,'Display Name');
-        yield TextField::new('popis', 'Description');
+        yield TextEditorField::new('pribehMista', 'Place Story');
+        yield TextEditorField::new('zajimavosti', 'Interestings');
     }
 }

@@ -26,7 +26,6 @@ final class PribehController extends AbstractController
         $lonMin = 12.091;
         $lonMax = 18.859;
 
-        $points = [];
 
         foreach ($body as $bod) {
             // Náhodné souřadnice
@@ -34,27 +33,18 @@ final class PribehController extends AbstractController
             $lon = $bod->getLng();
 
             // Přepočet na SVG souřadnice
-            $x = ($lon - $lonMin) / ($lonMax - $lonMin) * $svgWidth;
-            $y = $svgHeight - (
+            $bod->setX(($lon - $lonMin) / ($lonMax - $lonMin) * $svgWidth);
+            $bod->setY($svgHeight - (
                     ($lat - $latMin) / ($latMax - $latMin) * $svgHeight
-                );
+                ));
 
-            $points[] = [
-                'id' => $bod->getId(),
-                'title' => $bod->getNazev(),
-                'description' => $bod->getPopis(),
-                'lat' => $lat,
-                'lon' => $lon,
-                'x' => $x,
-                'y' => $y,
-            ];
         }
 
 
         return $this->render('pribeh/index.html.twig', [
             'controller_name' => 'PribehController',
             'paticka' => false,
-            'points' => $points,
+            'points' => $body,
             'svgWidth' => $svgWidth,
             'svgHeight' => $svgHeight,
         ]);
