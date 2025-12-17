@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Akce;
+use App\Entity\Aktuality;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -40,5 +42,29 @@ class AkceCrudController extends AktualityCrudController
         yield from parent::configureFields($pageName);
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Akce)
+        {
+            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager));
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    protected function makeUniqueUrl(string $original, EntityManagerInterface $em): string
+    {
+        $url = $originalUrl = $this->makeURL($original);
+
+        $i = 2;
+
+        while ($em->getRepository(Akce::class)->findOneBy(['url' => $url])) {
+            $url = $originalUrl . '-' . $i;
+            $i++;
+        }
+
+        return $url;
     }
 }

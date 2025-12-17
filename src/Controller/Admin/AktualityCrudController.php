@@ -108,7 +108,7 @@ class AktualityCrudController extends AbstractCrudController
         parent::deleteEntity($entityManager, $entityInstance);
     }
 
-    private function makeURL(string $url): string
+    protected function makeURL(string $url): string
     {
         // 1. Odstranění diakritiky
         $url = transliterator_transliterate('Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove', $url);
@@ -125,7 +125,7 @@ class AktualityCrudController extends AbstractCrudController
         return $url;
     }
 
-    private function makeUniqueUrl(string $original, EntityManagerInterface $em): string
+    protected function makeUniqueUrl(string $original, EntityManagerInterface $em): string
     {
         $url = $originalUrl = $this->makeURL($original);
 

@@ -1,0 +1,24 @@
+<div class="card shadow-sm mb-1 rounded-0 border-primary border-2">
+    <div class="card-body">
+        <a href="" class="text-decoration-none">
+            <div class="row">
+                <!-- Levý sloupec -->
+                <div class="col-md-2 col-12 mb-md-0 mb-2">
+                   {{ akce.Datum|date('d.m.Y') }}
+
+                </div>
+                <!-- Střední sloupec -->
+                <div class="col-md-6 col-12 ps-lg-0 ps-4">
+                    <h5 class="card-title fw-medium">{{ akce.Titulek }}</h5>
+                    <p class="card-text">{{ akce.Perex|raw }}</p>
+
+                </div>
+                <!-- Pravý sloupec -->
+                <div class="col-md-4 col-12 mt-md-0 mt-3 text-end">
+                    <img src="{{ asset('/images/aktuality/' ~ akce.Obrazek) | imagine_filter('aktualita_thumb') }}" class="card-img-top rounded-0" alt="Náhledový obrázek">
+                </div>
+
+            </div>
+        </a>
+    </div>
+</div>

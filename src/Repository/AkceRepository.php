@@ -16,28 +16,15 @@ class AkceRepository extends ServiceEntityRepository
         parent::__construct($registry, Akce::class);
     }
 
-    //    /**
-    //     * @return Akce[] Returns an array of Akce objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Akce
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAkceKZobrazeniPaginated(int $limit, int $offset): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.DatumZobrazeniOd < :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('a.Datum', 'DESC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
 }
