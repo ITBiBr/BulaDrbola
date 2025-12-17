@@ -17,10 +17,12 @@ final class AktualityController extends AbstractController
     #[Route('/aktuality', name: 'app_aktuality')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated(9,0);
+        $limit = 9;
+        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated($limit,0);
 
         return $this->render('aktuality/index.html.twig', [
             'controller_name' => 'AktualityController',
+            'limit' => $limit,
             'aktuality' => $aktuality,
             'paticka'=> true,
         ]);

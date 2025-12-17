@@ -26,7 +26,7 @@
 
 
                 <div class="row justify-content-center">
-                    <div class = "col-xxl-5 col-xl-7 col-lg-8 col-12 mt-4">
+                    <div class = "col-xxl-5 col-xl-7 col-lg-8 col-12 mt-4" id="akce-container">
                         {% for ak in akce %}
 
                             {% include 'kalendar_akci/_akce.html.twig' with {'akce': ak,} %}
@@ -35,7 +35,51 @@
                         {% endfor %}
                     </div>
                 </div>
+
+                <div class="container-fluid text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-6 col-lg-9 col-10">
+                            {% if (akce|length >= limit) %}
+                                <button id="load-more-btn" data-offset="{{ akce|length }}" class="btn btn-outline-primary rounded-pill m-5 border-2"><div class="mx-3">Načíst další</div></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('load-more-btn').addEventListener('click', function () {
+                        const btn = this;
+                        const offset = btn.dataset.offset;
+
+                        fetch('/kalendar-akci/load-more?offset=' + offset)
+                            .then(response => response.json())
+                            .then(data => {
+                                const container = document.getElementById('akce-container');
+                                data.items.forEach(itemHtml => {
+                                    const div = document.createElement('div');
+                                    div.innerHTML = itemHtml.trim();
+                                    const newItem = div.firstElementChild;
+
+                                    if (newItem) {
+                                        // přidej třídu fade-in
+                                        newItem.classList.add('fade-in');
+                                        container.appendChild(newItem);
+
+                                        // malý timeout, aby se spustil transition efekt
+                                        setTimeout(() => {
+                                            newItem.classList.add('show');
+                                        }, 10);
+                                    }
+                                });
+                                if (data.hasMore) {
+                                    btn.dataset.offset = data.nextOffset;
+                                } else {
+                                    btn.remove(); // skryje tlačítko, pokud už není co načíst
+                                }
+                            });
+                    });
+                </script>
             </div>
         </div>
     </div>
+
 {% endblock %}
