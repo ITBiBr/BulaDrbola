@@ -1002,7 +1002,7 @@
                         {% include 'pribeh/mapa.html.twig' %}
                         {# Body mapy #}
                         {% for point in points %}
-                            <g class="map-pin" transform="translate({{ point.x }}, {{ point.y - 25 }}) scale(0.9)">
+                            <g class="map-pin" transform="translate({{ point.x }}, {{ point.y - 15 }}) scale(0.4)">
                                 <g
                                         role="button"
                                         data-bs-toggle="modal"
@@ -1057,7 +1057,6 @@
                 id="modal-{{ point.id }}"
                 tabindex="-1"
                 aria-labelledby="modalLabel-{{ point.id }}"
-                aria-hidden="true"
         >
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

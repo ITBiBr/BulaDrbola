@@ -15,16 +15,16 @@ final class PribehController extends AbstractController
     {
 
         // Rozměry SVG (musí odpovídat viewBox)
-        $svgWidth = 919.94092;
-        $svgHeight = 514.36469;
+        $svgWidth = 375.18805;
+        $svgHeight = 256.465;
 
         $body= $entityManager->getRepository(BodyMapyPribeh::class)->findAll();
 
         // Bounding box ČR
-        $latMin = 48.551;
-        $latMax = 51.057;
-        $lonMin = 12.091;
-        $lonMax = 18.859;
+        $latMin = 48.615;
+        $latMax = 49.864;
+        $lonMin = 14.870;
+        $lonMax = 17.657;
 
 
         foreach ($body as $bod) {
