@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Akce;
 use App\Entity\Aktuality;
 use App\Entity\BodyMapyPribeh;
 use App\Entity\Clanky;
@@ -77,6 +78,7 @@ class DashboardController extends AbstractDashboardController
         }
 
         yield MenuItem::linkToCrud('News', 'fa fa-newspaper', Aktuality::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Events', 'fa fa-calendar', Akce::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Clanky::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class)->setPermission('ROLE_EDITOR');
