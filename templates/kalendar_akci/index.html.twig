@@ -45,65 +45,66 @@
                         </div>
                     </div>
                 </div>
-                {% include 'mapa/mapa.html.twig' with {
-                    lat: 49.349,
-                    lng: 16.0825,
-                    zoom: 8
-                } %}
-                <script>
-                    {% for ak in akce %}
-                    {%if ak.lat and ak.lng%}
-                        var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).addTo(map).bindPopup("<strong>{{ ak.Titulek }}</strong><hr>{{ ak.Perex|raw }}");
-                    {% endif %}
-                    {% endfor %}
 
-                    let btn_element = document.getElementById('load-more-btn')
-                    if (btn_element) {
-                        btn_element.addEventListener('click', function () {
-                            const btn = this;
-                            const offset = btn.dataset.offset;
-
-                            fetch('/kalendar-akci/load-more?offset=' + offset)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const container = document.getElementById('akce-container');
-
-                                    data.akce.forEach(akce => {
-                                        if (akce.lat && akce.lng) {
-                                            // příklad: přidání markeru na mapu
-                                            L.marker([akce.lat, akce.lng], {icon: pinIcon})
-                                                .addTo(map)
-                                                .bindPopup('<strong>'+akce.titulek+'</strong><hr>'+akce.perex);
-                                        }
-                                    });
-                                    data.items.forEach(itemHtml => {
-                                        const div = document.createElement('div');
-                                        div.innerHTML = itemHtml.trim();
-                                        const newItem = div.firstElementChild;
-
-
-                                        if (newItem) {
-                                            // přidej třídu fade-in
-                                            newItem.classList.add('fade-in');
-                                            container.appendChild(newItem);
-
-                                            // malý timeout, aby se spustil transition efekt
-                                            setTimeout(() => {
-                                                newItem.classList.add('show');
-                                            }, 10);
-                                        }
-                                    });
-                                    if (data.hasMore) {
-                                        btn.dataset.offset = data.nextOffset;
-                                    } else {
-                                        btn.remove(); // skryje tlačítko, pokud už není co načíst
-                                    }
-                                });
-                        })
-                    };
-                </script>
             </div>
         </div>
+        {% include 'mapa/mapa.html.twig' with {
+            lat: 49.800,
+            lng: 15.650,
+            zoom: 7
+        } %}
+        <script>
+            {% for ak in akce %}
+            {%if ak.lat and ak.lng%}
+            var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).addTo(map).bindPopup("<strong>{{ ak.Titulek }}</strong><hr>{{ ak.Perex|raw }}");
+            {% endif %}
+            {% endfor %}
+
+            let btn_element = document.getElementById('load-more-btn')
+            if (btn_element) {
+                btn_element.addEventListener('click', function () {
+                    const btn = this;
+                    const offset = btn.dataset.offset;
+
+                    fetch('/kalendar-akci/load-more?offset=' + offset)
+                        .then(response => response.json())
+                        .then(data => {
+                            const container = document.getElementById('akce-container');
+
+                            data.akce.forEach(akce => {
+                                if (akce.lat && akce.lng) {
+                                    // příklad: přidání markeru na mapu
+                                    L.marker([akce.lat, akce.lng], {icon: pinIcon})
+                                        .addTo(map)
+                                        .bindPopup('<strong>'+akce.titulek+'</strong><hr>'+akce.perex);
+                                }
+                            });
+                            data.items.forEach(itemHtml => {
+                                const div = document.createElement('div');
+                                div.innerHTML = itemHtml.trim();
+                                const newItem = div.firstElementChild;
+
+
+                                if (newItem) {
+                                    // přidej třídu fade-in
+                                    newItem.classList.add('fade-in');
+                                    container.appendChild(newItem);
+
+                                    // malý timeout, aby se spustil transition efekt
+                                    setTimeout(() => {
+                                        newItem.classList.add('show');
+                                    }, 10);
+                                }
+                            });
+                            if (data.hasMore) {
+                                btn.dataset.offset = data.nextOffset;
+                            } else {
+                                btn.remove(); // skryje tlačítko, pokud už není co načíst
+                            }
+                        });
+                })
+            };
+        </script>
     </div>
 
 {% endblock %}
