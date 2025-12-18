@@ -5,8 +5,9 @@
 
         {% include 'mapa/mapa.html.twig' with {
             lat: aktualita.lat,
-            lng: aktualita.lng
+            lng: aktualita.lng,
+            zoom: 13
         } %}
-        <script>var marker = L.marker([{{ aktualita.lat }}, {{ aktualita.lng }}],{icon: pinIcon}).addTo(map).bindPopup("{{ aktualita.Titulek }}.");</script>
+        <script>var marker = L.marker([{{ aktualita.lat }}, {{ aktualita.lng }}],{icon: pinIcon}).addTo(map).bindPopup("{{ aktualita.Titulek }}");</script>
     {% endif %}
 {% endblock %}

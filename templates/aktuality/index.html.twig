@@ -30,37 +30,40 @@
         </div>
     </div>
     <script>
-        document.getElementById('load-more-btn').addEventListener('click', function () {
-            const btn = this;
-            const offset = btn.dataset.offset;
+        let btn_element = document.getElementById('load-more-btn')
+        if (btn_element) {
+            btn_element.addEventListener('click', function () {
+                const btn = this;
+                const offset = btn.dataset.offset;
 
-            fetch('/aktuality/load-more?offset=' + offset)
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('aktuality-container');
-                    data.items.forEach(itemHtml => {
-                        const div = document.createElement('div');
-                        div.innerHTML = itemHtml.trim();
-                        const newItem = div.firstElementChild;
+                fetch('/aktuality/load-more?offset=' + offset)
+                    .then(response => response.json())
+                    .then(data => {
+                        const container = document.getElementById('aktuality-container');
+                        data.items.forEach(itemHtml => {
+                            const div = document.createElement('div');
+                            div.innerHTML = itemHtml.trim();
+                            const newItem = div.firstElementChild;
 
-                        if (newItem) {
-                            // přidej třídu fade-in
-                            newItem.classList.add('fade-in');
-                            container.appendChild(newItem);
+                            if (newItem) {
+                                // přidej třídu fade-in
+                                newItem.classList.add('fade-in');
+                                container.appendChild(newItem);
 
-                            // malý timeout, aby se spustil transition efekt
-                            setTimeout(() => {
-                                newItem.classList.add('show');
-                            }, 10);
+                                // malý timeout, aby se spustil transition efekt
+                                setTimeout(() => {
+                                    newItem.classList.add('show');
+                                }, 10);
+                            }
+                        });
+                        if (data.hasMore) {
+                            btn.dataset.offset = data.nextOffset;
+                        } else {
+                            btn.remove(); // skryje tlačítko, pokud už není co načíst
                         }
                     });
-                    if (data.hasMore) {
-                        btn.dataset.offset = data.nextOffset;
-                    } else {
-                        btn.remove(); // skryje tlačítko, pokud už není co načíst
-                    }
-                });
-        });
+            })
+        };
     </script>
 </div>
 {% endblock %}

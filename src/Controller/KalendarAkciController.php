@@ -60,12 +60,21 @@ final class KalendarAkciController extends AbstractController
             $htmlItems[] = $this->renderView('kalendar_akci/_akce.html.twig', [
                 'akce' => $ak,
             ]);
+
+            $akceData[] = [
+                'id' => $ak->getId(),
+                'titulek' => $ak->getTitulek(),
+                'perex' => $ak->getPerex(),
+                'lat' => $ak->getLat(),
+                'lng' => $ak->getLng(),
+            ];
         }
 
         return new JsonResponse([
             'items' => $htmlItems,
             'nextOffset' => $offset + $limit,
             'hasMore' => count($dalsi_akce) >= $limit,
+            'akce' => $akceData,
         ]);
     }
 }
