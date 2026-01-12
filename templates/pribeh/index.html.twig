@@ -993,7 +993,7 @@
     <div class="row justify-content-center bg-white">
         <div class="col-lg-11 col-12">
             <div class="row justify-content-center my-5">
-                <div class="col-lg-8 col-12 d-flex justify-content-center">
+                <div class="col-lg-8 col-12 d-flex justify-content-center map-container" style="position: relative;">
                     <svg id="mapSvg"
                             viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
                             class="w-100"
@@ -1002,7 +1002,10 @@
 
                         <!-- zoomovaný svět -->
                         <g id="world">
-
+                            <g id="tooltipGroup" style="pointer-events: none;" opacity="0">
+                                <rect id="tooltipRect" x="0" y="0" width="100" height="20" rx="4" ry="4" fill="rgba(0,0,0,0.75)" />
+                                <text id="tooltipText" x="0" y="14" fill="white" font-size="12" text-anchor="middle"></text>
+                            </g>
                             <!-- mapa -->
                             <g id="mapLayer">
                                 {% include 'pribeh/mapa.html.twig' %}
@@ -1017,7 +1020,7 @@
                                             transform="translate({{ point.x }}, {{ point.y }})"
                                     >
                                         <!-- pouze tvar pinu -->
-                                        <g class="pin-shape" role="button" data-bs-toggle="modal" data-bs-target="#modal-{{ point.id }}">
+                                        <g class="pin-shape" role="button" data-bs-toggle="modal" data-bs-target="#modal-{{ point.id }}" data-bs-title="{{ point.nazev }}">
                                             <path
                                                     d="M0,-20
                                C-10,-20 -15,-10 -15,0
@@ -1036,9 +1039,23 @@
 
                         </g>
                         </g>
+
                     </svg>
 
-
+                    <div id="mapTooltip"
+                         style="
+        position: absolute;
+        background: rgba(0,0,0,0.75);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.15s;
+        z-index: 1000;
+     ">
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -1062,24 +1079,83 @@
 </div>
 <script>
     const pins = document.querySelectorAll('.map-pin');
+    const tooltip = document.getElementById('mapTooltip');
+    const mapContainer = document.querySelector('.map-container');
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    let activePin = null;
 
     pins.forEach(pin => {
-        pin.addEventListener('mouseenter', () => {
-            // ztlum ostatní
-            pins.forEach(p => p.classList.add('is-dimmed'));
+        const pinShape = pin.querySelector('.pin-shape');
 
-            // aktivní pin
-            pin.classList.remove('is-dimmed');
+        /* ================= DESKTOP ================= */
+        if (!isTouch) {
+            pin.addEventListener('mouseenter', () => {
+                pins.forEach(p => p.classList.add('is-dimmed'));
+                pin.classList.remove('is-dimmed');
+                pin.parentNode.appendChild(pin);
 
-            // přesun do popředí
-            pin.parentNode.appendChild(pin);
-        });
+                tooltip.textContent = pinShape.dataset.bsTitle || '';
+                tooltip.style.opacity = '1';
+            });
 
-        pin.addEventListener('mouseleave', () => {
-            // reset průhlednosti
-            pins.forEach(p => p.classList.remove('is-dimmed'));
-        });
+            pin.addEventListener('mousemove', e => {
+                const parentRect = mapContainer.getBoundingClientRect();
+                tooltip.style.left = `${e.clientX - parentRect.left - 20}px`;
+                tooltip.style.top = `${e.clientY - parentRect.top - 30}px`;
+            });
+
+            pin.addEventListener('mouseleave', () => {
+                pins.forEach(p => p.classList.remove('is-dimmed'));
+                tooltip.style.opacity = '0';
+            });
+        }
+
+        /* ================= MOBIL ================= */
+        if (isTouch) {
+            pin.addEventListener('touchstart', e => {
+                // 👉 pokud je to druhý tap na stejný pin → nech Bootstrap otevřít modal
+                if (activePin === pin) {
+                    return; // NEVOLAT preventDefault
+                }
+
+                // první tap = tooltip
+                e.preventDefault();
+
+                activePin = pin;
+
+                pins.forEach(p => p.classList.add('is-dimmed'));
+                pin.classList.remove('is-dimmed');
+                pin.parentNode.appendChild(pin);
+
+                tooltip.textContent = pinShape.dataset.bsTitle || '';
+                tooltip.style.opacity = '1';
+
+                const rect = pinShape.getBoundingClientRect();
+                const parentRect = mapContainer.getBoundingClientRect();
+
+                tooltip.style.left =
+                    `${rect.left - parentRect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+                tooltip.style.top =
+                    `${rect.top - parentRect.top - tooltip.offsetHeight - 10}px`;
+            });
+        }
     });
+
+    /* ========= TAP MIMO PIN → SKRÝT TOOLTIP ========= */
+    function hideTooltip() {
+        activePin = null;
+        pins.forEach(p => p.classList.remove('is-dimmed'));
+        tooltip.style.opacity = '0';
+    }
+
+    if (isTouch) {
+        document.addEventListener('touchstart', e => {
+            if (!e.target.closest('.map-pin')) {
+                hideTooltip();
+            }
+        });
+    }
 </script>
     <script>
         const svg = document.getElementById('mapSvg');
