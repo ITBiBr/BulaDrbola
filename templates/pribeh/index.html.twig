@@ -1298,8 +1298,8 @@
             if (isDragging && e.touches.length === 1) {
                 const touch = e.touches[0];
 
-                translateX += touch.clientX - startX;
-                translateY += touch.clientY - startY;
+                translateX += (touch.clientX - startX) * dragSpeed ;
+                translateY += (touch.clientY - startY) * dragSpeed;
 
                 startX = touch.clientX;
                 startY = touch.clientY;
