@@ -994,35 +994,66 @@
         <div class="col-lg-11 col-12">
             <div class="row justify-content-center my-5">
                 <div class="col-lg-8 col-12 d-flex justify-content-center">
-                    <svg viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
+                    <svg id="mapSvg"
+                            viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
                             class="w-100"
                             xmlns="http://www.w3.org/2000/svg"
-                            xmlns:svg="http://www.w3.org/2000/svg">
+                    >
 
-                        {% include 'pribeh/mapa.html.twig' %}
-                        {# Body mapy #}
-                        {% for point in points %}
-                            <g class="map-pin" transform="translate({{ point.x }}, {{ point.y - 25 }}) scale(0.9)">
-                                <g
-                                        role="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal-{{ point.id }}"
-                                >
-                                    <path
-                                            d="M0,-20
-                   C-10,-20 -15,-10 -15,0
-                   C-15,10 0,25 0,25
-                   C0,25 15,10 15,0
-                   C15,-10 10,-20 0,-20Z"
-                                            fill="rgb(222, 174, 107)"
-                                            stroke="#FFFFFF"
-                                            stroke-width="0.4"
-                                    />
-                                    <circle cx="0" cy="-5" r="4" fill="white"/>
-                                </g>
+                        <!-- zoomovaný svět -->
+                        <g id="world">
+
+                            <!-- mapa -->
+                            <g id="mapLayer">
+                                {% include 'pribeh/mapa.html.twig' %}
                             </g>
-                        {% endfor %}
+
+                            <!-- piny -->
+                            <g transform="translate(0, -23)">
+                            <g id="pinLayer">
+                                {% for point in points %}
+                                    <g
+                                            class="map-pin"
+                                            transform="translate({{ point.x }}, {{ point.y }})"
+                                    >
+                                        <!-- pouze tvar pinu -->
+                                        <g class="pin-shape" role="button" data-bs-toggle="modal" data-bs-target="#modal-{{ point.id }}">
+                                            <path
+                                                    d="M0,-20
+                               C-10,-20 -15,-10 -15,0
+                               C-15,10 0,25 0,25
+                               C0,25 15,10 15,0
+                               C15,-10 10,-20 0,-20Z"
+                                                    fill="rgb(222, 174, 107)"
+                                                    stroke="#FFFFFF"
+                                                    stroke-width="0.4"
+                                            />
+                                            <circle cx="0" cy="-5" r="4" fill="white"/>
+                                        </g>
+                                    </g>
+                                {% endfor %}
+                            </g>
+
+                        </g>
+                        </g>
                     </svg>
+
+
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-12">
+                    <div class="mt-3 w-100">
+                        <input
+                                type="range"
+                                class="form-range"
+                                min="1"
+                                max="2"
+                                step="0.05"
+                                value="1"
+                                id="zoomRange"
+                        >
+                    </div>
                 </div>
             </div>
         </div>
@@ -1050,6 +1081,208 @@
         });
     });
 </script>
+    <script>
+        const svg = document.getElementById('mapSvg');
+        const world = document.getElementById('world');
+        const zoomRange = document.getElementById('zoomRange');
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        const pinBaseScale = isTouchDevice ? 2.2 : 1;
+
+        const MIN_ZOOM = 0.5;
+        const zoomTarget = { x: 600, y: 390 };
+        const maxZoomDesktop = 2;
+        const maxZoomMobile = 3.5;
+        const dragSpeed = isTouchDevice ? 3 : 0.7;
+
+        if (zoomRange) {
+            zoomRange.max = isTouchDevice ? maxZoomMobile : maxZoomDesktop;
+        }
+
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+
+        // pinch
+        let isPinching = false;
+        let startDistance = 0;
+        let startScale = 1;
+
+        function zoomToPoint(newScale, mapX, mapY) {
+            const rect = svg.getBoundingClientRect();
+
+            // kde má bod zůstat na obrazovce (střed SVG)
+            const screenX = rect.width / 2;
+            const screenY = rect.height / 2;
+
+            scale = newScale;
+
+            translateX = screenX - mapX * scale;
+            translateY = screenY - mapY * scale;
+
+            updateTransform();
+
+            if (zoomRange) zoomRange.value = scale;
+        }
+
+        function updateTransform() {
+            world.setAttribute(
+                'transform',
+                `translate(${translateX}, ${translateY}) scale(${scale})`
+            );
+
+            document.querySelectorAll('.pin-shape').forEach(pin => {
+
+                const PIN_ANCHOR = isTouchDevice ? 17 : 12;
+                const pinOffset = PIN_ANCHOR * (1 - (pinBaseScale / scale));
+
+                pin.setAttribute(
+                    'transform',
+                    `
+        translate(0, ${pinOffset})
+        scale(${(1 / scale) * pinBaseScale})
+        `
+                );
+            });
+
+        }
+
+        // ---------- ZOOM SLIDER ----------
+        zoomRange?.addEventListener('input', function () {
+            const newScale = parseFloat(this.value);
+
+            const rect = svg.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // faktor interpolace (0 = min zoom, 1 = max zoom)
+            const t = (newScale - MIN_ZOOM) / (zoomRange.max - MIN_ZOOM);
+
+            // horizontální a vertikální offset pro viditelnost mapy při malém zoomu
+            const maxOffsetX = 15; // uprav podle potřeby
+            const maxOffsetY = 35;  // uprav podle potřeby
+
+            const offsetX = maxOffsetX * (1 - t);
+            const offsetY = maxOffsetY * (1 - t);
+
+            // interpolovaný target s offsety
+            const targetX = zoomTarget.x * t + centerX * (1 - t) - offsetX;
+            const targetY = zoomTarget.y * t + centerY * (1 - t) - offsetY;
+
+            zoomToPoint(newScale, targetX, targetY);
+        });
+
+        // ---------- MOUSE ----------
+        svg.addEventListener('mousedown', e => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            svg.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+
+            translateX += (e.clientX - startX) * dragSpeed ;
+            translateY += (e.clientY - startY) * dragSpeed;
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            svg.style.cursor = 'grab';
+        });
+
+        // ---------- TOUCH ----------
+        svg.addEventListener('touchstart', e => {
+            if (e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }
+
+            if (e.touches.length === 2) {
+                isPinching = true;
+                startDistance = getDistance(e.touches[0], e.touches[1]);
+                startScale = scale;
+            }
+        }, { passive: false });
+
+        svg.addEventListener('touchmove', e => {
+            e.preventDefault();
+
+            // drag
+            if (isDragging && e.touches.length === 1) {
+                const touch = e.touches[0];
+
+                translateX += touch.clientX - startX;
+                translateY += touch.clientY - startY;
+
+                startX = touch.clientX;
+                startY = touch.clientY;
+
+                updateTransform();
+            }
+
+            // pinch zoom
+            if (isPinching && e.touches.length === 2) {
+                const dist = getDistance(e.touches[0], e.touches[1]);
+                scale = startScale * (dist / startDistance);
+
+                // limity zoomu
+                scale = Math.max(0.5, Math.min(3, scale));
+
+                if (zoomRange) zoomRange.value = scale;
+                updateTransform();
+            }
+        }, { passive: false });
+
+        svg.addEventListener('touchend', () => {
+            isDragging = false;
+            isPinching = false;
+        });
+
+        function getDistance(t1, t2) {
+            return Math.hypot(
+                t1.clientX - t2.clientX,
+                t1.clientY - t2.clientY
+            );
+        }
+        function setInitialView(initialScale, centerClientX, centerClientY) {
+            scale = initialScale;
+
+            const rect = svg.getBoundingClientRect();
+
+            translateX = rect.width / 2 - centerClientX * scale;
+            translateY = rect.height / 2 - centerClientY * scale;
+
+            updateTransform();
+
+            if (zoomRange) zoomRange.value = scale;
+        }
+
+        window.addEventListener('load', () => {
+            // SVG souřadnice cílového bodu
+
+            const targetX = 600;
+            const targetY = 390;
+
+            const initialScale = 3.0;
+
+            setInitialView(initialScale, targetX, targetY);
+        });
+        svg.style.cursor = 'grab';
+        updateTransform();
+    </script>
+
+
     {# MODALY – MIMO MAPU #}
     {% for point in points %}
         <div
