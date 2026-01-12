@@ -1156,8 +1156,7 @@
             }
         });
     }
-</script>
-    <script>
+
         const svg = document.getElementById('mapSvg');
         const world = document.getElementById('world');
         const zoomRange = document.getElementById('zoomRange');
@@ -1293,6 +1292,7 @@
 
         svg.addEventListener('touchmove', e => {
             e.preventDefault();
+            hideTooltip();
 
             // drag
             if (isDragging && e.touches.length === 1) {
