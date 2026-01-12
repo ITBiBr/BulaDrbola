@@ -1047,7 +1047,7 @@
                         <input
                                 type="range"
                                 class="form-range"
-                                min="1"
+                                min="0.7"
                                 max="2"
                                 step="0.05"
                                 value="1"
@@ -1088,10 +1088,10 @@
         const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
         const pinBaseScale = isTouchDevice ? 2.2 : 1;
 
-        const MIN_ZOOM = 0.5;
+        const MIN_ZOOM = 0;
         const zoomTarget = { x: 600, y: 390 };
         const maxZoomDesktop = 2;
-        const maxZoomMobile = 3.5;
+        const maxZoomMobile = 5;
         const dragSpeed = isTouchDevice ? 3 : 0.7;
 
         if (zoomRange) {
@@ -1162,8 +1162,8 @@
             const t = (newScale - MIN_ZOOM) / (zoomRange.max - MIN_ZOOM);
 
             // horizontální a vertikální offset pro viditelnost mapy při malém zoomu
-            const maxOffsetX = 15; // uprav podle potřeby
-            const maxOffsetY = 35;  // uprav podle potřeby
+            const maxOffsetX = 28; // uprav podle potřeby
+            const maxOffsetY = 72;  // uprav podle potřeby
 
             const offsetX = maxOffsetX * (1 - t);
             const offsetY = maxOffsetY * (1 - t);
@@ -1255,28 +1255,15 @@
                 t1.clientY - t2.clientY
             );
         }
-        function setInitialView(initialScale, centerClientX, centerClientY) {
-            scale = initialScale;
-
-            const rect = svg.getBoundingClientRect();
-
-            translateX = rect.width / 2 - centerClientX * scale;
-            translateY = rect.height / 2 - centerClientY * scale;
-
-            updateTransform();
-
-            if (zoomRange) zoomRange.value = scale;
-        }
 
         window.addEventListener('load', () => {
             // SVG souřadnice cílového bodu
 
             const targetX = 600;
             const targetY = 390;
+            const initialScale = isTouchDevice ? maxZoomMobile : maxZoomDesktop;
 
-            const initialScale = 3.0;
-
-            setInitialView(initialScale, targetX, targetY);
+            zoomToPoint(initialScale, targetX, targetY);
         });
         svg.style.cursor = 'grab';
         updateTransform();
