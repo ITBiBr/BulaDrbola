@@ -1230,8 +1230,9 @@
             const newScale = parseFloat(this.value);
 
             const rect = svg.getBoundingClientRect();
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+            const centerX = rect.width / (2*920/rect.width);
+            const centerY = rect.height / (1.8*514/rect.height);
+
 
             // faktor interpolace (0 = min zoom, 1 = max zoom)
             const t = (newScale - MIN_ZOOM) / (zoomRange.max - MIN_ZOOM);
