@@ -11,6 +11,7 @@
                         <h2 class="text-primary fw-bolder text-uppercase">{{ aktualita.Titulek|nbsp_prepositions }}</h2>
                     </div>
                 </div>
+                {% block date %}{% endblock %}
                 <div class="row justify-content-center mt-4">
                     <div class="col-xl-6 col-lg-9 col-10 text-justify-center">
                         <img class="w-75" src="{{ asset('/images/aktuality/' ~ aktualita.Obrazek) | imagine_filter('aktualita_full_thumb') }}" alt="{{ aktualita.Titulek }}">

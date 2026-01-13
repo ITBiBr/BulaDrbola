@@ -1,5 +1,15 @@
 {% extends 'aktuality/aktualita.html.twig' %}
+{% block title %}Akce - {{ aktualita.Titulek }}{% endblock %}
+{% block date %}
+    <div class="row justify-content-center mt-2">
+        <div class="col-xl-6 col-lg-9 col-10 text-justify-left">
+            <div class="date-badge py-2 px-3 text-white fw-semibold bg-primary d-inline-block">
+                {{ aktualita.Datum|date('j. n.') }}{% if aktualita.DatumDo %} – {{ aktualita.DatumDo|date('j. n.') }}{% endif %}
 
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block body_extends %}
     {% if aktualita.lat and aktualita.lng %}
 

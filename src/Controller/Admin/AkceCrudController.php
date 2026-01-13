@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -40,8 +41,10 @@ class AkceCrudController extends AktualityCrudController
     public function configureFields(string $pageName): iterable
     {
         yield from parent::configureFields($pageName);
+        yield DateField::new('DatumDo', 'Date To');
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
+        yield TextField::new('MistoKonani','Event venue');
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

@@ -3,3 +3,4 @@
 'Content must not be blank.' : "Obsah nesmí být prázdný."
 'Perex must not be blank.' : "Perex nesmí být prázdný."
 'This file type is not supported.' : "Tento typ souboru není podporován."
+'akce.date_to_must_be_greater': "'Datum do' musí být větší než 'Datum'"

@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\AkceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: AkceRepository::class)]
 class Akce
@@ -52,6 +54,12 @@ class Akce
 
     #[ORM\Column(nullable: true)]
     private ?float $lng = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $MistoKonani = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $DatumDo = null;
 
     public function getId(): ?int
     {
@@ -200,5 +208,40 @@ class Akce
         $this->lng = $lng;
 
         return $this;
+    }
+
+    public function getMistoKonani(): ?string
+    {
+        return $this->MistoKonani;
+    }
+
+    public function setMistoKonani(?string $MistoKonani): static
+    {
+        $this->MistoKonani = $MistoKonani;
+
+        return $this;
+    }
+
+    public function getDatumDo(): ?\DateTime
+    {
+        return $this->DatumDo;
+    }
+
+    public function setDatumDo(?\DateTime $DatumDo): static
+    {
+        $this->DatumDo = $DatumDo;
+
+        return $this;
+    }
+
+    #[Callback]
+    public function validateDatumDo(ExecutionContextInterface $context): void
+    {
+        if ($this->Datum && $this->DatumDo && $this->DatumDo <= $this->Datum) {
+            $context->buildViolation('akce.date_to_must_be_greater')
+                ->setTranslationDomain('validators')
+                ->atPath('DatumDo')
+                ->addViolation();
+        }
     }
 }
