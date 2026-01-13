@@ -19,7 +19,7 @@ final class KalendarAkciController extends AbstractController
     #[Route('/kalendar-akci', name: 'app_kalendar_akci')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $limit = 6;
+        $limit = 8;
         $akce = $entityManager->getRepository(Akce::class)->findAkceKZobrazeniPaginated($limit,0);
 
         return $this->render('kalendar_akci/index.html.twig', [
@@ -48,7 +48,7 @@ final class KalendarAkciController extends AbstractController
     public function loadMore(Request $request, AkceRepository $akceRepository): JsonResponse
     {
         $offset = (int) $request->query->get('offset', 0);
-        $limit = 6;
+        $limit = 8;
 
         $akce = $akceRepository->findAkceKZobrazeniPaginated($limit, $offset);
         $dalsi_akce= $akceRepository->findAkceKZobrazeniPaginated($limit, $offset+1);

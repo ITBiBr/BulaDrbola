@@ -23,8 +23,8 @@
 
 
                 <div class="row justify-content-center">
-                    <div class="col-lg-7 col-md-10 col-12 mt-4" id="akce-container">
-                        <div class="row g-3">
+                    <div class="col-lg-7 col-md-10 col-12 mt-4">
+                        <div class="row g-3" id="akce-container">
                             {% for ak in akce %}
 
                                 {% include 'kalendar_akci/_akce.html.twig' with {'akce': ak,} %}
