@@ -1431,8 +1431,8 @@
                         {% endif %}
                         <hr>
                         <small class="text-muted">
-                            N {{ point.lat }},
-                            E {{ point.lng}}
+                            N {{ point.lat | number_format(3, '.', '') }},
+                            E {{ point.lng | number_format(3, '.', '') }}
                         </small>
                     </div>
                 </div>
