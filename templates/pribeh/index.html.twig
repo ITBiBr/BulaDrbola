@@ -1184,7 +1184,7 @@
         const pinBaseScale = isTouchDevice ? 2.2 : 1;
 
         const MIN_ZOOM = 0;
-        const zoomTarget = { x: 600, y: 390 };
+        const zoomTarget = isTouchDevice ? { x: 520, y: 370 } : { x: 600, y: 390 };
         const maxZoomDesktop = 2;
         const maxZoomMobile = 5;
         const dragSpeed = isTouchDevice ? 3 : 0.7;
@@ -1356,8 +1356,8 @@
         window.addEventListener('load', () => {
             // SVG souřadnice cílového bodu
 
-            const targetX = 600;
-            const targetY = 390;
+            const targetX = zoomTarget.x;
+            const targetY = zoomTarget.y;
             const initialScale = isTouchDevice ? maxZoomMobile : maxZoomDesktop;
 
             zoomToPoint(initialScale, targetX, targetY);
