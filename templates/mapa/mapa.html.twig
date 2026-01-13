@@ -11,10 +11,34 @@
 </div>
 <script>
     var map = L.map('map').setView([{{ lat }}, {{ lng }}], {{ zoom }});
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+    L.tileLayer(`https://api.mapy.com/v1/maptiles/basic/256/{z}/{x}/{y}?apikey={{mapyApiKey}}`, {
+        minZoom: 0,
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '<a href="https://api.mapy.com/copyright" target="_blank">&copy; Seznam.cz a.s. a další</a>',
     }).addTo(map);
+    L.Control.Watermark = L.Control.extend({
+        onAdd: function(map) {
+            var img = L.DomUtil.create('img');
+
+            img.src = 'https://api.mapy.com/img/api/logo.svg';
+            img.style.width = '100px';
+
+
+            return img;
+        },
+
+        onRemove: function(map) {
+            // Nothing to do here
+        }
+    });
+
+    L.control.watermark = function(opts) {
+        return new L.Control.Watermark(opts);
+    }
+
+    L.control.watermark({ position: 'bottomright' }).addTo(map);
+
     var pinIcon = L.divIcon({
         className: 'map-pin',
         html: `<svg viewBox="-20 -25 40 55"
