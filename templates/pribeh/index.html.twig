@@ -993,7 +993,8 @@
     <div class="row justify-content-center bg-white">
         <div class="col-lg-11 col-12">
             <div class="row justify-content-center my-5">
-                <div class="col-lg-8 col-12 d-flex justify-content-center map-container" style="position: relative;">
+                <div class="col-lg-8 col-12 d-flex justify-content-center map-container position-relative">
+
                     <svg id="mapSvg"
                             viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
                             class="w-100"
@@ -1055,6 +1056,25 @@
         transition: opacity 0.15s;
         z-index: 1000;
      ">
+                    </div>
+                    <div id="miniMap">
+                        <svg
+                                viewBox="0 0 {{ svgWidth }} {{ svgHeight }}"
+                                xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <!-- celá mapa -->
+                            <g id="miniMapLayer">
+                                {% include 'pribeh/mapa.html.twig' %}
+                            </g>
+
+                            <!-- obdélník aktuálního výřezu -->
+                            <rect
+                                    id="miniViewport"
+                                    fill="rgba(222, 174, 107, 0.5)"
+                                    stroke="rgb(222, 174, 107)"
+                                    stroke-width="3"
+                            />
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -1222,7 +1242,7 @@
         `
                 );
             });
-
+            updateMiniMap();
         }
 
         // ---------- ZOOM SLIDER ----------
@@ -1342,6 +1362,43 @@
 
             zoomToPoint(initialScale, targetX, targetY);
         });
+    const miniViewport = document.getElementById('miniViewport');
+
+    {# function updateMiniMap() { //verze funkce, kdy zlatý obdelníček se neztrácí za okraj
+        const vb = svg.viewBox.baseVal;
+
+        // rozměry viditelné oblasti v SVG souřadnicích
+        const viewWidth = vb.width / scale;
+        const viewHeight = vb.height / scale;
+
+        // levý horní roh výřezu – inverze transformace
+        let viewX = (-translateX) / scale;
+        let viewY = (-translateY) / scale;
+
+        // ořez na hranice mapy
+        viewX = Math.max(0, Math.min(viewX, vb.width - viewWidth));
+        viewY = Math.max(0, Math.min(viewY, vb.height - viewHeight));
+
+        miniViewport.setAttribute('x', viewX.toString());
+        miniViewport.setAttribute('y', viewY.toString());
+        miniViewport.setAttribute('width', viewWidth.toString());
+        miniViewport.setAttribute('height', viewHeight.toString());
+    }#}
+    function updateMiniMap() {
+        const vb = svg.viewBox.baseVal;
+
+        const viewWidth = vb.width / scale;
+        const viewHeight = vb.height / scale;
+
+        const viewX = (-translateX) / scale;
+        const viewY = (-translateY) / scale;
+
+        miniViewport.setAttribute('x', viewX);
+        miniViewport.setAttribute('y', viewY);
+        miniViewport.setAttribute('width', viewWidth);
+        miniViewport.setAttribute('height', viewHeight);
+    }
+
         svg.style.cursor = 'grab';
 
     </script>
