@@ -1113,12 +1113,15 @@
     const maxZoom = isTouchDevice ? 5 : 2;
     const dragSpeed = isTouchDevice ? 3 : 0.7;
 
+    const wheelZoomSpeed = 0.0015; // citlivost kolečka
+    const minZoom = zoomRange.min;
+    zoomRange.max = maxZoom;
     svg.style.cursor = 'grab';
 
     let activePin = null;
-    if (zoomRange) {
-        zoomRange.max = maxZoom;
-    }
+
+
+
 
     let scale = 1;
     let translateX = 0;
@@ -1268,6 +1271,35 @@
     });
 
     // ---------- MOUSE ----------
+    svg.addEventListener('wheel', e => {
+        e.preventDefault();
+
+        const rect = svg.getBoundingClientRect();
+
+        // pozice kurzoru v SVG
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // převod na mapové souřadnice
+        const mapX = (mouseX - translateX) / scale;
+        const mapY = (mouseY - translateY) / scale;
+
+        // výpočet nového zoomu
+        let newScale = scale * (1 - e.deltaY * wheelZoomSpeed);
+
+        // limity
+        newScale = Math.max(minZoom, Math.min(maxZoom, newScale));
+
+        // zoom na bod pod kurzorem
+        scale = newScale;
+        translateX = mouseX - mapX * scale;
+        translateY = mouseY - mapY * scale;
+
+        if (zoomRange) zoomRange.value = scale;
+
+        updateTransform();
+    }, { passive: false });
+
     svg.addEventListener('mousedown', e => {
         isDragging = true;
         startX = e.clientX;
