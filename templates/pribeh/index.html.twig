@@ -1101,15 +1101,43 @@
     const pins = document.querySelectorAll('.map-pin');
     const tooltip = document.getElementById('mapTooltip');
     const mapContainer = document.querySelector('.map-container');
+    const miniViewport = document.getElementById('miniViewport');
+    const svg = document.getElementById('mapSvg');
+    const world = document.getElementById('world');
+    const zoomRange = document.getElementById('zoomRange');
 
-    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+    const pinBaseScale = isTouchDevice ? 2.2 : 1;
+    const zoomTarget = isTouchDevice ? { x: 520, y: 370 } : { x: 600, y: 390 };
+    const maxZoom = isTouchDevice ? 5 : 2;
+    const dragSpeed = isTouchDevice ? 3 : 0.7;
+
+    svg.style.cursor = 'grab';
+
     let activePin = null;
+    if (zoomRange) {
+        zoomRange.max = maxZoom;
+    }
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    // pinch
+    let isPinching = false;
+    let startDistance = 0;
+    let startScale = 1;
 
     pins.forEach(pin => {
         const pinShape = pin.querySelector('.pin-shape');
 
         /* ================= DESKTOP ================= */
-        if (!isTouch) {
+        if (!isTouchDevice) {
             pin.addEventListener('mouseenter', () => {
                 pins.forEach(p => p.classList.add('is-dimmed'));
                 pin.classList.remove('is-dimmed');
@@ -1132,7 +1160,7 @@
         }
 
         /* ================= MOBIL ================= */
-        if (isTouch) {
+        if (isTouchDevice) {
             pin.addEventListener('touchstart', e => {
                 // 👉 pokud je to druhý tap na stejný pin → nech Bootstrap otevřít modal
                 if (activePin === pin) {
@@ -1169,7 +1197,7 @@
         tooltip.style.opacity = '0';
     }
 
-    if (isTouch) {
+    if (isTouchDevice) {
         document.addEventListener('touchstart', e => {
             if (!e.target.closest('.map-pin')) {
                 hideTooltip();
@@ -1177,213 +1205,158 @@
         });
     }
 
-        const svg = document.getElementById('mapSvg');
-        const world = document.getElementById('world');
-        const zoomRange = document.getElementById('zoomRange');
-        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-        const pinBaseScale = isTouchDevice ? 2.2 : 1;
+    function zoomToPoint(newScale, mapX, mapY) {
+        const rect = svg.getBoundingClientRect();
 
-        const MIN_ZOOM = 0;
-        const zoomTarget = isTouchDevice ? { x: 520, y: 370 } : { x: 600, y: 390 };
-        const maxZoomDesktop = 2;
-        const maxZoomMobile = 5;
-        const dragSpeed = isTouchDevice ? 3 : 0.7;
+        // kde má bod zůstat na obrazovce (střed SVG)
+        const screenX = rect.width / 2;
+        const screenY = rect.height / 2;
 
-        if (zoomRange) {
-            zoomRange.max = isTouchDevice ? maxZoomMobile : maxZoomDesktop;
+        scale = newScale;
+
+        translateX = screenX - mapX * scale;
+        translateY = screenY - mapY * scale;
+
+        updateTransform();
+
+        if (zoomRange) zoomRange.value = scale;
+    }
+
+    function updateTransform() {
+        world.setAttribute(
+            'transform',
+            `translate(${translateX}, ${translateY}) scale(${scale})`
+        );
+
+        document.querySelectorAll('.pin-shape').forEach(pin => {
+
+            const PIN_ANCHOR = isTouchDevice ? 17 : 12;
+            const pinOffset = PIN_ANCHOR * (1 - (pinBaseScale / scale));
+
+            pin.setAttribute(
+                'transform',
+                `translate(0, ${pinOffset}) scale(${(1 / scale) * pinBaseScale})`
+            );
+        });
+        updateMiniMap();
+    }
+
+    // ---------- ZOOM SLIDER ----------
+    zoomRange?.addEventListener('input', function () {
+        const newScale = parseFloat(this.value);
+
+        const rect = svg.getBoundingClientRect();
+        const centerX = rect.width / (2*920/rect.width);
+        const centerY = rect.height / (1.8*514/rect.height);
+
+
+        // faktor interpolace (0 = min zoom, 1 = max zoom)
+        const t = newScale / zoomRange.max;
+
+        // horizontální a vertikální offset pro viditelnost mapy při malém zoomu
+        const maxOffsetX = 28; // uprav podle potřeby
+        const maxOffsetY = 72;  // uprav podle potřeby
+
+        const offsetX = maxOffsetX * (1 - t);
+        const offsetY = maxOffsetY * (1 - t);
+
+        // interpolovaný target s offsety
+        const targetX = zoomTarget.x * t + centerX * (1 - t) - offsetX;
+        const targetY = zoomTarget.y * t + centerY * (1 - t) - offsetY;
+
+        zoomToPoint(newScale, targetX, targetY);
+    });
+
+    // ---------- MOUSE ----------
+    svg.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        svg.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+
+        translateX += (e.clientX - startX) * dragSpeed ;
+        translateY += (e.clientY - startY) * dragSpeed;
+
+        startX = e.clientX;
+        startY = e.clientY;
+
+        updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+        svg.style.cursor = 'grab';
+    });
+
+    // ---------- TOUCH ----------
+    svg.addEventListener('touchstart', e => {
+        if (e.touches.length === 1) {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
         }
 
-        let scale = 1;
-        let translateX = 0;
-        let translateY = 0;
+        if (e.touches.length === 2) {
+            isPinching = true;
+            startDistance = getDistance(e.touches[0], e.touches[1]);
+            startScale = scale;
+        }
+    }, { passive: false });
 
-        let isDragging = false;
-        let startX = 0;
-        let startY = 0;
+    svg.addEventListener('touchmove', e => {
+        e.preventDefault();
+        hideTooltip();
 
-        // pinch
-        let isPinching = false;
-        let startDistance = 0;
-        let startScale = 1;
+        // drag
+        if (isDragging && e.touches.length === 1) {
+            const touch = e.touches[0];
 
-        function zoomToPoint(newScale, mapX, mapY) {
-            const rect = svg.getBoundingClientRect();
+            translateX += (touch.clientX - startX) * dragSpeed ;
+            translateY += (touch.clientY - startY) * dragSpeed;
 
-            // kde má bod zůstat na obrazovce (střed SVG)
-            const screenX = rect.width / 2;
-            const screenY = rect.height / 2;
-
-            scale = newScale;
-
-            translateX = screenX - mapX * scale;
-            translateY = screenY - mapY * scale;
+            startX = touch.clientX;
+            startY = touch.clientY;
 
             updateTransform();
+        }
+
+        // pinch zoom
+        if (isPinching && e.touches.length === 2) {
+            const dist = getDistance(e.touches[0], e.touches[1]);
+            scale = startScale * (dist / startDistance);
+
+            // limity zoomu
+            scale = Math.max(0.5, Math.min(3, scale));
 
             if (zoomRange) zoomRange.value = scale;
-        }
-
-        function updateTransform() {
-            world.setAttribute(
-                'transform',
-                `translate(${translateX}, ${translateY}) scale(${scale})`
-            );
-
-            document.querySelectorAll('.pin-shape').forEach(pin => {
-
-                const PIN_ANCHOR = isTouchDevice ? 17 : 12;
-                const pinOffset = PIN_ANCHOR * (1 - (pinBaseScale / scale));
-
-                pin.setAttribute(
-                    'transform',
-                    `
-        translate(0, ${pinOffset})
-        scale(${(1 / scale) * pinBaseScale})
-        `
-                );
-            });
-            updateMiniMap();
-        }
-
-        // ---------- ZOOM SLIDER ----------
-        zoomRange?.addEventListener('input', function () {
-            const newScale = parseFloat(this.value);
-
-            const rect = svg.getBoundingClientRect();
-            const centerX = rect.width / (2*920/rect.width);
-            const centerY = rect.height / (1.8*514/rect.height);
-
-
-            // faktor interpolace (0 = min zoom, 1 = max zoom)
-            const t = (newScale - MIN_ZOOM) / (zoomRange.max - MIN_ZOOM);
-
-            // horizontální a vertikální offset pro viditelnost mapy při malém zoomu
-            const maxOffsetX = 28; // uprav podle potřeby
-            const maxOffsetY = 72;  // uprav podle potřeby
-
-            const offsetX = maxOffsetX * (1 - t);
-            const offsetY = maxOffsetY * (1 - t);
-
-            // interpolovaný target s offsety
-            const targetX = zoomTarget.x * t + centerX * (1 - t) - offsetX;
-            const targetY = zoomTarget.y * t + centerY * (1 - t) - offsetY;
-
-            zoomToPoint(newScale, targetX, targetY);
-        });
-
-        // ---------- MOUSE ----------
-        svg.addEventListener('mousedown', e => {
-            isDragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            svg.style.cursor = 'grabbing';
-        });
-
-        window.addEventListener('mousemove', e => {
-            if (!isDragging) return;
-
-            translateX += (e.clientX - startX) * dragSpeed ;
-            translateY += (e.clientY - startY) * dragSpeed;
-
-            startX = e.clientX;
-            startY = e.clientY;
-
             updateTransform();
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-            svg.style.cursor = 'grab';
-        });
-
-        // ---------- TOUCH ----------
-        svg.addEventListener('touchstart', e => {
-            if (e.touches.length === 1) {
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            }
-
-            if (e.touches.length === 2) {
-                isPinching = true;
-                startDistance = getDistance(e.touches[0], e.touches[1]);
-                startScale = scale;
-            }
-        }, { passive: false });
-
-        svg.addEventListener('touchmove', e => {
-            e.preventDefault();
-            hideTooltip();
-
-            // drag
-            if (isDragging && e.touches.length === 1) {
-                const touch = e.touches[0];
-
-                translateX += (touch.clientX - startX) * dragSpeed ;
-                translateY += (touch.clientY - startY) * dragSpeed;
-
-                startX = touch.clientX;
-                startY = touch.clientY;
-
-                updateTransform();
-            }
-
-            // pinch zoom
-            if (isPinching && e.touches.length === 2) {
-                const dist = getDistance(e.touches[0], e.touches[1]);
-                scale = startScale * (dist / startDistance);
-
-                // limity zoomu
-                scale = Math.max(0.5, Math.min(3, scale));
-
-                if (zoomRange) zoomRange.value = scale;
-                updateTransform();
-            }
-        }, { passive: false });
-
-        svg.addEventListener('touchend', () => {
-            isDragging = false;
-            isPinching = false;
-        });
-
-        function getDistance(t1, t2) {
-            return Math.hypot(
-                t1.clientX - t2.clientX,
-                t1.clientY - t2.clientY
-            );
         }
+    }, { passive: false });
 
-        window.addEventListener('load', () => {
-            // SVG souřadnice cílového bodu
+    svg.addEventListener('touchend', () => {
+        isDragging = false;
+        isPinching = false;
+    });
 
-            const targetX = zoomTarget.x;
-            const targetY = zoomTarget.y;
-            const initialScale = isTouchDevice ? maxZoomMobile : maxZoomDesktop;
+    function getDistance(t1, t2) {
+        return Math.hypot(
+            t1.clientX - t2.clientX,
+            t1.clientY - t2.clientY
+        );
+    }
 
-            zoomToPoint(initialScale, targetX, targetY);
-        });
-    const miniViewport = document.getElementById('miniViewport');
+    window.addEventListener('load', () => {
+        // SVG souřadnice cílového bodu
 
-    {# function updateMiniMap() { //verze funkce, kdy zlatý obdelníček se neztrácí za okraj
-        const vb = svg.viewBox.baseVal;
+        const targetX = zoomTarget.x;
+        const targetY = zoomTarget.y;
+        zoomToPoint(maxZoom, targetX, targetY);
+    });
 
-        // rozměry viditelné oblasti v SVG souřadnicích
-        const viewWidth = vb.width / scale;
-        const viewHeight = vb.height / scale;
-
-        // levý horní roh výřezu – inverze transformace
-        let viewX = (-translateX) / scale;
-        let viewY = (-translateY) / scale;
-
-        // ořez na hranice mapy
-        viewX = Math.max(0, Math.min(viewX, vb.width - viewWidth));
-        viewY = Math.max(0, Math.min(viewY, vb.height - viewHeight));
-
-        miniViewport.setAttribute('x', viewX.toString());
-        miniViewport.setAttribute('y', viewY.toString());
-        miniViewport.setAttribute('width', viewWidth.toString());
-        miniViewport.setAttribute('height', viewHeight.toString());
-    }#}
     function updateMiniMap() {
         const vb = svg.viewBox.baseVal;
 
@@ -1393,14 +1366,11 @@
         const viewX = (-translateX) / scale;
         const viewY = (-translateY) / scale;
 
-        miniViewport.setAttribute('x', viewX);
-        miniViewport.setAttribute('y', viewY);
-        miniViewport.setAttribute('width', viewWidth);
-        miniViewport.setAttribute('height', viewHeight);
+        miniViewport.setAttribute('x', viewX.toString());
+        miniViewport.setAttribute('y', viewY.toString());
+        miniViewport.setAttribute('width', viewWidth.toString());
+        miniViewport.setAttribute('height', viewHeight.toString());
     }
-
-        svg.style.cursor = 'grab';
-
     </script>
 
 
