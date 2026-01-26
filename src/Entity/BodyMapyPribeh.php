@@ -33,6 +33,9 @@ class BodyMapyPribeh
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $zajimavosti = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $obrazek = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,18 @@ class BodyMapyPribeh
     public function setY(?int $y): static
     {
         $this->y = $y;
+        return $this;
+    }
+
+    public function getObrazek(): ?string
+    {
+        return $this->obrazek;
+    }
+
+    public function setObrazek(?string $obrazek): static
+    {
+        $this->obrazek = $obrazek;
+
         return $this;
     }
 

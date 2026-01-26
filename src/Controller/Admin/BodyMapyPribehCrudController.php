@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -49,7 +50,17 @@ class BodyMapyPribehCrudController extends AbstractCrudController
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
         yield TextField::new('nazev' ,'Display Name');
+
         yield TextEditorField::new('pribehMista', 'Place Story');
         yield TextEditorField::new('zajimavosti', 'Interestings');
+
+        yield ImageField::new('obrazek', 'Image')
+            ->setBasePath($_ENV['PRIBEH_BASE_PATH'])
+            ->setUploadDir($_ENV['PRIBEH_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
+            ->setFormTypeOption('allow_delete', true)
+            ->setSortable(false);
     }
 }

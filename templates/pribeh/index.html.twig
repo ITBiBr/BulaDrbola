@@ -1456,10 +1456,13 @@
 
                     <div class="modal-body">
                         {% if point.pribehMista %}
-                            <p>Příběh místa:<br>{{ point.pribehMista|raw }}</p>
+                            <p>Příběh místa:<br>{{ point.pribehMista|raw|nbsp_prepositions }}</p>
                         {% endif %}
                         {% if point.zajimavosti %}
-                            <p>Zajímavosti:<br>{{ point.zajimavosti|raw }}</p>
+                            <p>Zajímavosti:<br>{{ point.zajimavosti|raw|nbsp_prepositions }}</p>
+                        {% endif %}
+                        {% if point.obrazek %}
+                            <p><img class="w-100" src="{{ asset('/images/pribeh/' ~ point.obrazek) | imagine_filter('pribeh') }}" alt="{{ point.nazev }}"></p>
                         {% endif %}
                         <hr>
                         <small class="text-muted">
