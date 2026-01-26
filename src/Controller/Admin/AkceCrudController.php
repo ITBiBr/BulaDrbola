@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -38,13 +39,20 @@ class AkceCrudController extends AktualityCrudController
         return $actions;
     }
 
-    public function configureFields(string $pageName): iterable
+    public function configureFieldsChildren(string $pageName): iterable
     {
-        yield from parent::configureFields($pageName);
         yield DateField::new('DatumDo', 'Date To');
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
         yield TextField::new('MistoKonani','Event venue');
+        yield ImageField::new('IlustraceObsahu', 'Poster')
+            ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
+            ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setFormTypeOption('allow_delete', true)
+            ->setSortable(false)
+            ->hideOnIndex();
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

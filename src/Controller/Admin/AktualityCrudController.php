@@ -52,17 +52,9 @@ class AktualityCrudController extends AbstractCrudController
         yield TextField::new('Titulek', 'Title');
         yield TextField::new('url', 'URL')->hideOnForm();
         yield TextEditorField::new('perex');
-        yield TextEditorField::new('obsah');
-        yield ImageField::new('IlustraceObsahu', 'Ilustrace uprostřed obsahu')
-            ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
-            ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
-            ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
-            ->setFormTypeOption('allow_delete', true)
-            ->setSortable(false)
-            ->hideOnIndex();
+        yield TextEditorField::new('obsah', 'Content');
+
         yield TextField::new('Video', 'Video (YouTube ID)')->hideOnIndex();
-        yield TextEditorField::new('ObsahPokracovani' ,'Obsah - pokračování');
         yield DateField::new('Datum', 'Date');
         yield DateTimeField::new('DatumZobrazeniOd', 'Show content from')
             ->setFormTypeOption('data', new \DateTime());
@@ -75,7 +67,20 @@ class AktualityCrudController extends AbstractCrudController
             ->setFormTypeOption('allow_delete', false)
             ->setSortable(false);
 
+        yield from $this->configureFieldsChildren($pageName);
 
+    }
+    public function configureFieldsChildren(string $pageName):iterable
+    {
+        yield ImageField::new('IlustraceObsahu', 'Illustration in the middle of the content')
+            ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
+            ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setFormTypeOption('allow_delete', true)
+            ->setSortable(false)
+            ->hideOnIndex();
+        yield TextEditorField::new('ObsahPokracovani' ,'Article content - continued')->hideOnIndex();
     }
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
