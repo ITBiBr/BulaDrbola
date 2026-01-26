@@ -39,6 +39,19 @@ liip_imagine:
                 thumbnail: { size: [ 913, 515 ], mode: outbound }
 
                 # the name of the "filter set"
+        aktualita_ilustrace:
+
+            # adjust the image quality to 95%
+            quality: 95
+
+            # list of transformations to apply (the "filters")
+            filters:
+                auto_rotate: ~
+                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail: { size: [ 1600, 1200 ], mode: inset }
+
+                # the name of the "filter set"
         pribeh:
 
             # adjust the image quality to 95%
