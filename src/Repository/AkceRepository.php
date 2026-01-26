@@ -21,7 +21,7 @@ class AkceRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.DatumZobrazeniOd < :now')
             ->setParameter('now', new \DateTime())
-            ->orderBy('a.Datum', 'DESC')
+            ->orderBy('a.Datum', 'ASC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
