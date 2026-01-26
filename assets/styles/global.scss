@@ -511,7 +511,7 @@ input.form-check-input[type=checkbox] + label {
     margin-bottom: 0.25rem; /* mezera mezi chybami */
 }
 
-.map-pin:hover path {
+.map-pin.is-active .pin-shape path {
     fill: rgba(33, 7, 104, 1);
 }
 

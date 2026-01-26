@@ -1003,10 +1003,6 @@
 
                         <!-- zoomovaný svět -->
                         <g id="world">
-                            <g id="tooltipGroup" style="pointer-events: none;" opacity="0">
-                                <rect id="tooltipRect" x="0" y="0" width="100" height="20" rx="4" ry="4" fill="rgba(0,0,0,0.75)" />
-                                <text id="tooltipText" x="0" y="14" fill="white" font-size="12" text-anchor="middle"></text>
-                            </g>
                             <!-- mapa -->
                             <g id="mapLayer">
                                 {% include 'pribeh/mapa.html.twig' %}
@@ -1014,31 +1010,33 @@
 
                             <!-- piny -->
                             <g transform="translate(0, -23)">
-                            <g id="pinLayer">
-                                {% for point in points %}
-                                    <g
-                                            class="map-pin"
-                                            transform="translate({{ point.x }}, {{ point.y }})"
-                                    >
-                                        <!-- pouze tvar pinu -->
-                                        <g class="pin-shape" role="button" data-bs-toggle="modal" data-bs-target="#modal-{{ point.id }}" data-bs-title="{{ point.nazev }}">
-                                            <path
-                                                    d="M0,-20
-                               C-10,-20 -15,-10 -15,0
-                               C-15,10 0,25 0,25
-                               C0,25 15,10 15,0
-                               C15,-10 10,-20 0,-20Z"
-                                                    fill="rgb(222, 174, 107)"
-                                                    stroke="#FFFFFF"
-                                                    stroke-width="0.4"
-                                            />
-                                            <circle cx="0" cy="-5" r="4" fill="white"/>
+                                <g id="pinLayer">
+                                    {% for point in points %}
+                                        <g
+                                                class="map-pin"
+                                                transform="translate({{ point.x }}, {{ point.y }})"
+                                        >
+                                            <!-- pouze tvar pinu -->
+                                            <g class="pin-shape" role="button" data-bs-toggle="modal" data-bs-target="#modal-{{ point.id }}" data-bs-title="{{ point.nazev }}">
+                                                <path
+                                                        d="M0,-20
+                                   C-10,-20 -15,-10 -15,0
+                                   C-15,10 0,25 0,25
+                                   C0,25 15,10 15,0
+                                   C15,-10 10,-20 0,-20Z"
+                                                        fill="rgb(222, 174, 107)"
+                                                        stroke="#FFFFFF"
+                                                        stroke-width="0.4"
+                                                />
+                                                <circle cx="0" cy="-5" r="4" fill="white"/>
+                                            </g>
                                         </g>
-                                    </g>
-                                {% endfor %}
-                            </g>
+                                    {% endfor %}
+                                </g>
+                                <g id="activePinLayer"></g>
 
-                        </g>
+
+                            </g>
                         </g>
 
                     </svg>
@@ -1105,6 +1103,8 @@
     const svg = document.getElementById('mapSvg');
     const world = document.getElementById('world');
     const zoomRange = document.getElementById('zoomRange');
+    const pinLayer = document.getElementById('pinLayer');
+    const activePinLayer = document.getElementById('activePinLayer');
 
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
@@ -1120,9 +1120,6 @@
 
     let activePin = null;
 
-
-
-
     let scale = 1;
     let translateX = 0;
     let translateY = 0;
@@ -1136,30 +1133,63 @@
     let startDistance = 0;
     let startScale = 1;
 
+
+    function activatePin(pin, pinShape) {
+        if (activePin === pin) return;
+
+        deactivateActivePin();
+
+        activePin = pin;
+        activePinLayer.appendChild(pin);
+
+        pins.forEach(p => p.classList.add('is-dimmed'));
+        pin.classList.remove('is-dimmed');
+        pin.classList.add('is-active');
+
+        tooltip.textContent = pinShape.dataset.bsTitle || '';
+        tooltip.style.opacity = '1';
+
+        const pinRect = pinShape.getBoundingClientRect();
+        const containerRect = mapContainer.getBoundingClientRect();
+
+        tooltip.style.left =
+            `${pinRect.left - containerRect.left + pinRect.width / 2}px`;
+        tooltip.style.top =
+            `${pinRect.top - containerRect.top - 12}px`;
+        tooltip.style.transform = 'translate(-50%, -100%)';
+    }
+
+    function deactivateActivePin() {
+        if (!activePin) return;
+
+        pinLayer.appendChild(activePin);
+        activePin.classList.remove('is-active');
+        pins.forEach(p => p.classList.remove('is-dimmed'));
+        tooltip.style.opacity = '0';
+
+        activePin = null;
+    }
+    if (!isTouchDevice) {
+        svg.addEventListener('mousemove', e => {
+            if (!activePin) return;
+
+            const hoveredPin = e.target.closest('.map-pin');
+            if (hoveredPin === activePin) return;
+
+            deactivateActivePin();
+        });
+    }
+
     pins.forEach(pin => {
         const pinShape = pin.querySelector('.pin-shape');
 
         /* ================= DESKTOP ================= */
         if (!isTouchDevice) {
             pin.addEventListener('mouseenter', () => {
-                pins.forEach(p => p.classList.add('is-dimmed'));
-                pin.classList.remove('is-dimmed');
-                pin.parentNode.appendChild(pin);
-
-                tooltip.textContent = pinShape.dataset.bsTitle || '';
-                tooltip.style.opacity = '1';
+                activatePin(pin, pinShape);
             });
 
-            pin.addEventListener('mousemove', e => {
-                const parentRect = mapContainer.getBoundingClientRect();
-                tooltip.style.left = `${e.clientX - parentRect.left - 20}px`;
-                tooltip.style.top = `${e.clientY - parentRect.top - 30}px`;
-            });
 
-            pin.addEventListener('mouseleave', () => {
-                pins.forEach(p => p.classList.remove('is-dimmed'));
-                tooltip.style.opacity = '0';
-            });
         }
 
         /* ================= MOBIL ================= */
