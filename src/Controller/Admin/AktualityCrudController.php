@@ -62,7 +62,7 @@ class AktualityCrudController extends AbstractCrudController
             ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
             ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
             ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
             ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
             ->setFormTypeOption('allow_delete', false)
             ->setSortable(false);
@@ -76,7 +76,7 @@ class AktualityCrudController extends AbstractCrudController
             ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
             ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
             ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
             ->setFormTypeOption('allow_delete', true)
             ->setSortable(false)
             ->hideOnIndex();
