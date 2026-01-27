@@ -59,7 +59,7 @@ class ClankyCrudController extends AbstractCrudController
             ->setBasePath($_ENV['CLANKY_BASE_PATH'])
             ->setUploadDir($_ENV['CLANKY_UPLOAD'])
             ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
             ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
             ->setFormTypeOption('allow_delete', true)
             ->setSortable(false)
@@ -78,18 +78,20 @@ class ClankyCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+        $soubory = [];
+        $soubory[] = $entityInstance->getObrazek();
 
-        $soubor = $entityInstance->getObrazek();
+        foreach ($soubory as $soubor) {
+            if ($soubor) {
+                $filesystem = new Filesystem();
+                $souborPath = $this->getParameter('kernel.project_dir') . '/'.$_ENV['CLANKY_UPLOAD'] . $soubor;
 
-        if ($soubor) {
-            $filesystem = new Filesystem();
-            $souborPath = $this->getParameter('kernel.project_dir') . '/public/images/aktuality/' . $soubor;
+                if ($filesystem->exists($souborPath)) {
+                    try {
+                        $filesystem->remove($souborPath);
+                    } catch (\Exception $e) {
 
-            if ($filesystem->exists($souborPath)) {
-                try {
-                    $filesystem->remove($souborPath);
-                } catch (\Exception $e) {
-
+                    }
                 }
             }
         }
