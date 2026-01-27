@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\File;
 
 class AkceCrudController extends AktualityCrudController
 {
@@ -49,8 +50,19 @@ class AkceCrudController extends AktualityCrudController
             ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
             ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
             ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
             ->setFormTypeOption('allow_delete', true)
+            ->setFormTypeOption('attr', ['accept' => '.doc,.docx,.jpg,.png,.pdf'])
+            ->setFileConstraints(new File([
+                'mimeTypes' => [
+                    'application/pdf',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'application/msword',
+                    'image/jpeg',
+                    'image/png',
+                ],
+                'mimeTypesMessage' => 'Typ souboru není podporován.'
+            ]))
             ->setSortable(false)
             ->hideOnIndex();
     }

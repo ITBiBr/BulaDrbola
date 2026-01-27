@@ -94,18 +94,21 @@ class AktualityCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+        $soubory = [];
+        $soubory[] = $entityInstance->getObrazek();
+        $soubory[] = $entityInstance->getIlustraceObsahu();
 
-        $soubor = $entityInstance->getObrazek();
+        foreach ($soubory as $soubor) {
+            if ($soubor) {
+                $filesystem = new Filesystem();
+                $souborPath = $this->getParameter('kernel.project_dir') . '/'.$_ENV['AKTUALITY_UPLOAD'] . $soubor;
 
-        if ($soubor) {
-            $filesystem = new Filesystem();
-            $souborPath = $this->getParameter('kernel.project_dir') . '/public/images/aktuality/' . $soubor;
+                if ($filesystem->exists($souborPath)) {
+                    try {
+                        $filesystem->remove($souborPath);
+                    } catch (\Exception $e) {
 
-            if ($filesystem->exists($souborPath)) {
-                try {
-                    $filesystem->remove($souborPath);
-                } catch (\Exception $e) {
-
+                    }
                 }
             }
         }
