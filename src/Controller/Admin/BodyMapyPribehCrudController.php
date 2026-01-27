@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\BodyMapyPribeh;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -13,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class BodyMapyPribehCrudController extends AbstractCrudController
@@ -58,9 +60,32 @@ class BodyMapyPribehCrudController extends AbstractCrudController
             ->setBasePath($_ENV['PRIBEH_BASE_PATH'])
             ->setUploadDir($_ENV['PRIBEH_UPLOAD'])
             ->setFormTypeOption('multiple', false)
-            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[slug]-[contenthash].[extension]')
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
             ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
             ->setFormTypeOption('allow_delete', true)
             ->setSortable(false);
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $soubory = [];
+        $soubory[] = $entityInstance->getObrazek();
+
+        foreach ($soubory as $soubor) {
+            if ($soubor) {
+                $filesystem = new Filesystem();
+                $souborPath = $this->getParameter('kernel.project_dir') . '/'.$_ENV['PRIBEH_UPLOAD'] . $soubor;
+
+                if ($filesystem->exists($souborPath)) {
+                    try {
+                        $filesystem->remove($souborPath);
+                    } catch (\Exception $e) {
+
+                    }
+                }
+            }
+        }
+
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }
