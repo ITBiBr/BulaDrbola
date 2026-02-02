@@ -61,9 +61,16 @@
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
-                            <a class="nav-link text-center text-lg-start" href="{{ path('app_pribeh') }}">příběh</a>
+                         <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                            <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                příběh
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_pribeh') }}">příběh</a></li>
+                                <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_pribeh') }}#mistopis">místopis</a></li>
+                            </ul>
                         </li>
+
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_blahoreceni') }}">blahořečení</a>
                         </li>
