@@ -527,6 +527,8 @@ input.form-check-input[type=checkbox] + label {
 
 #mapSvg {
     user-select: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 #miniMap {
     position: absolute;
