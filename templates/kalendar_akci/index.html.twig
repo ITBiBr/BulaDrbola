@@ -78,7 +78,9 @@
                                     // příklad: přidání markeru na mapu
                                     const marker = L.marker([akce.lat, akce.lng], {icon: pinIcon})
 
-                                        .bindPopup('<strong>'+akce.titulek+'</strong><hr>'+akce.perex);
+                                        //.bindPopup('<strong>'+akce.titulek+'</strong><hr>'+akce.perex);
+                                        .bindPopup('<strong><a class="text-decoration-none text-black" href="akce/'+akce.url+'">'+akce.titulek+'</a></strong><hr><div class="text-center"><img src="" alt=""></div>');
+
                                     marker.addTo(markers);
                                 }
                             });

@@ -64,7 +64,9 @@ final class KalendarAkciController extends AbstractController
             $akceData[] = [
                 'id' => $ak->getId(),
                 'titulek' => $ak->getTitulek(),
-                'perex' => $ak->getPerex(),
+                'obsah' => $ak->getObsah(),
+                'img' => $ak->getObrazek(),
+                'url' => $ak->getUrl(),
                 'lat' => $ak->getLat(),
                 'lng' => $ak->getLng(),
             ];
