@@ -55,7 +55,7 @@
         <script>
             {% for ak in akce %}
             {%if ak.lat and ak.lng%}
-            var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).addTo(map).bindPopup("<strong>{{ ak.Titulek }}</strong><hr>{{ ak.Perex|raw }}");
+            var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).addTo(map).bindPopup('<strong><a class="text-decoration-none text-black" href="{{ path('akce_url', { url: ak.url }) }}">{{ ak.Titulek }}</a></strong><hr><div class="text-center"><img src="{{ asset('/images/aktuality/' ~ ak.Obrazek) | imagine_filter('akce_thumb') }}" alt="{{ ak.Titulek }}"></div>');
             {% endif %}
             {% endfor %}
 
