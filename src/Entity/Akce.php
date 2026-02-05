@@ -17,8 +17,7 @@ class Akce
     #[ORM\Column]
     private ?int $id = null;
 
-    #[NotBlank(message: 'Perex must not be blank.')]
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Perex = null;
 
     #[NotBlank(message: 'Content must not be blank.')]
