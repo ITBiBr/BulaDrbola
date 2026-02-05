@@ -4,6 +4,10 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
+
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 <div class="row justify-content-center mt-4">
     <div class="col-xl-6 col-lg-9 col-12">
         <div id="map"></div>
@@ -56,4 +60,9 @@
         popupAnchor:  [0, -45]   // kde se otevře popup vůči iconAnchor
     });
 
+    const markers = L.markerClusterGroup({
+        chunkedLoading: true, // výkon
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false
+    });
 </script>

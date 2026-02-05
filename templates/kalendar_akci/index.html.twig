@@ -55,9 +55,12 @@
         <script>
             {% for ak in akce %}
             {%if ak.lat and ak.lng%}
-            var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).addTo(map).bindPopup('<strong><a class="text-decoration-none text-black" href="{{ path('akce_url', { url: ak.url }) }}">{{ ak.Titulek }}</a></strong><hr><div class="text-center"><img src="{{ asset('/images/aktuality/' ~ ak.Obrazek) | imagine_filter('akce_thumb') }}" alt="{{ ak.Titulek }}"></div>');
+            var marker = L.marker([{{ ak.lat }}, {{ ak.lng }}],{icon: pinIcon}).bindPopup('<strong><a class="text-decoration-none text-black" href="{{ path('akce_url', { url: ak.url }) }}">{{ ak.Titulek }}</a></strong><hr><div class="text-center"><img src="{{ asset('/images/aktuality/' ~ ak.Obrazek) | imagine_filter('akce_thumb') }}" alt="{{ ak.Titulek }}"></div>');
+            marker.addTo(markers);
+
             {% endif %}
             {% endfor %}
+            map.addLayer(markers);
 
             let btn_element = document.getElementById('load-more-btn')
             if (btn_element) {
@@ -73,9 +76,10 @@
                             data.akce.forEach(akce => {
                                 if (akce.lat && akce.lng) {
                                     // příklad: přidání markeru na mapu
-                                    L.marker([akce.lat, akce.lng], {icon: pinIcon})
-                                        .addTo(map)
+                                    const marker = L.marker([akce.lat, akce.lng], {icon: pinIcon})
+
                                         .bindPopup('<strong>'+akce.titulek+'</strong><hr>'+akce.perex);
+                                    marker.addTo(markers);
                                 }
                             });
                             data.items.forEach(itemHtml => {
