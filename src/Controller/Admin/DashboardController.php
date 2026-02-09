@@ -13,6 +13,7 @@ use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -90,4 +91,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Story Map Points', 'fa fa-map-location', BodyMapyPribeh::class)->setPermission('ROLE_EDITOR');
     }
 
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addJsFile('admin.js');
+    }
 }

@@ -43,8 +43,14 @@ class AkceCrudController extends AktualityCrudController
     public function configureFieldsChildren(string $pageName): iterable
     {
         yield DateField::new('DatumDo', 'Date To');
-        yield NumberField::new('lat', 'Latitude');
-        yield NumberField::new('lng', 'Longitude');
+        yield TextField::new('coordsInput', 'Coordinates (N,E)')
+            ->setHelp('Ex.: 49.4053197N, 16.5865367E')
+            ->onlyOnForms()
+            ->setFormTypeOption('mapped', false);
+        yield NumberField::new('lat', 'Latitude')
+            ->setNumDecimals(3);;
+        yield NumberField::new('lng', 'Longitude')
+            ->setNumDecimals(3);;
         yield TextField::new('MistoKonani','Event venue');
         yield ImageField::new('IlustraceObsahu', 'Poster')
             ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])

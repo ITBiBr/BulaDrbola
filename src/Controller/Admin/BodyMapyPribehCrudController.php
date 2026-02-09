@@ -49,6 +49,10 @@ class BodyMapyPribehCrudController extends AbstractCrudController
     {
         if (!$this->security->isGranted('ROLE_EDITOR'))
             throw new AccessDeniedException('Access Denied');
+        yield TextField::new('coordsInput', 'Coordinates (N,E)')
+            ->setHelp('Ex.: 49.4053197N, 16.5865367E')
+            ->onlyOnForms()
+            ->setFormTypeOption('mapped', false);
         yield NumberField::new('lat', 'Latitude');
         yield NumberField::new('lng', 'Longitude');
         yield TextField::new('nazev' ,'Display Name');
