@@ -563,6 +563,10 @@ input.form-check-input[type=checkbox] + label {
     letter-spacing: 0.03em;
 }
 
+.leaflet-popup-content-wrapper
+{
+    min-width: 280px;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 

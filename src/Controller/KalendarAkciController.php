@@ -7,7 +7,9 @@ use App\Entity\Aktuality;
 use App\Repository\AkceRepository;
 use App\Repository\AktualityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class KalendarAkciController extends AbstractController
 {
+
+    public function __construct(
+        private Packages $packages,
+        private CacheManager $cacheManager,
+    ) {}
     #[Route('/kalendar-akci', name: 'app_kalendar_akci')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -60,16 +67,16 @@ final class KalendarAkciController extends AbstractController
             $htmlItems[] = $this->renderView('kalendar_akci/_akce.html.twig', [
                 'akce' => $ak,
             ]);
-
             $akceData[] = [
                 'id' => $ak->getId(),
                 'titulek' => $ak->getTitulek(),
                 'obsah' => $ak->getObsah(),
-                'img' => $ak->getObrazek(),
-                'url' => $ak->getUrl(),
+                'img' => $this->cacheManager->getBrowserPath('images/aktuality/' . $ak->getObrazek(),'akce_thumb'),
+                'url' => 'akce/'.$ak->getUrl(),
                 'lat' => $ak->getLat(),
                 'lng' => $ak->getLng(),
             ];
+            dump($akceData);
         }
 
         return new JsonResponse([
