@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -120,5 +121,16 @@ class UserCrudController extends AbstractCrudController
             $hash = $this->userPasswordHasher->hashPassword($this->getUser(), $password);
             $form->getData()->setPassword($hash);
         };
+    }
+
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($this->getUser()->getId() === $entityInstance->getId())
+            $this->addFlash('danger', 'Uživatel nemůže odstranit sám sebe.');
+        else {
+            parent::deleteEntity($entityManager, $entityInstance);
+            $this->addFlash('success', 'Uživatel byl úspěšně smazán.');
+
+        }
     }
 }
