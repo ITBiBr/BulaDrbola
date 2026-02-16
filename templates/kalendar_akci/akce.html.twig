@@ -22,6 +22,55 @@
                             <img class="w-100" src="{{ asset('/images/aktuality/' ~ aktualita.IlustraceObsahu) | imagine_filter('aktualita_ilustrace') }}" alt="{{ aktualita.Titulek }}">
                         </div>
                     </div>
+
+                {% endif %}
+                {% if ext == 'pdf' %}
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-lg-9 col-10 text-justify-center">
+
+
+                            <!-- PDF.js z cdnjs (UMD build) -->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+                            <canvas id="pdf-render" style="max-width: 100%;"></canvas>
+                            <script>
+                                const url = "{{ asset('/images/aktuality/' ~ aktualita.IlustraceObsahu) }}";
+
+                                // Nastavení workeru
+                                pdfjsLib.GlobalWorkerOptions.workerSrc =
+                                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+                                const loadingTask = pdfjsLib.getDocument(url);
+
+                                loadingTask.promise.then(function(pdf) {
+                                    console.log('PDF načteno');
+
+                                    // Načti první stránku
+                                    pdf.getPage(1).then(function(page) {
+
+                                        const scale = 1.5;
+                                        const viewport = page.getViewport({ scale: scale });
+
+                                        const canvas = document.getElementById('pdf-render');
+                                        const context = canvas.getContext('2d');
+                                        canvas.height = viewport.height;
+                                        canvas.width = viewport.width;
+
+                                        const renderContext = {
+                                            canvasContext: context,
+                                            viewport: viewport
+                                        };
+
+                                        page.render(renderContext);
+                                    });
+                                }).catch(function(error){
+                                    console.error("Chyba při načítání PDF:", error);
+                                });
+                            </script>
+
+
+
+                        </div>
+                    </div>
                 {% endif %}
 
                 <a class="btn btn-sm btn-outline-primary rounded-pill mt-lg-5 mt-0 px-4 border-2 download" href="{{ asset('images/aktuality/' ~ aktualita.IlustraceObsahu) }}" download="plakatek.{{ aktualita.IlustraceObsahu|split('.')|last }}">
