@@ -17,6 +17,7 @@ body.modal-open {
     position: relative;
     z-index: -1;
     top: -102px;
+    min-height: 47em;
 }
 .navbar-minus{
     height: 86px;
@@ -123,7 +124,7 @@ body.modal-open {
     }
 
     .bula-drbola{
-        min-height: 31em;
+        min-height: 35em;
     }
     .podbarveni_2{
         height: auto;
@@ -152,7 +153,7 @@ body.modal-open {
         left:-20%
     }
     .bula-drbola{
-        min-height: 25em;
+        min-height: 31em;
     }
 }
 .overflow-wrapper {
