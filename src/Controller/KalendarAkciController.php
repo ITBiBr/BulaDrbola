@@ -76,7 +76,6 @@ final class KalendarAkciController extends AbstractController
                 'lat' => $ak->getLat(),
                 'lng' => $ak->getLng(),
             ];
-            dump($akceData);
         }
 
         return new JsonResponse([
