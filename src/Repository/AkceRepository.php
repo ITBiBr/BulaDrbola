@@ -19,8 +19,11 @@ class AkceRepository extends ServiceEntityRepository
     public function findAkceKZobrazeniPaginated(int $limit, int $offset): array
     {
         return $this->createQueryBuilder('a')
-            ->where('a.DatumZobrazeniOd < :now')
-            ->setParameter('now', new \DateTime())
+            ->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
+            ->andWhere('
+                a.DatumDo >= CURRENT_DATE()
+                OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
+            ')
             ->orderBy('a.Datum', 'ASC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
