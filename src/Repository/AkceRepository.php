@@ -17,17 +17,30 @@ class AkceRepository extends ServiceEntityRepository
         parent::__construct($registry, Akce::class);
     }
 
-    public function findAkceKZobrazeniPaginated(int $limit, int $offset, ?Stitky $stitek = null): array
+    public function findAkceKZobrazeniPaginated(int $limit, int $offset, ?Stitky $stitek = null, bool $probehle = false): array
     {
-        $qb = $this->createQueryBuilder('a')
-            ->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
-            ->andWhere('
-                a.DatumDo >= CURRENT_DATE()
-                OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
-            ')
-            ->orderBy('a.Datum', 'ASC')
-            ->setMaxResults($limit)
+
+        $qb = $this->createQueryBuilder('a');
+
+        if ($probehle) {
+            $qb->where('
+                    a.DatumDo < CURRENT_DATE()
+                    OR (a.DatumDo IS NULL AND a.Datum < CURRENT_DATE())
+                ')
+                ->orderBy('a.Datum', 'DESC');
+
+        } else {
+            $qb->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
+                ->andWhere('
+                    a.DatumDo >= CURRENT_DATE()
+                    OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
+                ')
+                ->orderBy('a.Datum', 'ASC');
+        }
+
+        $qb->setMaxResults($limit)
             ->setFirstResult($offset);
+
 
         if ($stitek) {
             $qb->innerJoin('a.stitkies', 's')

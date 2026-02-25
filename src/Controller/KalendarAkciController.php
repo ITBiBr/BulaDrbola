@@ -21,15 +21,19 @@ final class KalendarAkciController extends AbstractController
         private readonly CacheManager $cacheManager,
     ) {}
     #[Route('/kalendar-akci/{stitek?}', name: 'app_kalendar_akci')]
-    public function index(EntityManagerInterface $entityManager, ?string $stitek = null): Response
+    #[Route('/mame-za-sebou/{stitek?}', name: 'app_mame_za_sebou')]
+    public function index(EntityManagerInterface $entityManager, Request $request, ?string $stitek = null): Response
     {
         $limit = 8;
+        $jeProbehle = $request->attributes
+                ->get('_route') === 'app_mame_za_sebou';
+
         $stitkyRepo = $entityManager->getRepository(Stitky::class);
         $akceRepo = $entityManager->getRepository(Akce::class);
-        $stitky = $stitkyRepo->findStitkySPlatnymiAkcemi();
+        $stitky = $stitkyRepo->findStitkySPlatnymiAkcemi($jeProbehle);
         $aktivniStitek = $stitek ? $stitkyRepo->findOneBy(['url' => $stitek]) : null;
 
-        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1,0,$aktivniStitek);
+        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1,0,$aktivniStitek, $jeProbehle);
         $hasMore = count($akce) > $limit;
         $akce = array_slice($akce, 0, $limit);
 
@@ -40,7 +44,8 @@ final class KalendarAkciController extends AbstractController
             'paticka'=> true,
             'stitky' => $stitky,
             'hasMore' => $hasMore,
-            'aktivniStitek' => $aktivniStitek
+            'aktivniStitek' => $aktivniStitek,
+            'probehle' => $jeProbehle
         ]);
     }
 

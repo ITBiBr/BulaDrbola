@@ -16,18 +16,24 @@ class StitkyRepository extends ServiceEntityRepository
         parent::__construct($registry, Stitky::class);
     }
 
-    public function findStitkySPlatnymiAkcemi(): array
+    public function findStitkySPlatnymiAkcemi(bool $probehle = false): array
     {
-        return $this->createQueryBuilder('s')
-            ->innerJoin('s.Akce', 'a')
-            ->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
-            ->andWhere('
-                a.DatumDo >= CURRENT_DATE()
-                OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
-            ')
-            ->groupBy('s.id')
-            ->orderBy('s.Titulek', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $qb = $this->createQueryBuilder('s')
+            ->innerJoin('s.Akce', 'a');
+        if ($probehle) {
+            $qb->where('
+                    a.DatumDo < CURRENT_DATE()
+                    OR (a.DatumDo IS NULL AND a.Datum < CURRENT_DATE())
+                ');
+        } else {
+            $qb->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
+                ->andWhere('
+                    a.DatumDo >= CURRENT_DATE()
+                    OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
+                ');
+        }
+        $qb->groupBy('s.id')
+            ->orderBy('s.Titulek', 'ASC');
+        return $qb->getQuery()->getResult();
     }
 }
