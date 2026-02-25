@@ -3,13 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Akce;
-use App\Entity\Aktuality;
+use App\Entity\Stitky;
 use App\Repository\AkceRepository;
-use App\Repository\AktualityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,20 +18,30 @@ final class KalendarAkciController extends AbstractController
 {
 
     public function __construct(
-        private Packages $packages,
-        private CacheManager $cacheManager,
+        private readonly CacheManager $cacheManager,
     ) {}
-    #[Route('/kalendar-akci', name: 'app_kalendar_akci')]
-    public function index(EntityManagerInterface $entityManager): Response
+    #[Route('/kalendar-akci/{stitek?}', name: 'app_kalendar_akci')]
+    public function index(EntityManagerInterface $entityManager, ?string $stitek = null): Response
     {
-        $limit = 8;
-        $akce = $entityManager->getRepository(Akce::class)->findAkceKZobrazeniPaginated($limit,0);
+        $limit = 1;
+        $stitkyRepo = $entityManager->getRepository(Stitky::class);
+        $akceRepo = $entityManager->getRepository(Akce::class);
+        $stitky = $stitkyRepo->findStitkySPlatnymiAkcemi();
+        $aktivniStitek = $stitek ? $stitkyRepo->findOneBy(['url' => $stitek]) : null;
+
+        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1,0,$aktivniStitek);
+        $hasMore = count($akce) > $limit;
+        $akce = array_slice($akce, 0, $limit);
+        dump($akce);
 
         return $this->render('kalendar_akci/index.html.twig', [
             'controller_name' => 'KalendarAkciController',
             'limit' => $limit,
             'akce' => $akce,
             'paticka'=> true,
+            'stitky' => $stitky,
+            'hasMore' => $hasMore,
+            'aktivniStitek' => $aktivniStitek
         ]);
     }
 
@@ -51,14 +59,17 @@ final class KalendarAkciController extends AbstractController
         ]);
     }
 
-    #[Route('/kalendar-akci/load-more', name: 'akce_load_more')]
-    public function loadMore(Request $request, AkceRepository $akceRepository): JsonResponse
+    #[Route('/nacist-dalsi-akce/{stitek?}', name: 'akce_load_more')]
+    public function loadMore(Request $request, EntityManagerInterface $entityManager, ?string $stitek = null): JsonResponse
     {
         $offset = (int) $request->query->get('offset', 0);
-        $limit = 8;
-
-        $akce = $akceRepository->findAkceKZobrazeniPaginated($limit, $offset);
-        $dalsi_akce= $akceRepository->findAkceKZobrazeniPaginated($limit, $offset+1);
+        $limit = 1;
+        $stitkyRepo = $entityManager->getRepository(Stitky::class);
+        $akceRepo = $entityManager->getRepository(Akce::class);
+        $aktivniStitek = $stitek ? $stitkyRepo->findOneBy(['url' => $stitek]) : null;
+        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1, $offset, $aktivniStitek);
+        $hasMore = count($akce) > $limit;
+        $akce = array_slice($akce, 0, $limit);
 
         // Vrátíme JSON s HTML každé aktuality (nebo pole dat)
         $htmlItems = [];
@@ -81,7 +92,7 @@ final class KalendarAkciController extends AbstractController
         return new JsonResponse([
             'items' => $htmlItems,
             'nextOffset' => $offset + $limit,
-            'hasMore' => count($dalsi_akce) >= $limit,
+            'hasMore' => $hasMore,
             'akce' => $akceData,
         ]);
     }

@@ -18,8 +18,26 @@
                         </p>
                     </div>
                 </div>
-
-
+                {% if stitky is not empty %}
+                    <div class="row justify-content-center mt-3 mb-2">
+                        <div class="col-xl-6 col-lg-9 col-10">
+                            <div class="d-flex flex-wrap gap-1 justify-content-start">
+                                {% if aktivniStitek %}
+                                <a href="{{ path('app_kalendar_akci') }}"
+                                   class="btn btn-sm btn-secondary rounded-pill px-4 border-2 mb-2 mx-1">
+                                    Bez štítků
+                                </a>
+                                {% endif %}
+                                {% for stitek in stitky %}
+                                    <a href="{{ path('app_kalendar_akci', {stitek: stitek.url}) }}"
+                                       class="btn btn-sm {% if aktivniStitek and aktivniStitek.id == stitek.id %}btn-primary{% else %}btn-outline-primary{% endif %} rounded-pill px-4 border-2 mb-2 mx-1">
+                                        {{ stitek }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
 
 
                 <div class="row justify-content-center">
@@ -38,7 +56,8 @@
                 <div class="container-fluid text-center">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-9 col-10">
-                            {% if (akce|length >= limit) %}
+
+                            {% if (hasMore) %}
                                 <button id="load-more-btn" data-offset="{{ akce|length }}" class="btn btn-outline-primary rounded-pill m-5 border-2"><div class="mx-3">Načíst další</div></button>
                             {% endif %}
                         </div>
@@ -68,7 +87,7 @@
                     const btn = this;
                     const offset = btn.dataset.offset;
 
-                    fetch('/kalendar-akci/load-more?offset=' + offset)
+                    fetch('/nacist-dalsi-akce{% if aktivniStitek %}/{{ aktivniStitek.url }}{% endif %}?offset=' + offset)
                         .then(response => response.json())
                         .then(data => {
                             const container = document.getElementById('akce-container');

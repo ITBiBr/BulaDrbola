@@ -18,12 +18,15 @@ final class AktualityController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $limit = 9;
-        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated($limit,0);
+        $aktuality = $entityManager->getRepository(Aktuality::class)->findAktualityKZobrazeniPaginated($limit+1,0);
+        $hasMore = count($aktuality) > $limit;
+        $aktuality = array_slice($aktuality, 0, $limit);
 
         return $this->render('aktuality/index.html.twig', [
             'controller_name' => 'AktualityController',
             'limit' => $limit,
             'aktuality' => $aktuality,
+            'hasMore' => $hasMore,
             'paticka'=> true,
         ]);
     }
@@ -34,8 +37,9 @@ final class AktualityController extends AbstractController
         $offset = (int) $request->query->get('offset', 0);
         $limit = 9;
 
-        $aktuality = $aktualityRepository->findAktualityKZobrazeniPaginated($limit, $offset);
-        $dalsi_aktuality = $aktualityRepository->findAktualityKZobrazeniPaginated($limit, $offset+1);
+        $aktuality = $aktualityRepository->findAktualityKZobrazeniPaginated($limit+1, $offset);
+        $hasMore = count($aktuality) > $limit;
+        $aktuality = array_slice($aktuality, 0, $limit);
 
         // Vrátíme JSON s HTML každé aktuality (nebo pole dat)
         $htmlItems = [];
@@ -49,7 +53,7 @@ final class AktualityController extends AbstractController
         return new JsonResponse([
             'items' => $htmlItems,
             'nextOffset' => $offset + $limit,
-            'hasMore' => count($dalsi_aktuality) >= $limit,
+            'hasMore' => $hasMore,
         ]);
     }
     #[Route('/aktuality/{url}', name: 'aktuality_url')]

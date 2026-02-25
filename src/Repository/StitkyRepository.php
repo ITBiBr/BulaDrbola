@@ -16,28 +16,18 @@ class StitkyRepository extends ServiceEntityRepository
         parent::__construct($registry, Stitky::class);
     }
 
-    //    /**
-    //     * @return Stitky[] Returns an array of Stitky objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Stitky
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findStitkySPlatnymiAkcemi(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.Akce', 'a')
+            ->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
+            ->andWhere('
+                a.DatumDo >= CURRENT_DATE()
+                OR (a.DatumDo IS NULL AND a.Datum >= CURRENT_DATE())
+            ')
+            ->groupBy('s.id')
+            ->orderBy('s.Titulek', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

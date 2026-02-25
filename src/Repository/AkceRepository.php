@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Akce;
+use App\Entity\Stitky;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,9 +17,9 @@ class AkceRepository extends ServiceEntityRepository
         parent::__construct($registry, Akce::class);
     }
 
-    public function findAkceKZobrazeniPaginated(int $limit, int $offset): array
+    public function findAkceKZobrazeniPaginated(int $limit, int $offset, ?Stitky $stitek = null): array
     {
-        return $this->createQueryBuilder('a')
+        $qb = $this->createQueryBuilder('a')
             ->where('a.DatumZobrazeniOd <= CURRENT_TIMESTAMP()')
             ->andWhere('
                 a.DatumDo >= CURRENT_DATE()
@@ -26,8 +27,14 @@ class AkceRepository extends ServiceEntityRepository
             ')
             ->orderBy('a.Datum', 'ASC')
             ->setMaxResults($limit)
-            ->setFirstResult($offset)
-            ->getQuery()
-            ->getResult();
+            ->setFirstResult($offset);
+
+        if ($stitek) {
+            $qb->innerJoin('a.stitkies', 's')
+                ->andWhere('s.id = :stitek')
+                ->setParameter('stitek', $stitek->getId());
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
