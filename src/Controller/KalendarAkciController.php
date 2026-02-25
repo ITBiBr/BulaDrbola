@@ -32,7 +32,6 @@ final class KalendarAkciController extends AbstractController
         $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1,0,$aktivniStitek);
         $hasMore = count($akce) > $limit;
         $akce = array_slice($akce, 0, $limit);
-        dump($akce);
 
         return $this->render('kalendar_akci/index.html.twig', [
             'controller_name' => 'KalendarAkciController',
