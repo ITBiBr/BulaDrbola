@@ -77,23 +77,9 @@ class AkceCrudController extends AktualityCrudController
     {
         if ($entityInstance instanceof Akce)
         {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager));
+            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager, Akce::class));
         }
 
         parent::persistEntity($entityManager, $entityInstance);
-    }
-
-    protected function makeUniqueUrl(string $original, EntityManagerInterface $em): string
-    {
-        $url = $originalUrl = $this->makeURL($original);
-
-        $i = 2;
-
-        while ($em->getRepository(Akce::class)->findOneBy(['url' => $url])) {
-            $url = $originalUrl . '-' . $i;
-            $i++;
-        }
-
-        return $url;
     }
 }

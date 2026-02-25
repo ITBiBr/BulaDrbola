@@ -21,6 +21,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ClankyCrudController extends AbstractCrudController
 {
+    use UrlTrait;
     public static function getEntityFqcn(): string
     {
         return Clanky::class;
@@ -70,7 +71,7 @@ class ClankyCrudController extends AbstractCrudController
     {
         if ($entityInstance instanceof Clanky)
         {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager));
+            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager, Clanky::class));
         }
 
         parent::persistEntity($entityManager, $entityInstance);
@@ -99,35 +100,4 @@ class ClankyCrudController extends AbstractCrudController
         parent::deleteEntity($entityManager, $entityInstance);
     }
 
-
-    private function makeURL(string $url): string
-    {
-        // 1. Odstranění diakritiky
-        $url = transliterator_transliterate('Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove', $url);
-
-        // 2. Nahrazení mezer pomlckami
-        $url = preg_replace('/\s+/', '-', $url);
-
-        // 3. Odstranění nepovolených znaků (ponechá jen písmena, čísla, pomlčku, podtržítko)
-        $url = preg_replace('/[^A-Za-z0-9\-_]/', '', $url);
-
-        // 4. Volitelně: převede na lowercase
-        $url = strtolower($url);
-
-        return $url;
-    }
-
-    private function makeUniqueUrl(string $original, EntityManagerInterface $em): string
-    {
-        $url = $originalUrl = $this->makeURL($original);
-
-        $i = 2;
-
-        while ($em->getRepository(Clanky::class)->findOneBy(['url' => $url])) {
-            $url = $originalUrl . '-' . $i;
-            $i++;
-        }
-
-        return $url;
-    }
 }
