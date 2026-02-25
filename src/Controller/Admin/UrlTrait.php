@@ -37,4 +37,23 @@ trait UrlTrait
 
         return $url;
     }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (method_exists($entityInstance, 'getTitulek') &&
+            method_exists($entityInstance, 'setUrl')) {
+
+            $entityClass = get_class($entityInstance);
+
+            $entityInstance->setUrl(
+                $this->makeUniqueUrl(
+                    $entityInstance->getTitulek(),
+                    $entityManager,
+                    $entityClass
+                )
+            );
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
 }

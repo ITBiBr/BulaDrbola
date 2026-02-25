@@ -16,7 +16,7 @@ class Stitky
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nazevStitku = null;
+    private ?string $Titulek = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url = null;
@@ -37,14 +37,14 @@ class Stitky
         return $this->id;
     }
 
-    public function getNazevStitku(): ?string
+    public function getTitulek(): ?string
     {
-        return $this->nazevStitku;
+        return $this->Titulek;
     }
 
-    public function setNazevStitku(string $nazevStitku): static
+    public function setTitulek(string $Titulek): static
     {
-        $this->nazevStitku = $nazevStitku;
+        $this->Titulek = $Titulek;
 
         return $this;
     }

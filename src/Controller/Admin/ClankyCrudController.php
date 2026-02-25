@@ -67,16 +67,6 @@ class ClankyCrudController extends AbstractCrudController
             ->setRequired(false);
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if ($entityInstance instanceof Clanky)
-        {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager, Clanky::class));
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
-    }
-
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         $soubory = [];

@@ -72,14 +72,4 @@ class AkceCrudController extends AktualityCrudController
             ->setSortable(false)
             ->hideOnIndex();
     }
-
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if ($entityInstance instanceof Akce)
-        {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager, Akce::class));
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
-    }
 }

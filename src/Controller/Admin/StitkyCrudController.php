@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Stitky;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -20,6 +23,21 @@ class StitkyCrudController extends AbstractCrudController
     {
         return Stitky::class;
     }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('new', 'New Label')
+            ->setPageTitle('edit', 'Edit Label')
+            ->setPageTitle('index', 'Labels');
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+        $actions->update(Crud::PAGE_INDEX, Action::NEW, function(Action $action){
+            return $action->setLabel('New Label');
+        });
+        return $actions;
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -27,17 +45,7 @@ class StitkyCrudController extends AbstractCrudController
             throw new AccessDeniedException('Access Denied');
 
         yield IdField::new('id')->hideOnForm();
-        yield TextField::new('Titulek', 'Title');
+        yield TextField::new('Titulek', 'Label Title');
         yield TextField::new('url', 'URL')->hideOnForm();
-    }
-
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if ($entityInstance instanceof Stitky)
-        {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getNazevStitku(), $entityManager, Stitky::class));
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
     }
 }

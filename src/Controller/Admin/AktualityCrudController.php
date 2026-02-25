@@ -83,15 +83,6 @@ class AktualityCrudController extends AbstractCrudController
             ->hideOnIndex();
         yield TextEditorField::new('ObsahPokracovani' ,'Article content - continued')->hideOnIndex();
     }
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        if ($entityInstance instanceof Aktuality)
-        {
-            $entityInstance->setUrl($this->makeUniqueUrl($entityInstance->getTitulek(), $entityManager, Aktuality::class));
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
-    }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
