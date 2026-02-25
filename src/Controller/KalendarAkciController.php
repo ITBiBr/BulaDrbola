@@ -23,7 +23,7 @@ final class KalendarAkciController extends AbstractController
     #[Route('/kalendar-akci/{stitek?}', name: 'app_kalendar_akci')]
     public function index(EntityManagerInterface $entityManager, ?string $stitek = null): Response
     {
-        $limit = 1;
+        $limit = 8;
         $stitkyRepo = $entityManager->getRepository(Stitky::class);
         $akceRepo = $entityManager->getRepository(Akce::class);
         $stitky = $stitkyRepo->findStitkySPlatnymiAkcemi();
@@ -63,7 +63,7 @@ final class KalendarAkciController extends AbstractController
     public function loadMore(Request $request, EntityManagerInterface $entityManager, ?string $stitek = null): JsonResponse
     {
         $offset = (int) $request->query->get('offset', 0);
-        $limit = 1;
+        $limit = 8;
         $stitkyRepo = $entityManager->getRepository(Stitky::class);
         $akceRepo = $entityManager->getRepository(Akce::class);
         $aktivniStitek = $stitek ? $stitkyRepo->findOneBy(['url' => $stitek]) : null;
