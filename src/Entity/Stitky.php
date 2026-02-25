@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: StitkyRepository::class)]
 class Stitky
 {
+    public function __toString(): string
+    {
+        return $this->getTitulek();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

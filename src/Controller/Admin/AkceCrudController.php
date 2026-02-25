@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -43,6 +44,7 @@ class AkceCrudController extends AktualityCrudController
     public function configureFieldsChildren(string $pageName): iterable
     {
         yield DateField::new('DatumDo', 'Date To');
+        yield AssociationField::new('stitkies', 'Labels')->setFormTypeOption('by_reference', false)->formatValue(fn($value) => implode('<br>', $value->toArray()));
         yield TextField::new('coordsInput', 'Coordinates (N,E)')
             ->setHelp('Ex.: 49.4053197N, 16.5865367E')
             ->onlyOnForms()
@@ -52,6 +54,7 @@ class AkceCrudController extends AktualityCrudController
         yield NumberField::new('lng', 'Longitude')
             ->setNumDecimals(3);;
         yield TextField::new('MistoKonani','Event venue');
+
         yield ImageField::new('IlustraceObsahu', 'Poster')
             ->setBasePath($_ENV['AKTUALITY_BASE_PATH'])
             ->setUploadDir($_ENV['AKTUALITY_UPLOAD'])
