@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AkceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Callback;
@@ -59,6 +61,17 @@ class Akce
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $DatumDo = null;
+
+    /**
+     * @var Collection<int, Stitky>
+     */
+    #[ORM\ManyToMany(targetEntity: Stitky::class, mappedBy: 'Akce')]
+    private Collection $stitkies;
+
+    public function __construct()
+    {
+        $this->stitkies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -242,5 +255,32 @@ class Akce
                 ->atPath('DatumDo')
                 ->addViolation();
         }
+    }
+
+    /**
+     * @return Collection<int, Stitky>
+     */
+    public function getStitkies(): Collection
+    {
+        return $this->stitkies;
+    }
+
+    public function addStitky(Stitky $stitky): static
+    {
+        if (!$this->stitkies->contains($stitky)) {
+            $this->stitkies->add($stitky);
+            $stitky->addAkce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStitky(Stitky $stitky): static
+    {
+        if ($this->stitkies->removeElement($stitky)) {
+            $stitky->removeAkce($this);
+        }
+
+        return $this;
     }
 }
