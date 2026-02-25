@@ -64,14 +64,17 @@ final class KalendarAkciController extends AbstractController
     }
 
     #[Route('/nacist-dalsi-akce/{stitek?}', name: 'akce_load_more')]
+    #[Route('/nacist-dalsi-mame-za-sebou/{stitek?}', name: 'app_load_more_mame_za_sebou')]
     public function loadMore(Request $request, EntityManagerInterface $entityManager, ?string $stitek = null): JsonResponse
     {
         $offset = (int) $request->query->get('offset', 0);
         $limit = 8;
+        $jeProbehle = $request->attributes
+                ->get('_route') === 'app_load_more_mame_za_sebou';
         $stitkyRepo = $entityManager->getRepository(Stitky::class);
         $akceRepo = $entityManager->getRepository(Akce::class);
         $aktivniStitek = $stitek ? $stitkyRepo->findOneBy(['url' => $stitek]) : null;
-        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1, $offset, $aktivniStitek);
+        $akce = $akceRepo->findAkceKZobrazeniPaginated($limit + 1, $offset, $aktivniStitek, $jeProbehle);
         $hasMore = count($akce) > $limit;
         $akce = array_slice($akce, 0, $limit);
 

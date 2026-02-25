@@ -87,7 +87,7 @@
                     const btn = this;
                     const offset = btn.dataset.offset;
 
-                    fetch('/nacist-dalsi-akce{% if aktivniStitek %}/{{ aktivniStitek.url }}{% endif %}?offset=' + offset)
+                    fetch('/nacist-dalsi-{% if probehle %}mame-za-sebou{% else %}akce{% endif %}{% if aktivniStitek %}/{{ aktivniStitek.url }}{% endif %}?offset=' + offset)
                         .then(response => response.json())
                         .then(data => {
                             const container = document.getElementById('akce-container');
