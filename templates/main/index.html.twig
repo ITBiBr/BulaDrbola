@@ -49,21 +49,9 @@
                             <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}?v=2" alt="Odvaha">
                         </div>
                         <div class="col-xl-2 col-lg-3 col-10 ps-0">
-                            <p></p>
-                            <p>
-                                ... ctnosti, které charakterizují dva
-                                mučedníky komunistických procesů
-                                50.&nbsp;let, kněze Jana Bulu a&nbsp;Václava
-                                Drbolu.
-                            </p>
-                            <p>
-                                Zpráva o jejich popravě měla původně
-                                sloužit k zastrašení církevní
-                                a náboženské opozice režimu, dnes
-                                naopak jejich příběh slouží jako
-                                symbol odpuštění, nezlomné
-                                odvahy a naděje.
-                            </p>
+                            <div>
+                                {{ globalVars.textyStranek('ctnosti', 'main')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
                         </div>
                     </div>
                 </div>

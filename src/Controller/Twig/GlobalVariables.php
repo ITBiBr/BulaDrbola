@@ -43,6 +43,13 @@ readonly class GlobalVariables
 
         return $item?->getText();
     }
+    public function getNadpisTextuStranek(string $identifikator, string $stranka): ?string
+    {
+        $item = $this->entityManager
+            ->getRepository(TextyStranek::class)
+            ->findOneByIdentifikatorAndStranka($identifikator, $stranka);
 
+        return $item?->getNadpis();
+    }
 
 }

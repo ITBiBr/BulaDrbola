@@ -14,8 +14,8 @@
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class = "col-xl-6 col-lg-9 col-10">
-                        <p class="text-justify-center">{% if probehle %}Akce, které již proběhly{% else %}Blížící se zajímavé akce{% endif %}
-                        </p>
+                        <div class="text-justify-center pb-3">{% if probehle %}{{ globalVars.textyStranek('akce', 'mame-za-sebou')|raw|nbsp_prepositions|strong_filter|div_filter }}{% else %}{{ globalVars.textyStranek('akce', 'kalendar-akci')|raw|nbsp_prepositions|strong_filter|div_filter }}{% endif %}
+                        </div>
                     </div>
                 </div>
                 {% if stitky is not empty %}

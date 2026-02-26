@@ -23,34 +23,8 @@
                 </div>
                 <div class="row justify-content-center mt-4 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
-                        <h5 id="modlitba-za-blahoreceni" class="scroll-offset text-primary text-start fw-bold">MODLITBA</h5>
-                        <p class="pt-4">Pane Ježíši, náš Pastýři a&nbsp;Příteli,</p>
-
-
-                            <p>děkujeme Ti za život a&nbsp;svědectví kněží Jana a&nbsp;Václava,
-
-                            kteří odpověděli na Tvé volání a&nbsp;věrně Ti sloužili
-
-                            i&nbsp;tváří v&nbsp;tvář utrpení a&nbsp;smrti.
-
-                            Jejich statečnost, pokora a&nbsp;důvěra v&nbsp;Tebe
-
-                                jsou pro nás inspirací a&nbsp;výzvou.</p>
-
-
-                            <p>Prosíme Tě o&nbsp;dar živé a zralé víry za všech okolností.
-
-                            Dej nám sílu k&nbsp;lásce, která odpouští, i&nbsp;když je to těžké,
-
-                            a&nbsp;odvahu k vytrvalému hledání pravdy.
-
-                                Připomínej nám, že s&nbsp;Tebou nejsme nikdy sami.</p>
-
-
-                        <p>Ať nás příběh kněží Jana a&nbsp;Václava osloví a&nbsp;posílí na cestě k&nbsp;Tobě.</p>
-
-
-                        <p>Neboť Ty žiješ a&nbsp;kraluješ na věky věků. Amen.</p>
+                        <h5 id="modlitba-za-blahoreceni" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('modlitba', 'zapojte-se')|raw }}</h5>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('modlitba', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
 
                     </div>
                     <div class="col-xl-3 col-lg-4 col-12 text-center my-5 position-relative overflow-visible ps-lg-5 ps-0">
@@ -82,21 +56,9 @@
                                 <img src="{{ asset('images/zs01.jpg') }}" class="img-fluid">
                             </div>
                             <div class="col-xl-3 col-lg-4 col-10 text-left ps-lg-5 ps-0">
-                                <h5 id="dobrovolnictvi" class="scroll-offset text-white text-start pt-4 fw-bold">Dobrovolnictví</h5>
-                                <p class="text-white pt-4 ">
-                                    Proces blahořečení vyvrcholí beatifikační slavností
-                                    na brněnském výstavišti v&nbsp;červnu 2026.</p>
-                                <p class="text-white">
-                                    Očekávaná účast se pohybuje mezi 5000–8000 věřícími
-                                    z&nbsp;celého Česka. Pro akci, která je svým rozsahem pro
-                                    českou církev mimořádná, bude potřeba zajistit
-                                    dostatečné množství dobrovolníků, kteří se zapojí
-                                    do různých částí programu.
-                                </p>
-                                <p class="text-white">
-                                    Chcete nám při tom pomoct? Vyplňte přihlášku a&nbsp;my se Vám ozveme s&nbsp;podrobnostmi.
-                                </p>
-
+                                <h5 id="dobrovolnictvi" class="scroll-offset text-white text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('dobrovolnictvi', 'zapojte-se')|raw }}</h5>
+                                <div class="text-white pt-4 pb-3">
+                                    {{ globalVars.textyStranek('dobrovolnictvi', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
                                 <a class="btn btn-outline-light btn-sm rounded-pill px-4 border-2" href="{{ path('app_dobrovolnici') }}">Chci se zapojit</a>
                             </div>
                         </div>
@@ -104,12 +66,8 @@
                 </div>
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                        <h5 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">Newsletter</h5>
-                        <p class="pt-4 ">
-                            Chcete dostávat pravidelně důležité informace a novinky o doprovodných akcích a o samotné slavnosti blahořečení?
-                            Přihlaste se k odběru našeho newsletteru a nenechte si ujít nové výzvy a updaty.</p>
-                        <p>
-                            Stačí zadat e-mail a zůstat v kontaktu.</p>
+                        <h5 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('newsletter', 'zapojte-se')|raw }}</h5>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('newsletter', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
 
                     </div>
                     <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset" id="newsletter-zapsano">
@@ -148,12 +106,8 @@
                 </div>
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                        <h5 id="sdilejte-svedectvi" class="scroll-offset text-primary text-start pt-4 fw-bold">Sdílejte příběh</h5>
-                        <p class="pt-4 ">
-                            Zaujal Vás příběh umučených kněží a&nbsp;chtěli byste o&nbsp;něm povědět více lidem?</p>
-                        <p>
-                            Sdílejte video nebo příběh na webu.
-                        </p>
+                        <h5 id="sdilejte-svedectvi" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('sdilejte-pribeh', 'zapojte-se')|raw }}</h5>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('sdilejte-pribeh', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
                         <h6 class="text-primary text-start pt-4">Sdílet video</h6>
                         <div class="row">
                             <div class="col-xl-3 col-lg-4">
@@ -184,16 +138,11 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0">
-                        <h5 id="darujte" class="scroll-offset text-primary text-start pt-4 fw-bold">Darujte</h5>
-                        <p class="pt-4 ">
-                            Pokud chcete podpořit pastorační a&nbsp;komunikační aktivity spojené s&nbsp;blahořečením Jana Buly
-                        a&nbsp;Václava Drboly, budeme rádi, když přispějete libovolnou částkou. Přes portál Donátor.cz můžete k darům obdržet potvrzení.</p>
-{#                        <h6 class="text-black fw-bold text-start pt-4">1341625329/0800</h6>#}
+                        <h5 id="darujte" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('darujte', 'zapojte-se')|raw }}</h5>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('darujte', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+
                         <h6 class="text-black fw-bold text-start pt-0"><a class="btn btn-sm btn-outline-primary rounded-pill mt-lg-5 mt-0 px-4 border-2" href="https://donator.cz/projekt/kanonizacebd" target="_blank">Přispět na portálu Donátor.cz</a></h6>
-                        <p class="pt-4">
-                            Váš dar pomůže pokrýt náklady na tiskoviny, doprovodné edukační materiály a&nbsp;samotný program
-                            události blahořečení.
-                        </p>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('darujte-2', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
                         <div class="row d-flex justify-content-center justify-content-lg-start">
                             <div class="col-lg-4 col-10">
                                 <img src="{{ (asset('images/qr.png')) }}" class="img-fluid d-block mx-lg-0 mx-auto">
@@ -207,17 +156,8 @@
 
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                        <h5 id="kontakt" class="scroll-offset text-primary text-start pt-4 fw-bold">Kontakt</h5>
-                        <p class="pt-4 ">
-                            Máte dotaz nebo jste našli chybu?<br>Kontaktujte nás.</p>
-                        <p>
-                            <a href="mailto:buladrbola@biskupstvi.cz">buladrbola@biskupstvi.cz</a>
-                        </p>
-                        <p class="pt-4 ">
-                            Kontakt pro média:</p>
-                        <p>
-                            <a href="mailto:komunikace@biskupstvi.cz">komunikace@biskupstvi.cz</a>
-                        </p>
+                        <h5 id="kontakt" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('kontakt', 'zapojte-se')|raw }}</h5>
+                        <div class="pt-4 pb-3">{{ globalVars.textyStranek('kontakt', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
 
                     </div>
                     <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0">
