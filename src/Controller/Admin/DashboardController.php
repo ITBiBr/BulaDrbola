@@ -11,6 +11,7 @@ use App\Entity\DobrovolniciAkceCiselnik;
 use App\Entity\EmailSubscription;
 use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
+use App\Entity\NastaveniWebu;
 use App\Entity\Stitky;
 use App\Entity\TextyStranek;
 use App\Entity\User;
@@ -85,6 +86,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Labels', 'fa fa-tags', Stitky::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Clanky::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Page texts', 'fa fa-align-justify', TextyStranek::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Web settings', 'fa fa-gear', NastaveniWebu::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Material Categories', 'fa fa-file', MaterialyKategorie::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Materials', 'fa fa-file', Materialy::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Email Subscription', 'fa fa-envelope', EmailSubscription::class)->setPermission('ROLE_EDITOR');

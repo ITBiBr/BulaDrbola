@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Entity\MaterialyKategorie;
+use App\Entity\NastaveniWebu;
 use App\Entity\TextyStranek;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -49,6 +50,14 @@ readonly class GlobalVariables
             ->findOneByIdentifikatorAndStranka($identifikator, $stranka);
 
         return $item?->getNadpis();
+    }
+    public function getNastaveniWebu(string $identifikator): ?string
+    {
+        $item = $this->entityManager
+            ->getRepository(NastaveniWebu::class)
+            ->findOneByIdentifikator($identifikator);
+
+        return $item?->getNastaveni();
     }
 
 }

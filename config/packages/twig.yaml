@@ -2,7 +2,6 @@ twig:
     file_name_pattern: '*.twig'
 
     globals:
-        video_id: '%video.id%'
         mapyApiKey: '%mapy_api_key%'
         globalVars: '@App\Twig\GlobalVariables'
 
