@@ -43,6 +43,6 @@ class NastaveniWebuCrudController extends AbstractCrudController
         if (!$this->security->isGranted('ROLE_EDITOR'))
             throw new AccessDeniedException('Access Denied');
         yield TextField::new('identifikator','Identifier')->setDisabled(true);
-        yield TextField::new('nastaveni','Settings');
+        yield TextField::new('nastaveni','Settings')->setRequired(false);
     }
 }

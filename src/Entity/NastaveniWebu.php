@@ -41,8 +41,10 @@ class NastaveniWebu
         return $this->nastaveni;
     }
 
-    public function setNastaveni(string $nastaveni): static
+    public function setNastaveni(?string $nastaveni): static
     {
+        if (!$nastaveni)
+            $nastaveni='';
         $this->nastaveni = $nastaveni;
 
         return $this;
