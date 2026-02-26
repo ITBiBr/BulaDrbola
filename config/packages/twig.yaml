@@ -4,7 +4,7 @@ twig:
     globals:
         video_id: '%video.id%'
         mapyApiKey: '%mapy_api_key%'
-        globalVars: '@App\Controller\Twig\GlobalVariables'
+        globalVars: '@App\Twig\GlobalVariables'
 
 
 when@test:

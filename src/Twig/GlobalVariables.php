@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Controller\Twig;
+namespace App\Twig;
 
-use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
 use App\Entity\TextyStranek;
 use Doctrine\ORM\EntityManagerInterface;

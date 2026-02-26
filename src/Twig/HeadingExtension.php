@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Twig;
+namespace App\Twig;
 
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Twig\Extension\AbstractExtension;
