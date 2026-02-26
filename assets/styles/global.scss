@@ -17,8 +17,12 @@ body.modal-open {
     position: relative;
     #z-index: -1;
     top: -102px;
+    min-height: 47em;
+}
+body:has(.button-mainpage) .bula-drbola {
     min-height: 51em;
 }
+
 .navbar-minus{
     height: 86px;
 }
@@ -124,6 +128,9 @@ body.modal-open {
     }
 
     .bula-drbola{
+        min-height: 35em;
+    }
+    body:has(.button-mainpage) .bula-drbola {
         min-height: 43em;
     }
     .podbarveni_2{
@@ -153,6 +160,9 @@ body.modal-open {
         left:-20%
     }
     .bula-drbola{
+        min-height: 32em;
+    }
+    body:has(.button-mainpage) .bula-drbola {
         min-height: 37em;
     }
 }
