@@ -23,11 +23,15 @@ class NbspExtension extends AbstractExtension
             '/(?<=\s|^)([KkSsVvZzOoUuAaIi])\s+(?=\S)/u',
             // zkratka P.
             '/(?<=\bP\.)\s+(?=\p{Lu})/u',  // mezi "P." a velkým písmenem
+            // Číslo + tečka + mezera → např. "1. ledna"
+            '/(\d+)\.\s+(?=\p{L})/u',
+
         ];
 
         $replacements = [
             '$1&nbsp;',
             '&nbsp;',
+            '$1.&nbsp;',
         ];
         return preg_replace($patterns, $replacements, $text);
     }

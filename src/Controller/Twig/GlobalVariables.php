@@ -4,12 +4,13 @@ namespace App\Controller\Twig;
 
 use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
+use App\Entity\TextyStranek;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class GlobalVariables
+readonly class GlobalVariables
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly SluggerInterface $slugger)
+    public function __construct(private EntityManagerInterface $entityManager, private SluggerInterface $slugger)
     {
 
     }
@@ -33,5 +34,15 @@ class GlobalVariables
         }
         return $kategorieData;
     }
+
+    public function getTextyStranek(string $identifikator, string $stranka): ?string
+    {
+        $item = $this->entityManager
+            ->getRepository(TextyStranek::class)
+            ->findOneByIdentifikatorAndStranka($identifikator, $stranka);
+
+        return $item?->getText();
+    }
+
 
 }
