@@ -11,6 +11,16 @@
                         <h1 class="text-primary fw-bolder text-uppercase">{{ clanek.Titulek }}</h1>
                     </div>
                 </div>
+                {% if headings %}
+                    <div class="row text-center mb-0">
+                        <div class="col-12 pb-lg-5 mb-lg-3 mb-0 pb-0 p-3">
+
+                    {% for h in headings %}
+                        <a class="btn btn-sm btn-outline-primary rounded-pill px-4 border-2 mb-2 mx-1" href="#{{ h.id }}">{{ h.title }}</a>
+                    {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
                 {% if clanek.Obrazek %}
                 <div class="row justify-content-center mt-4">
                     <div class="col-xl-6 col-lg-9 col-10 text-justify-center">
@@ -20,7 +30,7 @@
                 {% endif %}
                 <div class="row justify-content-center mt-5">
                     <div class="col-xl-6 col-lg-9 col-10 text-justify-left">
-                        {{ clanek.Obsah|raw|nbsp_prepositions|headings_id }}
+                        {{ obsah|raw|nbsp_prepositions }}
                     </div>
                 </div>
             </div>
