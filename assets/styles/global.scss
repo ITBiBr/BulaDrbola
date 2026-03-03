@@ -581,6 +581,9 @@ input.form-check-input[type=checkbox] + label {
 {
     min-width: 280px;
 }
+.button-mainpage:hover span {
+    color: var(--bs-secondary) !important;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
