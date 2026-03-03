@@ -28,7 +28,7 @@ class ClankyController extends AbstractController
             throw new NotFoundHttpException();
         // Přepracování obsahu článku a získání H1 nadpisů
         [$processedContent, $headings] = $this->addHeadingsId($clanek->getObsah());
-        dump($processedContent);
+
         return $this->render('clanky/clanek.html.twig', [
             'controller_name' => 'ClankyController',
             'clanek' => $clanek,

@@ -22,9 +22,9 @@
                     </div>
                 {% endif %}
                 {% if clanek.Obrazek %}
-                <div class="row justify-content-center mt-4">
+                <div class="row justify-content-center mt-0">
                     <div class="col-xl-6 col-lg-9 col-10 text-justify-center">
-                        <img class="w-75" src="{{ asset('/images/clanky/' ~ clanek.Obrazek) | imagine_filter('aktualita_full_thumb') }}" alt="{{ clanek.Titulek }}">
+                        <img class="w-100" src="{{ asset('/images/clanky/' ~ clanek.Obrazek) | imagine_filter('aktualita_full_thumb') }}" alt="{{ clanek.Titulek }}">
                     </div>
                 </div>
                 {% endif %}
