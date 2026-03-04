@@ -6,7 +6,7 @@
     <meta property="og:description" content="{{ aktualita.Perex|striptags|trim }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="{{ absolute_url(asset('/images/aktuality/' ~ aktualita.Obrazek)) }}">
+    <meta property="og:image" content="{{ ('/images/aktuality/' ~ aktualita.Obrazek) | imagine_filter('aktualita_full_thumb') }}">
     <meta property="og:image:alt" content="{{ aktualita.Titulek }}">
 {% endblock %}
 
