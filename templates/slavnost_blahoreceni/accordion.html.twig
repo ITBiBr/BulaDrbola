@@ -1,0 +1,24 @@
+<div class="accordion d-flex flex-column" id="{{ id }}">
+    {% for text in items %}
+        <div class="accordion-item bg-transparent border-0 rounded-0 border-top {% if loop.last %} border-bottom{% endif %}">
+            <h4>
+                <button class="accordion-button bg-transparent text-primary fs-5 fw-bold shadow-none pb-2 {% if not loop.first %} collapsed{% endif %}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ text.id }}"
+                        aria-expanded="{{ loop.first ? 'true' : 'false' }}"
+                        aria-controls="collapse{{ text.id }}">
+                    {{ text.Titulek }}
+                </button>
+            </h4>
+
+            <div id="collapse{{ text.id }}"
+                 class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                 data-bs-parent="#accordion1">
+                <div class="accordion-body bg-transparent">
+                    {{ text.Text|raw|nbsp_prepositions|strong_filter }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

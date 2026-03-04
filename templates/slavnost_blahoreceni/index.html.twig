@@ -73,27 +73,10 @@
         </div>
 
         <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
-            <div class="accordion" id="accordionExample">
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
-                                aria-expanded="true"
-                                aria-controls="collapseOne">
-                            Nadpis 1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show"
-                         data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Obsah 1
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[1].slavnostBlahoreceniTexties
+            } %}
         </div>
 
     </div>
@@ -106,7 +89,9 @@
     <div class="row justify-content-center mt-0">
         <div class = "col-xl-6 col-lg-9 col-10">
             <div class="text-justify-center pb-3">{{ globalVars.textyStranek('podporte-slavnost', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                <a href="{{ path('app_zapojte_se') }}#darujte" class="mt-3 btn btn-outline-primary rounded-pill">Chci podpořit slavnost</a>
             </div>
+
         </div>
     </div>
     <div class="row justify-content-center pt-3 mt-5 mb-2">
@@ -114,10 +99,48 @@
             <h4 class="text-primary fs-2 fw-bold">Důležité informace</h4>
         </div>
     </div>
+    <div class="row justify-content-center pt-3 mt-2 mb-2">
+        <div class = "col-xl-6 col-lg-9 col-10">
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[2].slavnostBlahoreceniTexties
+            } %}
+
+        </div>
+    </div>
     <div class="row justify-content-center pt-3 mt-5 mb-2">
         <div class="col-12 text-center">
             <h4 class="text-secondary fw-bold">FAQ</h4>
             <h4 class="text-primary fs-2 fw-bold">Často kladené otázky</h4>
+        </div>
+    </div>
+    <div class="row justify-content-center pt-3 mt-2 mb-5">
+        <div class = "col-xl-6 col-lg-9 col-10">
+            <div class="m-3 mt-0">Registrace a vstupenky</div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[3].slavnostBlahoreceniTexties
+            } %}
+            <div class="m-3">Praktická organizace</div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[4].slavnostBlahoreceniTexties
+            } %}
+            <div class="m-3">Děti</div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[5].slavnostBlahoreceniTexties
+            } %}
+            <div class="m-3">Stravování</div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[6].slavnostBlahoreceniTexties
+            } %}
+            <div class="m-3">Příspěvek a dar</div>
+            {% include 'slavnost_blahoreceni/accordion.html.twig' with {
+                id: 'accordion1',
+                items: kategorieTextu[6].slavnostBlahoreceniTexties
+            } %}
         </div>
     </div>
 {% endblock %}
