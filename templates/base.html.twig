@@ -8,11 +8,13 @@
         <meta name="robots" content="all,follow" >
         <meta name='googlebot' content="index,follow,snippet,archive" >
         <meta name="author" content="Biskupství brněnské" >
+        {% block meta %}
         <meta property="og:type" content="website" >
         <meta property="og:url" content="{{ app.request.uri }}" >
         <meta property="og:title" content="Jan Bula a Václav Drbola" >
         <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}/images/bula_drbola.jpg" >
         <meta property="og:description" content="Jan Bula a Václav Drbola. Dva obyčejní kněží, umučení v 50. letech minulého století komunistickým režimem. Oba se stali symbolem odporu vůči útlaku, neochvějné pevnosti hodnot, vnitřní integrity a hluboké víry. Papež Lev XIV. schválil v říjnu 2025 jejich beatifikaci, která se uskuteční na jaře 2026 v Brně." >
+        {% endblock %}
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" >
         <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" >

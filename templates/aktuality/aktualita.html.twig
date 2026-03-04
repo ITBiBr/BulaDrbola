@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Aktuality - {{ aktualita.Titulek }}{% endblock %}
+{% block meta %}
+    <meta property="og:title" content="Jan Bula a Václav Drbola - {{ aktualita.Titulek }}">
+    <meta property="og:description" content="{{ aktualita.Perex|striptags|trim }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="{{ absolute_url(asset('/images/aktuality/' ~ aktualita.Obrazek)) }}">
+    <meta property="og:image:alt" content="{{ aktualita.Titulek }}">
+{% endblock %}
 
 {% block body %}
     <div class = "container-fluid pt-5 mt-3">
