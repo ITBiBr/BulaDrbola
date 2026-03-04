@@ -29,7 +29,12 @@ class ClankyController extends AbstractController
         // Přepracování obsahu článku a získání H1 nadpisů
         [$processedContent, $headings] = $this->addHeadingsId($clanek->getObsah());
         // Zpracování pokračování obsahu
-        [$processedContent2, $headings2] = $this->addHeadingsId($clanek->getObsahPokracovani());
+        if ($clanek->getObsahPokracovani())
+            [$processedContent2, $headings2] = $this->addHeadingsId($clanek->getObsahPokracovani());
+        else {
+            $processedContent2 = null;
+            $headings2 = [];
+        }
 
         // Sloučení nadpisů
         $allHeadings = array_merge($headings, $headings2);
