@@ -19,6 +19,10 @@ body.modal-open {
     top: -102px;
     min-height: 47em;
 }
+.bula-drbola-slavnost-blahoreceni
+{
+    min-height: 45em !important;
+}
 body:has(.button-mainpage) .bula-drbola {
     min-height: 51em;
 }
@@ -133,6 +137,10 @@ body:has(.button-mainpage) .bula-drbola {
     body:has(.button-mainpage) .bula-drbola {
         min-height: 43em;
     }
+    .bula-drbola-slavnost-blahoreceni
+    {
+        min-height: 41em !important;
+    }
     .podbarveni_2{
         height: auto;
     }
@@ -164,6 +172,10 @@ body:has(.button-mainpage) .bula-drbola {
     }
     body:has(.button-mainpage) .bula-drbola {
         min-height: 37em;
+    }
+    .bula-drbola-slavnost-blahoreceni
+    {
+        min-height: 37em !important;
     }
 }
 .overflow-wrapper {

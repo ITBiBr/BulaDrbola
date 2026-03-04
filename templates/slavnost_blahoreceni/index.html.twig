@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Slavnost blahořečení{% endblock %}
+
+{% block body %}
+
+
+    <div class="bula-drbola bula-drbola-slavnost-blahoreceni overflow-hidden">
+        <div class="container-fluid position-relative">
+            <div class="navbar-minus"></div>
+            <div class="text-center">
+                <img class="img-fluid mt-lg-0 mt-1 bula-drbola-oriznuti-main-mobil" src = "{{ asset('images/bula_drbola.png') }}" alt="Jan Bula a Václav Drbola">
+
+                <div class="d-flex justify-content-between position-absolute top-50 start-50 translate-middle-x mt-lg-0 mt-sm-1 mt-4 pb-3">
+                    <h1 class="text-secondary text-uppercase text-center mt-4 m-2 pt-3">Slavnost<br>blahořečení</h1>
+
+                </div>
+                <div class="row position-absolute top-50 justify-content-center mt-5 pt-6 w-100">
+                    <div class="col-12">
+                        <p class="fs-2 fw-bold text-white pt-1 m-4">Jana Buly a václava Drboly</p>
+                        <h5 class="text-secondary mb-4 fw-bold">6. června 2026 | Areál brněnského výstaviště</h5>
+                        {% if globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') %}
+                            <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-outline-light rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="podbarveni">
+        <div class="container-fluid posun-140">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-12">
+                    <div class="row mt-5"></div>
+                    <div class="row justify-content-center">
+
+                        <div class="col-xxl-3 col-xl-4 col-lg-5 col-10 pe-xl-2 pe-lg-0 pe-0">
+                            <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}?v=2" alt="Odvaha">
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-10 ps-0">
+                            <div>
+                                {{ globalVars.textyStranek('ctnosti', 'main')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
