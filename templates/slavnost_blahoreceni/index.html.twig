@@ -19,33 +19,50 @@
                     <div class="col-12">
                         <p class="fs-2 fw-bold text-white pt-1 m-4">Jana Buly a václava Drboly</p>
                         <h5 class="text-secondary mb-4 fw-bold">6. června 2026 | Areál brněnského výstaviště</h5>
-                        {% if globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') %}
                             <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-outline-light rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
-                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="podbarveni">
-        <div class="container-fluid posun-140">
-            <div class="row justify-content-center">
-                <div class="col-lg-11 col-12">
-                    <div class="row mt-5"></div>
-                    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
+            <h5 id="jste-zvani" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('jste-zvani', 'slavnost-blahoreceni')|raw }}</h5>
+            <div class="pt-4 pb-3">{{ globalVars.textyStranek('jste-zvani', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
+            <h5 id="proc-se-registrovat-dopredu" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw }}</h5>
+            <div class="pt-4 pb-3">{{ globalVars.textyStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+        </div>
+    </div>
 
-                        <div class="col-xxl-3 col-xl-4 col-lg-5 col-10 pe-xl-2 pe-lg-0 pe-0">
-                            <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}?v=2" alt="Odvaha">
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-10 ps-0">
-                            <div>
-                                {{ globalVars.textyStranek('ctnosti', 'main')|raw|nbsp_prepositions|strong_filter|div_filter }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row justify-content-center mt-4 mb-5 py-4">
+        <div class="col-12 text-center">
+            <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-secondary text-primary rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
+        </div>
+    </div>
+    <div class="row justify-content-center pt-3 mt-5 mb-2">
+        <div class="col-12 text-center">
+            <h4 class="text-primary fs-2 fw-bold">{{ globalVars.nadpisTextuStranek('program', 'slavnost-blahoreceni')|raw }}</h4>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-0">
+        <div class = "col-xl-6 col-lg-9 col-10">
+            <div class="text-justify-center pb-3">{{ globalVars.textyStranek('program', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}
             </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
+
+
+        </div>
+        <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
+
+
         </div>
 
     </div>

@@ -12,6 +12,7 @@ use App\Entity\EmailSubscription;
 use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
 use App\Entity\NastaveniWebu;
+use App\Entity\SlavnostBlahoreceniTexty;
 use App\Entity\Stitky;
 use App\Entity\TextyStranek;
 use App\Entity\User;
@@ -95,6 +96,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)->setPermission('ROLE_DOBROVOLNICI')
             ]);
         yield MenuItem::linkToCrud('Story Map Points', 'fa fa-map-location', BodyMapyPribeh::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Slavnost blahořečení - texty', 'fa fa-align-justify', SlavnostBlahoreceniTexty::class)->setPermission('ROLE_EDITOR');
     }
 
     public function configureAssets(): Assets
