@@ -21,6 +21,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 class AktualityCrudController extends AbstractCrudController
 {
     use UrlTrait;
+    use DeleteFilesTrait;
     public static function getEntityFqcn(): string
     {
         return Aktuality::class;
@@ -86,24 +87,12 @@ class AktualityCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $soubory = [];
-        $soubory[] = $entityInstance->getObrazek();
-        $soubory[] = $entityInstance->getIlustraceObsahu();
+        $soubory = [
+            $entityInstance->getObrazek(),
+            $entityInstance->getIlustraceObsahu(),
+        ];
 
-        foreach ($soubory as $soubor) {
-            if ($soubor) {
-                $filesystem = new Filesystem();
-                $souborPath = $this->getParameter('kernel.project_dir') . '/'.$_ENV['AKTUALITY_UPLOAD'] . $soubor;
-
-                if ($filesystem->exists($souborPath)) {
-                    try {
-                        $filesystem->remove($souborPath);
-                    } catch (\Exception $e) {
-
-                    }
-                }
-            }
-        }
+        $this->deleteEntityFiles($entityManager,$entityInstance,$soubory,$_ENV['AKTUALITY_UPLOAD']);
 
         parent::deleteEntity($entityManager, $entityInstance);
     }

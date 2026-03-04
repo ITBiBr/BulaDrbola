@@ -2,15 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Aktuality;
 use App\Entity\Clanky;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -22,6 +19,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 class ClankyCrudController extends AbstractCrudController
 {
     use UrlTrait;
+    use DeleteFilesTrait;
     public static function getEntityFqcn(): string
     {
         return Clanky::class;
@@ -55,7 +53,6 @@ class ClankyCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('Titulek', 'Title');
         yield TextField::new('url', 'URL')->hideOnForm();
-        yield TextEditorField::new('obsah');
         yield ImageField::new('Obrazek', 'Image')
             ->setBasePath($_ENV['CLANKY_BASE_PATH'])
             ->setUploadDir($_ENV['CLANKY_UPLOAD'])
@@ -65,27 +62,28 @@ class ClankyCrudController extends AbstractCrudController
             ->setFormTypeOption('allow_delete', true)
             ->setSortable(false)
             ->setRequired(false);
+        yield TextEditorField::new('obsah');
+        yield TextField::new('Video', 'Video (YouTube ID)')->hideOnIndex();
+        yield ImageField::new('IlustraceObsahu', 'Illustration in the middle of the content')
+            ->setBasePath($_ENV['CLANKY_BASE_PATH'])
+            ->setUploadDir($_ENV['CLANKY_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
+            ->setFormTypeOption('allow_delete', true)
+            ->setSortable(false)
+            ->hideOnIndex();
+        yield TextEditorField::new('ObsahPokracovani' ,'Article content - continued')->hideOnIndex();
+
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $soubory = [];
-        $soubory[] = $entityInstance->getObrazek();
+        $soubory = [
+            $entityInstance->getObrazek(),
+            $entityInstance->getIlustraceObsahu(),
+        ];
 
-        foreach ($soubory as $soubor) {
-            if ($soubor) {
-                $filesystem = new Filesystem();
-                $souborPath = $this->getParameter('kernel.project_dir') . '/'.$_ENV['CLANKY_UPLOAD'] . $soubor;
-
-                if ($filesystem->exists($souborPath)) {
-                    try {
-                        $filesystem->remove($souborPath);
-                    } catch (\Exception $e) {
-
-                    }
-                }
-            }
-        }
+        $this->deleteEntityFiles($entityManager,$entityInstance,$soubory,$_ENV['CLANKY_UPLOAD']);
 
         parent::deleteEntity($entityManager, $entityInstance);
     }
