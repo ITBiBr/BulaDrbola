@@ -33,6 +33,29 @@
                         {{ obsah|raw|nbsp_prepositions }}
                     </div>
                 </div>
+                {% if clanek.IlustraceObsahu %}
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-xl-6 col-lg-9 col-10 text-justify-center">
+                            <img class="w-100" src="{{ asset('/images/clanky/' ~ clanek.IlustraceObsahu) | imagine_filter('aktualita_ilustrace') }}" alt="{{ clanek.Titulek }}">
+                        </div>
+                    </div>
+                {% endif %}
+                {% if clanek.Video %}
+                    <div class ="row justify-content-center mt-4">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-10 pt-sm-0 pt-2">
+                            <div class="ratio ratio-16x9">
+                                <iframe class = "rounded" src="https://www.youtube.com/embed/{{ clanek.Video }}" title="{{ clanek.Titulek }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if obsahPokracovani %}
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-xl-6 col-lg-9 col-10 text-justify-left">
+                            {{ obsahPokracovani|raw|nbsp_prepositions }}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

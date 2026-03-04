@@ -28,12 +28,19 @@ class ClankyController extends AbstractController
             throw new NotFoundHttpException();
         // Přepracování obsahu článku a získání H1 nadpisů
         [$processedContent, $headings] = $this->addHeadingsId($clanek->getObsah());
+        // Zpracování pokračování obsahu
+        [$processedContent2, $headings2] = $this->addHeadingsId($clanek->getObsahPokracovani());
+
+        // Sloučení nadpisů
+        $allHeadings = array_merge($headings, $headings2);
+
 
         return $this->render('clanky/clanek.html.twig', [
             'controller_name' => 'ClankyController',
             'clanek' => $clanek,
             'obsah' => $processedContent,
-            'headings' => $headings,
+            'obsahPokracovani' => $processedContent2,
+            'headings' => $allHeadings,
             'paticka'=> true,
         ]);
 
