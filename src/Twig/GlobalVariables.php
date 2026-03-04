@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Entity\Clanky;
 use App\Entity\MaterialyKategorie;
 use App\Entity\NastaveniWebu;
 use App\Entity\TextyStranek;
@@ -58,6 +59,15 @@ readonly class GlobalVariables
             ->findOneByIdentifikator($identifikator);
 
         return $item?->getNastaveni();
+    }
+
+    public function getClanekTitulek(string $url): ?string
+    {
+        $item = $this->entityManager
+            ->getRepository(Clanky::class)
+            ->findOneBy(['url' => $url]);
+
+        return mb_strtolower($item?->getTitulek());
     }
 
 }
