@@ -596,6 +596,9 @@ input.form-check-input[type=checkbox] + label {
 .button-mainpage:hover span {
     color: var(--bs-secondary) !important;
 }
+.program-slavnosti{
+    background: #e7e6ee;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
