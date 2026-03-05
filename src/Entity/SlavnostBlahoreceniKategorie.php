@@ -27,6 +27,7 @@ class SlavnostBlahoreceniKategorie
      * @var Collection<int, SlavnostBlahoreceniTexty>
      */
     #[ORM\OneToMany(targetEntity: SlavnostBlahoreceniTexty::class, mappedBy: 'Kategorie')]
+    #[ORM\OrderBy(['priorita' => 'DESC'])]
     private Collection $slavnostBlahoreceniTexties;
 
     public function __construct()
