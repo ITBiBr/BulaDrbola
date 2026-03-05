@@ -7,11 +7,13 @@ use App\Entity\MaterialyKategorie;
 use App\Entity\NastaveniWebu;
 use App\Entity\TextyStranek;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 readonly class GlobalVariables
 {
-    public function __construct(private EntityManagerInterface $entityManager, private SluggerInterface $slugger)
+    public function __construct(private EntityManagerInterface $entityManager, private SluggerInterface $slugger, private Security $security, private ParameterBagInterface $parameterBag)
     {
 
     }
@@ -68,6 +70,20 @@ readonly class GlobalVariables
             ->findOneBy(['url' => $url]);
 
         return mb_strtolower($item?->getTitulek());
+    }
+
+    public function getMuzuZverejnit(): bool
+    {
+        $datumZverejneni = new \DateTimeImmutable(
+            $this->parameterBag->get('datum_zverejneni')
+        );
+
+        $now = new \DateTimeImmutable();
+
+        if ($now < $datumZverejneni  && !$this->security->isGranted('IS_AUTHENTICATED_FULLY')) { //muze se zverejnit nebo není user prihlasen
+            return false;
+        }
+        return true;
     }
 
 }
