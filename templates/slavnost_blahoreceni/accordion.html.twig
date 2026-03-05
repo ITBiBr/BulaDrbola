@@ -16,7 +16,7 @@
                  class="accordion-collapse collapse"
                  data-bs-parent="#{{ id }}">
                 <div class="accordion-body bg-transparent">
-                    {{ text.Text|raw|nbsp_prepositions|strong_filter|external_links }}
+                    {{ text.Text|raw|nbsp_prepositions|strong_filter|external_links|pre_to_html }}
                 </div>
             </div>
         </div>
