@@ -17,7 +17,7 @@
                 </div>
                 <div class="row position-absolute top-50 justify-content-center mt-5 pt-6 w-100">
                     <div class="col-12">
-                        <p class="fs-2 fw-bold text-white pt-1 m-4">Jana Buly a václava Drboly</p>
+                        <p class="fs-2 fw-bold text-white pt-1 m-4">Jana Buly a Václava Drboly</p>
                         <h5 class="text-secondary mb-4 fw-bold">6. června 2026 | Areál brněnského výstaviště</h5>
                             <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-outline-light rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
                     </div>
@@ -26,18 +26,18 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-4 mb-5">
+    <div class="row justify-content-center mt-4 mb-4">
         <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
             <h5 id="jste-zvani" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('jste-zvani', 'slavnost-blahoreceni')|raw }}</h5>
-            <div class="pt-4 pb-3">{{ globalVars.textyStranek('jste-zvani', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+            <div class="pt-4 pb-2">{{ globalVars.textyStranek('jste-zvani', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
         </div>
         <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
             <h5 id="proc-se-registrovat-dopredu" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw }}</h5>
-            <div class="pt-4 pb-3">{{ globalVars.textyStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+            <div class="pt-4 pb-2">{{ globalVars.textyStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-4 mb-5 py-4">
+    <div class="row justify-content-center mb-5 pb-2">
         <div class="col-12 text-center">
             <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-secondary text-primary rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
         </div>
@@ -116,27 +116,27 @@
     </div>
     <div class="row justify-content-center pt-3 mt-2 mb-5">
         <div class = "col-xl-6 col-lg-9 col-10">
-            <div class="m-3 mt-0">Registrace a vstupenky</div>
+            <div class="fw-bold m-3 mt-0">Registrace a vstupenky</div>
             {% include 'slavnost_blahoreceni/accordion.html.twig' with {
                 id: 'accordion1',
                 items: kategorieTextu[3].slavnostBlahoreceniTexties
             } %}
-            <div class="m-3">Praktická organizace</div>
+            <div class="fw-bold m-3">Praktická organizace</div>
             {% include 'slavnost_blahoreceni/accordion.html.twig' with {
                 id: 'accordion1',
                 items: kategorieTextu[4].slavnostBlahoreceniTexties
             } %}
-            <div class="m-3">Děti</div>
+            <div class="fw-bold m-3">Děti</div>
             {% include 'slavnost_blahoreceni/accordion.html.twig' with {
                 id: 'accordion1',
                 items: kategorieTextu[5].slavnostBlahoreceniTexties
             } %}
-            <div class="m-3">Stravování</div>
+            <div class="fw-bold m-3">Stravování</div>
             {% include 'slavnost_blahoreceni/accordion.html.twig' with {
                 id: 'accordion1',
                 items: kategorieTextu[6].slavnostBlahoreceniTexties
             } %}
-            <div class="m-3">Příspěvek a dar</div>
+            <div class="fw-bold m-3">Příspěvek a dar</div>
             {% include 'slavnost_blahoreceni/accordion.html.twig' with {
                 id: 'accordion1',
                 items: kategorieTextu[7].slavnostBlahoreceniTexties
