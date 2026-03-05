@@ -20,7 +20,7 @@ final class SlavnostBlahoreceniController extends AbstractController
 
         $now = new \DateTimeImmutable();
 
-        if ($now < $datumZverejneni || $security->getUser() !== null) { //muze se zverejnit nebo je user prihlasen
+        if ($now < $datumZverejneni  && !$security->isGranted('IS_AUTHENTICATED_FULLY')) { //muze se zverejnit nebo není user prihlasen
             return new Response('Nedostupné');
         }
         $kategorieTextu = $entityManager->getRepository(SlavnostBlahoreceniKategorie::class)->findAll();
