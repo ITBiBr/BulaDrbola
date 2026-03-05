@@ -5,14 +5,24 @@ namespace App\Controller;
 use App\Entity\SlavnostBlahoreceniKategorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class SlavnostBlahoreceniController extends AbstractController
 {
     #[Route('/slavnost-blahoreceni', name: 'app_slavnost_blahoreceni')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, Security $security): Response
     {
+        $datumZverejneni = new \DateTimeImmutable(
+            $this->getParameter('datum_zverejneni')
+        );
+
+        $now = new \DateTimeImmutable();
+
+        if ($now < $datumZverejneni || $security->getUser() !== null) { //muze se zverejnit nebo je user prihlasen
+            return new Response('Nedostupné');
+        }
         $kategorieTextu = $entityManager->getRepository(SlavnostBlahoreceniKategorie::class)->findAll();
         return $this->render('slavnost_blahoreceni/index.html.twig', [
             'kategorieTextu' => $kategorieTextu,

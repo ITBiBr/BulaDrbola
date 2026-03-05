@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -9,8 +10,10 @@ class ExternalLinkExtension extends AbstractExtension
 {
     private string $webUrl;
 
-    public function __construct(string $webUrl)
+    public function __construct(ParameterBagInterface $params)
     {
+        $webUrl = $params->get('web_url');
+
         // odstraníme protokol i www
         $clean = preg_replace('#^https?://#', '', rtrim($webUrl, '/'));
         $clean = preg_replace('#^www\.#', '', $clean);
