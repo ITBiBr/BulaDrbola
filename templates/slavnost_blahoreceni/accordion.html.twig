@@ -8,7 +8,7 @@
                         data-bs-target="#collapse{{ text.id }}"
                         aria-expanded="{{ loop.first ? 'true' : 'false' }}"
                         aria-controls="collapse{{ text.id }}">
-                    {{ text.Titulek }}
+                    {{ text.Titulek|nbsp_prepositions }}
                 </button>
             </h4>
 
