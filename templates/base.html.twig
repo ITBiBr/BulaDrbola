@@ -72,7 +72,7 @@
                                 <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_pribeh') }}#mistopis">místopis</a></li>
                             </ul>
                         </li>
-                        {%  if globalVars.muzuZverejnit %}
+                        {# {%  if globalVars.muzuZverejnit %} #}
                             <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
                                 <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     slavnost blahořečení
@@ -86,11 +86,11 @@
                                     <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_slavnost_blahoreceni') }}#caste-otazky">časté otázky</a></li>
                                 </ul>
                             </li>
-                        {% else %}
+                        {# {% else %}
                             <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                                 <a class="nav-link text-center text-lg-start" href="{{ path('app_vystaviste') }}">{{ globalVars.clanekTitulek('vystaviste')|nbsp_prepositions }}</a>
                             </li>
-                        {% endif %}
+                        {% endif %} #}
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_aktuality') }}">aktuality</a>
                         </li>
@@ -146,11 +146,11 @@
                         <div class="row justify-content-center posun-140 ">
                             <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-5 col-xs-6 col-10 text-center">
                                 <div class="text-white text-center mb-3">{{ globalVars.textyStranek('vystaviste', 'paticka')|raw|nbsp_prepositions }}</div>
-                                {% if globalVars.muzuZverejnit %}
+                                {#  {% if globalVars.muzuZverejnit %} #}
                                     <a class="btn btn-sm btn-outline-light rounded-pill px-4 border-2" href="{{ path('app_slavnost_blahoreceni') }}">Více o slavnosti blahořečení</a>
-                                {% else %}
+                                {# {% else %}
                                     <a class="btn btn-sm btn-outline-light rounded-pill px-4 border-2" href="{{ path('app_vystaviste') }}">Více o akci na výstavišti</a>
-                                {% endif %}
+                                {% endif %} #}
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ final class VystavisteController extends ClankyController
     #[Route('/vystaviste', name: 'app_vystaviste')]
     public function vystaviste(EntityManagerInterface $entityManager, Security $security): Response
     {
-        $datumZverejneni = new \DateTimeImmutable(
+        /*$datumZverejneni = new \DateTimeImmutable(
             $this->getParameter('datum_zverejneni')
         );
 
@@ -25,7 +25,7 @@ final class VystavisteController extends ClankyController
         if ($now < $datumZverejneni  && !$security->isGranted('IS_AUTHENTICATED_FULLY')) { //muze se zverejnit nebo není user prihlasen
             // Přesměrování na showAktualita s URL 'vystaviste'
             return $this->showClanek('vystaviste', $entityManager);
-        }
+        }*/
 
         return new RedirectResponse('slavnost-blahoreceni');
 

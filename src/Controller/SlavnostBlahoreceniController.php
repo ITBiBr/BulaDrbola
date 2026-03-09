@@ -14,7 +14,7 @@ final class SlavnostBlahoreceniController extends AbstractController
     #[Route('/slavnost-blahoreceni', name: 'app_slavnost_blahoreceni')]
     public function index(EntityManagerInterface $entityManager, Security $security): Response
     {
-        $datumZverejneni = new \DateTimeImmutable(
+        /*$datumZverejneni = new \DateTimeImmutable(
             $this->getParameter('datum_zverejneni')
         );
 
@@ -22,7 +22,7 @@ final class SlavnostBlahoreceniController extends AbstractController
 
         if ($now < $datumZverejneni  && !$security->isGranted('IS_AUTHENTICATED_FULLY')) { //muze se zverejnit nebo není user prihlasen
             return new Response('Nedostupné');
-        }
+        }*/
         $kategorieTextu = $entityManager->getRepository(SlavnostBlahoreceniKategorie::class)->findAll();
         return $this->render('slavnost_blahoreceni/index.html.twig', [
             'kategorieTextu' => $kategorieTextu,
