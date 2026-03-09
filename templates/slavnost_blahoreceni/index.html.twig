@@ -19,7 +19,9 @@
                     <div class="col-12">
                         <p class="fs-2 fw-bold text-white pt-1 m-4">Jana Buly a Václava Drboly</p>
                         <h5 class="text-secondary mb-4 fw-bold">6. června 2026 | Areál brněnského výstaviště</h5>
+                        {% if globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') %}
                             <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-outline-light rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -38,12 +40,13 @@
                         <div class="pt-4 pb-2">{{ globalVars.textyStranek('proc-se-registrovat-dopredu', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
                     </div>
                 </div>
-
+                {% if globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') %}
                 <div class="row justify-content-center mb-5 pb-2">
                     <div class="col-12 text-center">
                         <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-secondary text-primary rounded-pill border-3"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">Zaregistrujte se ještě dnes</span></a>
                     </div>
                 </div>
+                {% endif %}
                 <div class="row justify-content-center pt-3 mt-5 mb-2">
                     <div class="col-12 text-center">
                         <h4 id="program" class="text-primary fs-2 fw-bold scroll-offset">{{ globalVars.nadpisTextuStranek('program', 'slavnost-blahoreceni')|raw }}</h4>
