@@ -51,8 +51,8 @@ class ExternalLinkExtension extends AbstractExtension
                     // odstraníme doménu
                     $relative = substr($cleanHref, strlen($this->webUrl));
 
-                    // odstraníme případné počáteční /
-                    $relative = ltrim($relative, '/');
+                    // vždy vytvoříme kořenovou relativní URL
+                    $relative = '/' . ltrim($relative, '/');
 
                     // přepíšeme href="..."
                     $newTag = preg_replace(
