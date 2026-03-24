@@ -42,6 +42,15 @@ class DobrovolniciType extends AbstractType
                     ],
                 'label_attr' => ['class' => 'fw-bold'],
             ])
+            ->add('Farnost', TextType::class, [
+                'label' => 'Farnost',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                    'placeholder' => 'Zadejte farnost',
+                ],
+                'label_attr' => ['class' => 'fw-bold'],
+            ])
+
             ->add('vek', NumberType::class, [
                 'label' => 'Věk',
                 'label_attr' => ['class' => 'fw-bold'],

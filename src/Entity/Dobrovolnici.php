@@ -69,6 +69,9 @@ class Dobrovolnici
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $zkusenosti = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Farnost = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -214,6 +217,18 @@ class Dobrovolnici
     public function setZkusenosti(?string $zkusenosti): static
     {
         $this->zkusenosti = $zkusenosti;
+
+        return $this;
+    }
+
+    public function getFarnost(): ?string
+    {
+        return $this->Farnost;
+    }
+
+    public function setFarnost(string $Farnost): static
+    {
+        $this->Farnost = $Farnost;
 
         return $this;
     }

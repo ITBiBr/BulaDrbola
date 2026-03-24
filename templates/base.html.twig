@@ -272,7 +272,94 @@
                 </section>
 
             </footer>
+            {# Cookie lišta #}
+            <div id="cookieBar"
+                 class="position-fixed bottom-0 start-0 end-0 bg-dark text-white shadow-lg"
+                 style="z-index: 1055; display: none; padding: 2rem 0;">
+                <div class="container">
+                    <div class="row align-items-center gy-3">
+                        <div class="col-12 col-md-8">
+                            <div style="font-size: 1.1rem; line-height: 1.6;">
+                                Tento web využívá soubory cookie pro správné fungování, analýzu návštěvnosti a zlepšování obsahu i služeb.
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-md-end">
+                                <button id="cookieAccept" class="btn btn-primary btn-lg">
+                                    Přijmout
+                                </button>
+                                <button id="cookieDecline" class="btn btn-outline-light btn-lg">
+                                    Zavřít
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const cookieBar = document.getElementById('cookieBar');
+                    const acceptBtn = document.getElementById('cookieAccept');
+                    const declineBtn = document.getElementById('cookieDecline');
 
+                    function setCookie(name, value, days) {
+                        const expires = new Date();
+                        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+                        document.cookie = name + "=" + value + ";expires=" + expires.toUTCString() + ";path=/;SameSite=Lax";
+                    }
+
+                    function getCookie(name) {
+                        const nameEQ = name + "=";
+                        const ca = document.cookie.split(';');
+                        for (let i = 0; i < ca.length; i++) {
+                            let c = ca[i].trim();
+                            if (c.indexOf(nameEQ) === 0) {
+                                return c.substring(nameEQ.length, c.length);
+                            }
+                        }
+                        return null;
+                    }
+
+                    function loadFacebookPixel() {
+                        if (window.fbq) return;
+
+                        !function(f,b,e,v,n,t,s)
+                        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                            n.queue=[];t=b.createElement(e);t.async=!0;
+                            t.src=v;s=b.getElementsByTagName(e)[0];
+                            s.parentNode.insertBefore(t,s)}(window, document,'script',
+                            'https://connect.facebook.net/en_US/fbevents.js');
+                        fbq('init', '978172253615223');
+                        fbq('track', 'PageView');
+                    }
+
+                    const consent = getCookie('cookie_consent');
+
+                    if (consent === 'accepted') {
+                        loadFacebookPixel();
+                    } else if (consent === null) {
+                        cookieBar.style.display = 'block';
+                    }
+
+                    acceptBtn.addEventListener('click', function () {
+                        setCookie('cookie_consent', 'accepted', 180);
+                        cookieBar.style.display = 'none';
+                        loadFacebookPixel();
+                    });
+
+                    declineBtn.addEventListener('click', function () {
+                        setCookie('cookie_consent', 'declined', 180);
+                        cookieBar.style.display = 'none';
+                    });
+                });
+            </script>
+
+            <noscript>
+                <img height="1" width="1" style="display:none"
+                     src="https://www.facebook.com/tr?id=978172253615223&ev=PageView&noscript=1"/>
+            </noscript>
         {% endblock %}
 
         {% block scripts %}

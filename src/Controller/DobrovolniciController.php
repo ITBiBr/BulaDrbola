@@ -42,6 +42,7 @@ final class DobrovolniciController extends AbstractController
                     <h2>Nový dobrovolník</h2>
                     <p><strong>Jméno:</strong> {$dobrovolnik->getJmeno()}</p>
                     <p><strong>Příjmení:</strong> {$dobrovolnik->getPrijmeni()}</p>
+                    <p><strong>Farnost:</strong> {$dobrovolnik->getFarnost()}</p>
                     <p><strong>Datum:</strong> {$dobrovolnik->getCreatedAt()?->format('j. n. Y')}</p>
                     <p><strong>Souhlas s GDPR:</strong> {$gdpr}</p>
                     <p><strong>Věk:</strong> {$dobrovolnik->getVek()}</p>

@@ -75,6 +75,7 @@ class DobrovolniciCrudController extends AbstractCrudController
         yield IdField::new('Id')->hideOnForm();
         yield TextField::new('jmeno', 'Name');
         yield TextField::new('prijmeni', 'Surname');
+        yield TextField::new('Farnost', 'Parish');
         yield IntegerField::new('vek', 'Age');
         yield EmailField::new('email', 'E-mail');
         yield TextField::new('telefon', "Phone number");
@@ -101,24 +102,26 @@ class DobrovolniciCrudController extends AbstractCrudController
         $sheet->setCellValue('A1', 'ID');
         $sheet->setCellValue('B1', 'Jméno');
         $sheet->setCellValue('C1', 'Přijmení');
-        $sheet->setCellValue('D1', 'Email');
-        $sheet->setCellValue('E1', 'Telefon');
-        $sheet->setCellValue('F1', 'Souhlas s GDPR');
-        $sheet->setCellValue('G1', 'Datum registrace');
-        $sheet->setCellValue('H1', 'Aktivity');
-        $sheet->setCellValue('I1', 'Zkušenosti');
+        $sheet->setCellValue('D1', 'Farnost');
+        $sheet->setCellValue('E1', 'Email');
+        $sheet->setCellValue('F1', 'Telefon');
+        $sheet->setCellValue('G1', 'Souhlas s GDPR');
+        $sheet->setCellValue('H1', 'Datum registrace');
+        $sheet->setCellValue('I1', 'Aktivity');
         $sheet->setCellValue('J1', 'Zkušenosti');
-        $sheet->setCellValue('K1', 'Vzkaz');
+        $sheet->setCellValue('K1', 'Zkušenosti');
+        $sheet->setCellValue('L1', 'Vzkaz');
 
         $row = 2;
         foreach ($subscriptions as $subscription) {
             $sheet->setCellValue('A' . $row, $subscription->getId());
             $sheet->setCellValue('B' . $row, $subscription->getJmeno());
             $sheet->setCellValue('C' . $row, $subscription->getPrijmeni());
-            $sheet->setCellValue('D' . $row, $subscription->getEmail());
-            $sheet->setCellValue('E' . $row, $subscription->getTelefon());
-            $sheet->setCellValue('F' . $row, $subscription->isSouhlasGdpr()?'Ano':'Ne');
-            $sheet->setCellValue('G' . $row, $subscription->getCreatedAt()->format('Y-m-d H:i:s'));
+            $sheet->setCellValue('D' . $row, $subscription->getFarnost());
+            $sheet->setCellValue('E' . $row, $subscription->getEmail());
+            $sheet->setCellValue('F' . $row, $subscription->getTelefon());
+            $sheet->setCellValue('G' . $row, $subscription->isSouhlasGdpr()?'Ano':'Ne');
+            $sheet->setCellValue('H' . $row, $subscription->getCreatedAt()->format('Y-m-d H:i:s'));
             $aktivityEntita = $subscription->getAkce();
             $aktivity = '';
             $lastIndex = count($aktivityEntita) - 1;
