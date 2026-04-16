@@ -12,7 +12,14 @@ final class MainController extends AbstractController
     public function index(): Response
     {
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+            'paticka' => false,
+        ]);
+    }
+
+    #[Route('/en', name: 'app_main_en')]
+    public function ciziIndex(): Response
+    {
+        return $this->render('main/index_cizojazycny.html.twig', [
             'paticka' => false,
         ]);
     }

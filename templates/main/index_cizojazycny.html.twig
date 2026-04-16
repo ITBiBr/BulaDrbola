@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jan Bula and Václav Drbola{% endblock %}
+
+{% block body %}
+
+
+    <div class="bula-drbola bula-drbola-en overflow-hidden">
+        <div class="container-fluid position-relative">
+            <div class="navbar-minus"></div>
+            <div class="text-center">
+                <img class="img-fluid mt-lg-0 mt-1 bula-drbola-oriznuti-main-mobil" src = "{{ asset('images/bula_drbola.png') }}" alt="Jan Bula a Václav Drbola">
+
+                <div class="d-flex justify-content-between position-absolute top-50 start-50 translate-middle-x mt-lg-0 mt-sm-1 mt-4 pb-3">
+                    <h2 class="text-white text-uppercase text-start m-2 pt-3">Jan<br>Bula</h2>
+                    <h1 class="text-secondary text-uppercase m-3 pt-3 fw-normal">&amp;</h1>
+                    <h2 class="text-white text-uppercase text-start m-2 pt-3">Václav<br>Drbola</h2>
+
+                </div>
+                <div class="row position-absolute top-50 justify-content-center mt-5 pt-6 w-100">
+                    <div class="col-12">
+                        <h1 class="text-white text-uppercase m-2" style="position: relative; top:-7px">{{ globalVars.nastaveniWebu('hlavicka_1_mainpage_en') }}</h1>
+                        <p class="fs-2 text-white m-0" style="position: relative; top:-10px">{{ globalVars.nastaveniWebu('hlavicka_2_mainpage_en')|raw }}</p>
+                        {% if globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') %}
+                        <a href="{{ globalVars.nastaveniWebu('tlacitko_link_hlavicka_mainpage') }}" class="btn btn-primary rounded-pill border-3 button-mainpage"{% if globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') %} target="{{ globalVars.nastaveniWebu('tlacitko_target_hlavicka_mainpage') }}"{% endif %}><span class="fw-bold fs-3 mx-2">{{ globalVars.nastaveniWebu('tlacitko_text_hlavicka_mainpage_en') }}</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row posun-160 mb-5">
+            <div class="col-12 bg-primary py-3">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-10 text-white text-justify-center">
+                            {{ globalVars.textyStranek('text_1', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="podbarveni">
+        <div class="container-fluid posun-140">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-12">
+                    <div class="row mt-5"></div>
+                    <div class="row justify-content-center">
+
+                        <div class="col-xxl-3 col-xl-4 col-lg-5 col-10 pe-xl-2 pe-lg-0 pe-0">
+                            <img class="img-fluid mx-auto d-block" src="{{ asset('images/odvaha.jpg') }}?v=2" alt="Odvaha">
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-10 ps-0">
+                            <div>
+                                {{ globalVars.textyStranek('text_2', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-12 mt-5 pt-5 p-3">
+                            <h5 class="text-primary fw-bold">{{ globalVars.nadpisTextuStranek('text_3', 'en')|raw }}</h5>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center d-flex flex-row mt-1">
+                        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                            <p class="p-3">
+                                <img src="{{ asset('images/kolarek.svg') }}" height="35px" alt="Grafika">
+                            </p>
+                            <div class="p-0">
+                                {{ globalVars.textyStranek('text_4', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                            <p class="p-3">
+                                <img src="{{ asset('images/kolarek.svg') }}" height="35px" alt="Grafika">
+                            </p>
+                            <div class="p-0">
+                                {{ globalVars.textyStranek('text_5', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-3 col-8 d-flex flex-column text-center mb-lg-0 mb-5">
+                            <p class="p-3">
+                                <img src="{{ asset('images/kolarek.svg') }}" height="35px" alt="Grafika">
+                            </p>
+                            <div class="p-0">
+                                {{ globalVars.textyStranek('text_6', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-10 col-xl-6 col-lg-9 mt-5 mb-2 pt-5">
+                            <h5 id="schvaleny-zazrak" class="scroll-offset text-primary fw-bold text-justify-center">{{ globalVars.nadpisTextuStranek('text_7', 'en')|raw }}</h5>
+                            <div class="text-primary text-justify-center pt-4">
+                                {{ globalVars.textyStranek('text_7', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-0 mb-5">
+                        <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
+                            <h4 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_8', 'en')|raw }}</h4>
+                            <div class="pt-4 pb-3">{{ globalVars.textyStranek('text_8', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset" id="newsletter-zapsano">
+                            <h4 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_9', 'en')|raw }}</h4>
+                            <div class="pt-4 pb-3">{{ globalVars.textyStranek('text_9', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class = "col-xxl-5 col-xl-7 col-lg-8 col-9 mt-4">
+                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_10', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'zivotopis_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_11', 'en'), 'Popis': globalVars.textyStranek('text_11', 'en')|striptags, 'Soubor' : 'zivotopis_en.pdf'} %}
+                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_12', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'modlitba_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_13', 'en'), 'Popis': globalVars.textyStranek('text_13', 'en')|striptags, 'Soubor' : 'modlitba_en.pdf'} %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
