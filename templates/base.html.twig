@@ -112,6 +112,15 @@
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_zapojte_se') }}">zapojte se</a>
                         </li>
+                        <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                            <a href="{{ path('app_main') }}" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('images/flags/cz.svg') }}" height="20px">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_main_en') }}"><img class="me-3" src="{{ asset('images/flags/gb.svg') }}" height="20px">English</a></li>
+                            </ul>
+                        </li>
+
 
                         {# <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
