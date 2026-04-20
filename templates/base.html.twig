@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% set lang = cizi_jazyk|default('cz') %}
 <html lang="cs">
     <head>
         <meta charset="UTF-8">
@@ -55,15 +56,16 @@
         </header>
         {% endblock %}
         {% block nav %}
+
         <nav class="navbar navbar-expand-lg sticky-top-lg navbar-light sticky-top mt-lg-3 mt-md-2" id="navbar">
             <div class="container-fluid justify-content-lg-center">
-                <a class="navbar-brand" href="{{ path ('app_main') }}"><img src="{{ asset('images/logo.svg') }}" height="60" alt="Logo"></a>
+                <a class="navbar-brand" href="{{ path('app_main_' ~ lang) }}"><img src="{{ asset('images/logo.svg') }}" height="60" alt="Logo"></a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        {% if cizi_jazyk is not defined %}
+                        {% if lang =='cz' %}
                         <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
                             <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 příběh
@@ -115,11 +117,12 @@
                         </li>
                         {% endif %}
                         <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
-                            <a href="{% if cizi_jazyk is defined and cizi_jazyk %}{{ path('app_main_' ~ cizi_jazyk) }}{% else %}{{ path('app_main') }}{% endif %}"
+
+                            <a href="{{ path('app_main_' ~ lang) }}"
                                class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('images/flags/' ~ (cizi_jazyk is defined and cizi_jazyk ? cizi_jazyk : 'cz') ~ '.svg') }}" height="20px">
+                                <img src="{{ asset('images/flags/' ~ (lang) ~ '.svg') }}" height="20px">
                             </a>
-                            {% set lang = cizi_jazyk|default('cz') %}
+
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
@@ -132,7 +135,7 @@
                                 {% endif %}
                                 {% if lang != 'cz' %}
                                     <li>
-                                        <a class="dropdown-item text-center text-lg-start" href="{{ path('app_main') }}">
+                                        <a class="dropdown-item text-center text-lg-start" href="{{ path('app_main_cz') }}">
                                             <img class="me-3" src="{{ asset('images/flags/cz.svg') }}" height="20px">Česky
                                         </a>
                                     </li>
@@ -195,7 +198,7 @@
                             <div class="col-xxl-8 col-xl-10 col-12 justify-content-center">
                                 <div class="row justify-content-lg-start justify-content-center">
                                     <div class="col-lg-2 col-5 text-start m-auto border-end">
-                                        <a href="{{ path ('app_main') }}"><img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60"></a>
+                                        <a href="{{ path('app_main_' ~ lang) }}"><img alt="Bula - Drbola" src="{{ asset('images/logo_bile.svg') }}" height="60"></a>
                                     </div>
                                     <div class="col-lg-2 col-5 text-lg-center text-start border-end-desktop-only m-auto">
                                         <a href="https://www.biskupstvi.cz"><img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60"></a>
@@ -218,7 +221,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                         <h6 class="fw-bold mb-4">
-                                            <a class="text-reset text-decoration-none" href="{{ path('app_main') }}">domů</a>
+                                            <a class="text-reset text-decoration-none" href="{{ path('app_main_cz') }}">domů</a>
                                         </h6>
                                     </div>
                                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
