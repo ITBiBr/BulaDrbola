@@ -203,17 +203,24 @@
                                     <div class="col-lg-2 col-5 text-lg-center text-start border-end-desktop-only m-auto">
                                         <a href="https://www.biskupstvi.cz"><img alt="Brněnská diecéze" src="{{ asset('images/dieceze.svg') }}" height="60"></a>
                                     </div>
+                                    {% if lang =='cz' %}
                                     <div class="col-lg-8 col-10 mt-lg-0 mt-4 text-start ps-lg-5">
                                         beatifikační proces mučedníků<br>komunistického režimu
                                     </div>
+                                    {% elseif lang =='en'%}
+                                        <div class="col-lg-8 col-10 mt-lg-0 mt-4 text-start ps-lg-5">
+                                            beatification process of martyrs <br>of communist regime
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 <section class="d-flex py-lg-4 py-1">
-
                 </section>
+
+                {% if lang =='cz' %}
                 <section>
                     <div class="container-fluid">
                         <div class="row justify-content-center mt-5">
@@ -288,6 +295,7 @@
                         </div>
                     </div>
                 </section>
+                {% endif %}
                 <section>
                     <div class="container-fluid">
                         <div class="row justify-content-center">

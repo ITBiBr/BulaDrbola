@@ -93,32 +93,43 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-10 col-xl-6 col-lg-9 mt-5 mb-2 pt-5">
-                            <h5 id="schvaleny-zazrak" class="scroll-offset text-primary fw-bold text-justify-center">{{ globalVars.nadpisTextuStranek('text_7', 'en')|raw }}</h5>
+                            <h5 class="text-primary fw-bold text-justify-center">{{ globalVars.nadpisTextuStranek('text_7', 'en')|raw }}</h5>
                             <div class="text-primary text-justify-center pt-4">
                                 {{ globalVars.textyStranek('text_7', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
                             </div>
 
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-0 mb-5">
-                        <div class="col-xl-3 col-lg-4 col-10 pe-lg-5 pe-0">
-                            <h4 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_8', 'en')|raw }}</h4>
+                    <div class="row justify-content-center mt-4 mb-5">
+                        <div class="col-xl-3 col-lg-4 col-10 pe-lg-3 pe-lg-0 pe-3 program-slavnosti me-lg-3 me-0 mb-lg-0 mb-3">
+                            <h4 class="text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_8', 'en')|raw }}</h4>
                             <div class="pt-4 pb-3">{{ globalVars.textyStranek('text_8', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
 
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-10 ps-lg-5 ps-0 scroll-offset" id="newsletter-zapsano">
-                            <h4 id="newsletter" class="scroll-offset text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_9', 'en')|raw }}</h4>
+                        <div class="col-xl-3 col-lg-4 col-10 ps-lg-3 ps-lg-0 ps-3 program-slavnosti ms-lg-3 ms-0">
+                            <h4 class="text-primary text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('text_9', 'en')|raw }}</h4>
                             <div class="pt-4 pb-3">{{ globalVars.textyStranek('text_9', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
 
                         </div>
 
                     </div>
                     <div class="row justify-content-center">
+                        <div class="col-10 col-xl-6 col-lg-9 mt-3 mb-2">
+                            <div class="text-primary text-justify-center pt-4">
+                                {{ globalVars.textyStranek('text_10', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
                         <div class = "col-xxl-5 col-xl-7 col-lg-8 col-9 mt-4">
-                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_10', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
-                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'zivotopis_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_11', 'en'), 'Popis': globalVars.textyStranek('text_11', 'en')|striptags, 'Soubor' : 'zivotopis_en.pdf'} %}
-                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_12', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
-                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'modlitba_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_13', 'en'), 'Popis': globalVars.textyStranek('text_13', 'en')|striptags, 'Soubor' : 'modlitba_en.pdf'} %}
+                            {# <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_11', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'zivotopis_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_12', 'en'), 'Popis': globalVars.textyStranek('text_11', 'en')|striptags, 'Soubor' : 'zivotopis_en.pdf'} %} #}
+                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.textyStranek('text_13', 'en')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
+                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'modlitba_en' ~ '.' ~ 'pdf' , 'Typ' : 'PDF', 'Nazev': globalVars.nadpisTextuStranek('text_14', 'en'), 'Popis': globalVars.textyStranek('text_13', 'en')|striptags, 'Soubor' : 'modlitba_en.pdf'} %}
+                            <div class="pt-4 pb-3 text-center fs-5 text-primary">{{ globalVars.nadpisTextuStranek('text_15', 'en') }}</div>
+                            {% include 'materialy/_file.html.twig' with {'NazevSouboru': 'media' ~ '.' ~ 'zip' , 'Typ' : 'ZIP', 'Nazev': globalVars.nadpisTextuStranek('text_15', 'en'), 'Popis': globalVars.textyStranek('text_15', 'en')|striptags, 'Soubor' : 'media.zip'} %}
                         </div>
                     </div>
                 </div>
