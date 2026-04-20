@@ -63,6 +63,7 @@
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        {% if cizi_jazyk is not defined %}
                         <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
                             <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 příběh
@@ -112,12 +113,31 @@
                         <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_zapojte_se') }}">zapojte se</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
-                            <a href="{{ path('app_main') }}" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('images/flags/cz.svg') }}" height="20px">
+                            <a href="{% if cizi_jazyk is defined and cizi_jazyk %}{{ path('app_main_' ~ cizi_jazyk) }}{% else %}{{ path('app_main') }}{% endif %}"
+                               class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('images/flags/' ~ (cizi_jazyk is defined and cizi_jazyk ? cizi_jazyk : 'cz') ~ '.svg') }}" height="20px">
                             </a>
+                            {% set lang = cizi_jazyk|default('cz') %}
+
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_main_en') }}"><img class="me-3" src="{{ asset('images/flags/gb.svg') }}" height="20px">English</a></li>
+
+                                {% if lang != 'en' %}
+                                    <li>
+                                        <a class="dropdown-item text-center text-lg-start" href="{{ path('app_main_en') }}">
+                                            <img class="me-3" src="{{ asset('images/flags/en.svg') }}" height="20px">English
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if lang != 'cz' %}
+                                    <li>
+                                        <a class="dropdown-item text-center text-lg-start" href="{{ path('app_main') }}">
+                                            <img class="me-3" src="{{ asset('images/flags/cz.svg') }}" height="20px">Česky
+                                        </a>
+                                    </li>
+                                {% endif %}
+
                             </ul>
                         </li>
 

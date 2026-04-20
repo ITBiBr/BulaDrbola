@@ -21,6 +21,7 @@ final class MainController extends AbstractController
     {
         return $this->render('main/index_cizojazycny.html.twig', [
             'paticka' => false,
+            'cizi_jazyk' => 'en'
         ]);
     }
 }
