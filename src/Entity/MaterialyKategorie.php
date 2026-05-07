@@ -27,6 +27,7 @@ class MaterialyKategorie
      * @var Collection<int, Materialy>
      */
     #[ORM\ManyToMany(targetEntity: Materialy::class, mappedBy: 'Kategorie')]
+    #[ORM\OrderBy(['id'=>'DESC'])]
     private Collection $materialies;
 
     public function __construct()

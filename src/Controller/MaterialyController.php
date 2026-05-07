@@ -13,10 +13,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class MaterialyController extends AbstractController
 {
     #[Route('/materialy', name: 'app_materialy')]
-    public function index(EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
 
-        $soubory = $entityManager->getRepository(Materialy::class)->findBy([], ['Nazev' => 'ASC']);
+        $soubory = $entityManager->getRepository(Materialy::class)->findBy([], ['id' => 'DESC']);
 
 
         return $this->render('materialy/index.html.twig', [
