@@ -86,6 +86,65 @@
 
                 </div>
 
+
+                <div class="row justify-content-center pt-3 mt-5 mb-2">
+                    <div class="col-lg-6 col-12 text-center">
+                        <div id="ucinkujiciCarousel"
+                             class="carousel slide mx-auto"
+                             data-bs-ride="carousel">
+
+                            <div class="carousel-inner">
+
+                                {% for osoba in ucinkujici %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+
+
+
+                                        <div class="performer-image-wrapper">
+                                            <img src="{{ asset('images/clanky/' ~ osoba.obrazek) | imagine_filter('medailonek') }}"
+                                                 class="performer-image mx-auto"
+                                                 alt="{{ osoba.jmeno }}">
+
+                                            <!-- overlay jen desktop -->
+                                            <div class="performer-overlay">
+                                                <div class="position-relative top-0 m-lg-5 m-3 p-lg-5 p-0">
+                                                    <!-- <h4 class="text-white">{{ osoba.jmeno|nbsp_prepositions }}</h4>-->
+
+                                                    <div class="">
+                                                        {{ osoba.medailonek|raw|nbsp_prepositions }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                            <button class="carousel-control-prev"
+                                    type="button"
+                                    data-bs-target="#ucinkujiciCarousel"
+                                    data-bs-slide="prev">
+
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+
+                            <button class="carousel-control-next"
+                                    type="button"
+                                    data-bs-target="#ucinkujiciCarousel"
+                                    data-bs-slide="next">
+
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
                 <div class="row justify-content-center pt-3 mt-5 mb-2">
                     <div class="col-12 text-center">
                         <h4 id="podporte-slavnost" class="text-primary fs-2 fw-bold scroll-offset">{{ globalVars.nadpisTextuStranek('podporte-slavnost', 'slavnost-blahoreceni')|raw }}</h4>

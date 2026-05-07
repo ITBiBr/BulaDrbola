@@ -15,6 +15,7 @@ use App\Entity\NastaveniWebu;
 use App\Entity\SlavnostBlahoreceniTexty;
 use App\Entity\Stitky;
 use App\Entity\TextyStranek;
+use App\Entity\Ucinkujici;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -96,7 +97,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Volunteer Activities', 'fa fa-list-check', DobrovolniciAkceCiselnik::class)->setPermission('ROLE_DOBROVOLNICI')
             ]);
         yield MenuItem::linkToCrud('Story Map Points', 'fa fa-map-location', BodyMapyPribeh::class)->setPermission('ROLE_EDITOR');
-        yield MenuItem::linkToCrud('Slavnost blahořečení - texty', 'fa fa-align-justify', SlavnostBlahoreceniTexty::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Beatification - texts', 'fa fa-align-justify', SlavnostBlahoreceniTexty::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Performers', 'fa fa-face-grin-wide', Ucinkujici::class)->setPermission('ROLE_EDITOR');
     }
 
     public function configureAssets(): Assets

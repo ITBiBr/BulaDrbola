@@ -621,6 +621,48 @@ input.form-check-input[type=checkbox] + label {
 .program-slavnosti{
     background: #e7e6ee;
 }
+
+.performer-image-wrapper {
+    position: relative;
+}
+
+.performer-image {
+
+    height: 720px;
+    object-fit: contain;
+    display: block;
+}
+
+/* desktop overlay */
+.performer-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0,0,0,0.72);
+    color: white;
+
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.performer-image-wrapper:hover .performer-overlay {
+    opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+
+    .performer-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+}
+.top-25{
+    top: 25% !important;
+}
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 

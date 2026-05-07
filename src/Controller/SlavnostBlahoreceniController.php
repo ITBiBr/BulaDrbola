@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\SlavnostBlahoreceniKategorie;
+use App\Entity\Ucinkujici;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -24,8 +25,10 @@ final class SlavnostBlahoreceniController extends AbstractController
             return new Response('Nedostupné');
         }*/
         $kategorieTextu = $entityManager->getRepository(SlavnostBlahoreceniKategorie::class)->findAll();
+        $ucinkujici = $entityManager->getRepository(Ucinkujici::class)->findBy([],['poradi'=>'ASC']);
         return $this->render('slavnost_blahoreceni/index.html.twig', [
             'kategorieTextu' => $kategorieTextu,
+            'ucinkujici' =>$ucinkujici,
             'paticka' => false,
         ]);
     }
