@@ -33,6 +33,9 @@ class Ucinkujici
     #[ORM\Column]
     private ?int $poradi = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $obrazekPc = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +85,18 @@ class Ucinkujici
     public function setPoradi(int $poradi): static
     {
         $this->poradi = $poradi;
+
+        return $this;
+    }
+
+    public function getObrazekPc(): ?string
+    {
+        return $this->obrazekPc;
+    }
+
+    public function setObrazekPc(string $obrazekPc): static
+    {
+        $this->obrazekPc = $obrazekPc;
 
         return $this;
     }

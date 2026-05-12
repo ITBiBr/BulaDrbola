@@ -29,7 +29,7 @@ readonly class GlobalVariables
                 'slug' => $this->slugger->slug($kat->getKategorie())->lower(),
                 'materialies' => $materialies,
             ];
-            dump($kategorieData);
+
         }
         return $kategorieData;
     }

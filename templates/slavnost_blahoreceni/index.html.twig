@@ -88,7 +88,7 @@
 
 
                 <div class="row justify-content-center pt-3 mt-5 mb-2">
-                    <div class="col-lg-6 col-12 text-center">
+                    <div class="col-xl-6 col-lg-9 col-12 text-center">
                         <div id="ucinkujiciCarousel"
                              class="carousel slide mx-auto"
                              data-bs-ride="carousel">
@@ -101,14 +101,21 @@
 
 
                                         <div class="performer-image-wrapper">
+                                            {# Mobilní obrázek – zobrazí se pouze na malých zařízeních (< md) #}
                                             <img src="{{ asset('images/clanky/' ~ osoba.obrazek) | imagine_filter('medailonek') }}"
-                                                 class="performer-image mx-auto"
+                                                 class="performer-image mx-auto d-block d-md-none"
                                                  alt="{{ osoba.jmeno }}">
 
+                                            {# Desktopový obrázek – zobrazí se od velikosti md a výše #}
+                                            <img src="{{ asset('images/clanky/' ~ osoba.obrazekPc) | imagine_filter('medailonek_pc') }}"
+                                                 class="performer-image mx-auto d-none d-md-block"
+                                                 alt="{{ osoba.jmeno }}">
+
+
                                             <!-- overlay jen desktop -->
-                                            <div class="performer-overlay">
-                                                <div class="position-relative top-0 m-lg-5 m-3 p-lg-5 p-0">
-                                                    <!-- <h4 class="text-white">{{ osoba.jmeno|nbsp_prepositions }}</h4>-->
+                                            <div class="performer-overlay d-flex align-items-center">
+                                                <div class="position-relative m-3 p-0">
+                                                    <h5 class="text-white">{{ osoba.jmeno|nbsp_prepositions }}</h5>
 
                                                     <div class="">
                                                         {{ osoba.medailonek|raw|nbsp_prepositions }}

@@ -628,9 +628,9 @@ input.form-check-input[type=checkbox] + label {
 
 .performer-image {
 
-    height: 720px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
-    display: block;
 }
 
 /* desktop overlay */

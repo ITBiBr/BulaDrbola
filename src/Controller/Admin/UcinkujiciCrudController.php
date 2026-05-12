@@ -48,6 +48,14 @@ class UcinkujiciCrudController extends AbstractCrudController
             throw new AccessDeniedException('Access Denied');
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('jmeno', 'Name');
+        yield ImageField::new('ObrazekPc', 'Image PC')
+            ->setBasePath($_ENV['CLANKY_BASE_PATH'])
+            ->setUploadDir($_ENV['CLANKY_UPLOAD'])
+            ->setFormTypeOption('multiple', false)
+            ->setUploadedFileNamePattern('[year][month][day]-[timestamp]-[contenthash].[extension]')
+            ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
+            ->setFormTypeOption('allow_delete', false)
+            ->setSortable(false);
         yield ImageField::new('Obrazek', 'Image')
             ->setBasePath($_ENV['CLANKY_BASE_PATH'])
             ->setUploadDir($_ENV['CLANKY_UPLOAD'])
