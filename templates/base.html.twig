@@ -66,7 +66,7 @@
                 <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         {% if lang =='cz' %}
-                        <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold dropdown">
                             <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 příběh
                             </a>
@@ -76,7 +76,7 @@
                             </ul>
                         </li>
                         {# {%  if globalVars.muzuZverejnit %} #}
-                            <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                            <li class="nav-item mt-1 m-2 mb-0 fw-bold dropdown">
                                 <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     slavnost blahořečení
                                 </a>
@@ -94,10 +94,10 @@
                                 <a class="nav-link text-center text-lg-start" href="{{ path('app_vystaviste') }}">{{ globalVars.clanekTitulek('vystaviste')|nbsp_prepositions }}</a>
                             </li>
                         {% endif %} #}
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_aktuality') }}">aktuality</a>
                         </li>
-                        <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold dropdown">
                             <a href="#" class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 kalendář akcí
                             </a>
@@ -106,17 +106,17 @@
                                 <li><a class="dropdown-item text-center text-lg-start" href="{{ path('app_mame_za_sebou') }}">máme za sebou</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_blahoreceni') }}">beatifikace</a>
                         </li>
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_materialy') }}">materiály</a>
                         </li>
-                        <li class="nav-item mt-1 m-3 mx-xl-4 mb-0 fw-bold">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold">
                             <a class="nav-link text-center text-lg-start" href="{{ path('app_zapojte_se') }}">zapojte se</a>
                         </li>
                         {% endif %}
-                        <li class="nav-item mt-1 m-3 mb-0 fw-bold dropdown">
+                        <li class="nav-item mt-1 m-2 mb-0 fw-bold dropdown">
 
                             <a href="{{ path('app_main_' ~ lang) }}"
                                class="nav-link text-center text-lg-start dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -220,7 +220,7 @@
                 <section class="d-flex py-lg-4 py-1">
                     <div class="container-fluid">
                         <div class="row justify-content-center my-5">
-                            <div class="col-xxl-8 col-xl-10 col-12 mb-2">{% if lang =='cz' %}Sponzoři{% else %}Sponsors{% endif %}</div>
+                            <div class="col-xxl-8 col-xl-10 col-12 mb-2">{% if lang =='cz' %}Sponzoři a partneři{% else %}Sponsors and partners{% endif %}</div>
                             <div class="col-xxl-8 col-xl-10 col-12">
                                 <div class="d-flex justify-content-lg-start justify-content-center align-items-center gap-4 flex-wrap">
                                     <img
@@ -228,6 +228,18 @@
                                             alt="Jihomoravský kraj"
                                             src="{{ asset('images/loga-sponzoru/jihomoravsky-kraj.svg') }}"
                                             style="height:20px;"
+                                    >
+                                    <img
+                                            class="img-fluid"
+                                            alt="Kraj Vysočina"
+                                            src="{{ asset('images/loga-sponzoru/vysocina.svg') }}"
+                                            style="height:50px;"
+                                    >
+                                    <img
+                                            class="img-fluid"
+                                            alt="Město Brno"
+                                            src="{{ asset('images/loga-sponzoru/brno.svg') }}"
+                                            style="height:30px;"
                                     >
                                     <img
                                             class="img-fluid"
