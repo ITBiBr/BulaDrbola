@@ -46,6 +46,26 @@
                     </div>
                 {% endif %}
                 {% endblock %}
+                {% block fotogalerie %}
+                    {% if aktualita.fotos %}
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-xl-6 col-lg-9 col-10">
+                                <div class="gallery-grid">
+                                    {% for foto in aktualita.fotos %}
+                                        <a href="{{ asset(foto.soubor) }}"
+                                           class="glightbox"
+                                           data-gallery="akce"
+                                           data-title="{{ foto.nazev }}">
+
+                                            <img src="{{ foto.soubor | imagine_filter('ak_fotogallery_thumb') }}"
+                                                 class="img-fluid">
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
                 {% if aktualita.Video %}
                     <div class ="row justify-content-center mt-4">
                         <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-10 pt-sm-0 pt-2">
@@ -67,4 +87,12 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('fotogalerie') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('fotogalerie_js') }}
 {% endblock %}

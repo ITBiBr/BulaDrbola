@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Aktuality;
+use App\Form\DropzoneType;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -10,12 +11,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class AktualityCrudController extends AbstractCrudController
@@ -28,7 +29,7 @@ class AktualityCrudController extends AbstractCrudController
     }
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud
+        return $crud->addFormTheme('admin/form/dropzone_theme.html.twig')
             ->setPageTitle('new', 'New news')
             ->setPageTitle('edit', 'Edit news')
             ->setPageTitle('index', 'News');
@@ -68,7 +69,19 @@ class AktualityCrudController extends AbstractCrudController
             ->setFormTypeOption('required', $pageName === Crud::PAGE_NEW)
             ->setFormTypeOption('allow_delete', false)
             ->setSortable(false);
-
+        yield Field::new('upload', 'Photo')
+            ->setFormType(DropzoneType::class)
+            ->setFormTypeOptions([
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'data-entity' => 'aktuality',
+                    'data-entity-id' => $this->getContext()?->getEntity()?->getInstance()?->getId(),
+                    'data-type' => 'image',
+                ],
+            ])
+            ->onlyOnForms()
+            ->setHelp('Content of this field saves automatically.');
         yield from $this->configureFieldsChildren($pageName);
 
     }

@@ -1,0 +1,29 @@
+.dz-preview *:not(.dz-remove, .dz-filename-input) {
+    cursor: move !important;
+}
+.dz-filename-input {
+    cursor: text !important;
+}
+
+
+.dz-remove {
+    position: relative;
+    z-index: 21;
+}
+
+
+.dz-optimized-size
+{
+    background-color: rgba(255, 255, 255, .4);
+    padding: 0 .4em;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    margin-top: -14px;
+    color:#06601b;
+}
+.dz-error-message{
+    margin-top:15px;
+}
+.dropzone, {
+    background: white;
+}

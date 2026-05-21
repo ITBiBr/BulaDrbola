@@ -22,6 +22,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('admin', './assets/admin.js')
+    .addEntry('fotogalerie_js', './assets/fotogalerie.js')
+    .addStyleEntry('fotogalerie','./assets/styles/fotogalerie.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

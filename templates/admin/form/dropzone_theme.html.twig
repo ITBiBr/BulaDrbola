@@ -1,0 +1,30 @@
+{# templates/admin/form/dropzone_theme.html.twig #}
+
+{% block dropzone_widget %}
+    {% set entity = attr['data-entity'] ?? null %}
+    {% set entity_id = attr['data-entity-id'] ?? null %}
+    {% set data_type = attr['data-type'] ?? null %}
+    {% set upload_url = 'admin_upload_upload' %}
+    {% set remove_url = 'admin_upload_remove' %}
+    {% set rename_url = 'admin_upload_rename' %}
+    {% set reorder_url = 'admin_upload_reorder' %}
+    {% set list_url = 'admin_upload_list' %}
+
+    {% if entity and entity_id %}
+        <div
+            class="dropzone"
+            data-upload-url="{{ path(upload_url, { data_type: data_type, entity: entity, id: entity_id }) }}"
+            data-remove-url="{{ path(remove_url, { data_type: data_type, id: 0 })|replace({'0': ''}) }}"
+            data-rename-url="{{ path(rename_url, { data_type: data_type, id: 0 })|replace({'0': ''}) }}"
+            data-list-url="{{ path(list_url, { data_type: data_type, entity:0, id: 0 })|replace({'0/0': ''}) }}"
+            data-reorder-url="{{ path(reorder_url, { data_type: data_type})}}"
+            data-entity="{{ entity }}"
+            data-entity-id="{{ entity_id }}"
+            data-type="{{ data_type }}"
+        ></div>
+    {% else %}
+        <div class="alert alert-info">
+            Nejprve uložte záznam, pak lze nahrávat soubory.
+        </div>
+    {% endif %}
+{% endblock %}

@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\AktualityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: AktualityRepository::class)]
-class Aktuality
+class Aktuality implements FotoInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -47,6 +48,14 @@ class Aktuality
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $ObsahPokracovani = null;
+    #[ORM\OneToMany(targetEntity: Foto::class, mappedBy: 'Aktuality', cascade: ['remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $fotos;
+
+    public function __construct()
+    {
+        $this->fotos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -169,6 +178,36 @@ class Aktuality
     public function setObsahPokracovani(?string $ObsahPokracovani): static
     {
         $this->ObsahPokracovani = $ObsahPokracovani;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Foto>
+     */
+    public function getFotos(): Collection
+    {
+        return $this->fotos;
+    }
+
+    public function addFoto(Foto $foto): static
+    {
+        if (!$this->fotos->contains($foto)) {
+            $this->fotos->add($foto);
+            $foto->setAktuality($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFoto(Foto $foto): static
+    {
+        if ($this->fotos->removeElement($foto)) {
+            // set the owning side to null (unless already changed)
+            if ($foto->getAktuality() === $this) {
+                $foto->setAktuality(null);
+            }
+        }
 
         return $this;
     }

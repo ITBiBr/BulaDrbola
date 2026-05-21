@@ -27,4 +27,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Controller\Admin\UploadController:
+        arguments:
+            $mapEntity:
+                aktuality: App\Entity\Aktuality
+            $mapSetter:
+                aktuality: 'setAktuality'
+            $mapFileEntity:
+                image: App\Entity\Foto
+            $mapUploadDir:
+                image: 'fotogalerie'
+            $mapGetter:
+                image: 'getFotos'
 
