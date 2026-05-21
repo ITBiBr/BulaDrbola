@@ -24,10 +24,12 @@
                     </div>
                 </div>
                 <div class="row justify-content-center mt-5">
+                    {% if "now"|date("Y-m-d") < "2026-06-01" %}
                     <div class="col-xl-4 col-lg-6 col-10 text-left">
                         {{ form_start(dobrovolniciForm, {'attr': {'class': 'form-dobrovolnici'}} )}}
                         {{ form_end(dobrovolniciForm) }}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
