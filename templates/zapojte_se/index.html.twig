@@ -59,13 +59,13 @@
                                 <h5 id="dobrovolnictvi" class="scroll-offset text-white text-start pt-4 fw-bold">{{ globalVars.nadpisTextuStranek('dobrovolnictvi', 'zapojte-se')|raw }}</h5>
                                 <div class="text-white pt-4 pb-3">
                                     {{ globalVars.textyStranek('dobrovolnictvi', 'zapojte-se')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
-                                {% if "now"|date("Y-m-d") < "2026-06-01" %}
+                                {% if "now"|date("Y-m-d") < "2026-06-06" %}
                                     <a class="btn btn-outline-light btn-sm rounded-pill px-4 border-2"
                                        href="{{ path('app_dobrovolnici') }}">
                                         Chci se zapojit
                                     </a>
                                 {% else %}
-                                    <strong class="text-white">Přihlašování pro dobrovolníky bylo k&nbsp;31. květnu uzavřeno.</strong>
+                                    <strong class="text-white">Přihlašování pro dobrovolníky bylo k&nbsp;6. červnu uzavřeno.</strong>
                                 {% endif %}
                             </div>
                         </div>
