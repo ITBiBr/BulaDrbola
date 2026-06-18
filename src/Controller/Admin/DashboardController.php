@@ -9,6 +9,7 @@ use App\Entity\Clanky;
 use App\Entity\Dobrovolnici;
 use App\Entity\DobrovolniciAkceCiselnik;
 use App\Entity\EmailSubscription;
+use App\Entity\Fotogalerie;
 use App\Entity\Materialy;
 use App\Entity\MaterialyKategorie;
 use App\Entity\NastaveniWebu;
@@ -99,6 +100,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Story Map Points', 'fa fa-map-location', BodyMapyPribeh::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Beatification - texts', 'fa fa-align-justify', SlavnostBlahoreceniTexty::class)->setPermission('ROLE_EDITOR');
         yield MenuItem::linkToCrud('Performers', 'fa fa-face-grin-wide', Ucinkujici::class)->setPermission('ROLE_EDITOR');
+        yield MenuItem::linkToCrud('Fotogalleries', 'fa fa-photo', Fotogalerie::class)->setPermission('ROLE_EDITOR');
     }
 
     public function configureAssets(): Assets

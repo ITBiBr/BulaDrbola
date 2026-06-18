@@ -25,6 +25,9 @@ class Foto
     #[ORM\ManyToOne(inversedBy: 'fotos')]
     private ?Aktuality $Aktuality = null;
 
+    #[ORM\ManyToOne(inversedBy: 'fotos')]
+    private ?Fotogalerie $fotogalerie = null;
+
 
     public function getId(): ?int
     {
@@ -75,6 +78,18 @@ class Foto
     public function setAktuality(?Aktuality $Aktuality): static
     {
         $this->Aktuality = $Aktuality;
+
+        return $this;
+    }
+
+    public function getFotogalerie(): ?Fotogalerie
+    {
+        return $this->fotogalerie;
+    }
+
+    public function setFotogalerie(?Fotogalerie $fotogalerie): static
+    {
+        $this->fotogalerie = $fotogalerie;
 
         return $this;
     }

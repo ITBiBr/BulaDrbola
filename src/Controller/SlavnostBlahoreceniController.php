@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Fotogalerie;
 use App\Entity\SlavnostBlahoreceniKategorie;
 use App\Entity\Ucinkujici;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,10 +27,12 @@ final class SlavnostBlahoreceniController extends AbstractController
         }*/
         $kategorieTextu = $entityManager->getRepository(SlavnostBlahoreceniKategorie::class)->findAll();
         $ucinkujici = $entityManager->getRepository(Ucinkujici::class)->findBy([],['poradi'=>'ASC']);
+        $fotogalerie = $entityManager->getRepository(Fotogalerie::class)->find(1)->getFotos();
         return $this->render('slavnost_blahoreceni/index.html.twig', [
             'kategorieTextu' => $kategorieTextu,
             'ucinkujici' =>$ucinkujici,
             'paticka' => false,
+            'fotogalerie' => $fotogalerie,
         ]);
     }
 }

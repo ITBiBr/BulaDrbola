@@ -37,6 +37,50 @@
                     <div class = "col-xl-6 col-lg-9 col-10">
                          <div class="pt-4 pb-2 text-justify-center">{{ globalVars.textyStranek('jste-zvani', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
                     </div>
+                    <div class="row justify-content-center pt-1 mb-2">
+                        <div class="col-xl-6 col-lg-9 col-12 text-center">
+                            <div id="fotogalerieCarousel"
+                                 class="carousel slide mx-auto"
+                                 data-bs-ride="carousel">
+
+                                <div class="carousel-inner">
+
+                                    {% for foto in fotogalerie %}
+                                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+
+
+
+                                            <div class="performer-image-wrapper">
+
+                                                <img src="{{ asset(foto.soubor) | imagine_filter('medailonek_pc') }}"
+                                                     class="performer-image mx-auto"
+                                                     alt="{{ foto.nazev }}">
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+
+                                <button class="carousel-control-prev"
+                                        type="button"
+                                        data-bs-target="#fotogalerieCarousel"
+                                        data-bs-slide="prev">
+
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+
+                                <button class="carousel-control-next"
+                                        type="button"
+                                        data-bs-target="#fotogalerieCarousel"
+                                        data-bs-slide="next">
+
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                    {# <div class="col-xl-3 col-lg-4 col-10 text-left pe-lg-5 pe-0">
                         <h5 id="registrace" class="scroll-offset text-primary text-start fw-bold text-uppercase">{{ globalVars.nadpisTextuStranek('jste-zvani', 'slavnost-blahoreceni')|raw }}</h5>
                         <div class="pt-4 pb-2">{{ globalVars.textyStranek('jste-zvani', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}</div>
@@ -58,6 +102,7 @@
                         <h4 id="program" class="text-primary fs-2 fw-bold scroll-offset">{{ globalVars.nadpisTextuStranek('program', 'slavnost-blahoreceni')|raw }}</h4>
                     </div>
                 </div>
+
                 <div class="row justify-content-center mt-0">
                     <div class = "col-xl-6 col-lg-9 col-10">
                         <div class="text-justify-center pb-3">{{ globalVars.textyStranek('program', 'slavnost-blahoreceni')|raw|nbsp_prepositions|strong_filter|div_filter }}
