@@ -662,7 +662,9 @@ input.form-check-input[type=checkbox] + label {
 .top-25{
     top: 25% !important;
 }
-
+.bula-drbola-horni-posun{
+    padding-top:85px;
+}
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
