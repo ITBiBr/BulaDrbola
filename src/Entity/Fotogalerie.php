@@ -19,6 +19,7 @@ class Fotogalerie
      * @var Collection<int, Foto>
      */
     #[ORM\OneToMany(targetEntity: Foto::class, mappedBy: 'fotogalerie')]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $fotos;
 
     #[ORM\Column(length: 255)]
